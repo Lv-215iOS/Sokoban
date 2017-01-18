@@ -7,10 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */; };
+		84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7481E2F72C400FCB4C3 /* MenuController.swift */; };
+		84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */; };
+		84C1A74F1E2F730D00FCB4C3 /* FloorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A74E1E2F730D00FCB4C3 /* FloorCell.swift */; };
+		84C1A7511E2F734500FCB4C3 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7501E2F734500FCB4C3 /* RootController.swift */; };
+		84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7531E2F739600FCB4C3 /* Sokoban.xcdatamodeld */; };
+		84C1A75C1E2F74D300FCB4C3 /* LevelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */; };
+		84C1A75E1E2F74F800FCB4C3 /* PlaygroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */; };
 		8B2794B51E2E5F8600A93642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2794B41E2E5F8600A93642 /* AppDelegate.swift */; };
-		8B2794B71E2E5F8600A93642 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2794B61E2E5F8600A93642 /* ViewController.swift */; };
 		8B2794BA1E2E5F8600A93642 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2794B81E2E5F8600A93642 /* Main.storyboard */; };
-		8B2794BD1E2E5F8600A93642 /* Sokoban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8B2794BB1E2E5F8600A93642 /* Sokoban.xcdatamodeld */; };
 		8B2794BF1E2E5F8600A93642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2794BE1E2E5F8600A93642 /* Assets.xcassets */; };
 		8B2794C21E2E5F8600A93642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2794C01E2E5F8600A93642 /* LaunchScreen.storyboard */; };
 		8B2794CD1E2E5F8600A93642 /* SokobanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2794CC1E2E5F8600A93642 /* SokobanTests.swift */; };
@@ -35,11 +41,17 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelsController.swift; path = Classes/Controllers/LevelsController.swift; sourceTree = "<group>"; };
+		84C1A7481E2F72C400FCB4C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Classes/Controllers/MenuController.swift; sourceTree = "<group>"; };
+		84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneController.swift; path = Classes/Controllers/Scene/SceneController.swift; sourceTree = "<group>"; };
+		84C1A74E1E2F730D00FCB4C3 /* FloorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorCell.swift; path = Classes/Controllers/Scene/FloorCell.swift; sourceTree = "<group>"; };
+		84C1A7501E2F734500FCB4C3 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootController.swift; path = Classes/RootController.swift; sourceTree = "<group>"; };
+		84C1A7541E2F739600FCB4C3 /* Sokoban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sokoban.xcdatamodel; sourceTree = "<group>"; };
+		84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsProvider.swift; sourceTree = "<group>"; };
+		84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaygroundController.swift; path = Classes/Controllers/PlaygroundController.swift; sourceTree = "<group>"; };
 		8B2794B11E2E5F8600A93642 /* Sokoban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sokoban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2794B41E2E5F8600A93642 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8B2794B61E2E5F8600A93642 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8B2794B91E2E5F8600A93642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8B2794BC1E2E5F8600A93642 /* Sokoban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sokoban.xcdatamodel; sourceTree = "<group>"; };
 		8B2794BE1E2E5F8600A93642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8B2794C11E2E5F8600A93642 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8B2794C31E2E5F8600A93642 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -76,6 +88,53 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		84C1A7431E2F724300FCB4C3 /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				84C1A75A1E2F74D300FCB4C3 /* DataProviders */,
+				84C1A74B1E2F72C900FCB4C3 /* Controller */,
+				84C1A7441E2F724B00FCB4C3 /* Scene */,
+				84C1A7501E2F734500FCB4C3 /* RootController.swift */,
+			);
+			name = Classes;
+			sourceTree = "<group>";
+		};
+		84C1A7441E2F724B00FCB4C3 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */,
+				84C1A74E1E2F730D00FCB4C3 /* FloorCell.swift */,
+			);
+			name = Scene;
+			sourceTree = "<group>";
+		};
+		84C1A74B1E2F72C900FCB4C3 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */,
+				84C1A7481E2F72C400FCB4C3 /* MenuController.swift */,
+				84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		84C1A7521E2F735B00FCB4C3 /* DataModel */ = {
+			isa = PBXGroup;
+			children = (
+				84C1A7531E2F739600FCB4C3 /* Sokoban.xcdatamodeld */,
+			);
+			path = DataModel;
+			sourceTree = "<group>";
+		};
+		84C1A75A1E2F74D300FCB4C3 /* DataProviders */ = {
+			isa = PBXGroup;
+			children = (
+				84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */,
+			);
+			name = DataProviders;
+			path = Classes/DataProviders;
+			sourceTree = "<group>";
+		};
 		8B2794A81E2E5F8600A93642 = {
 			isa = PBXGroup;
 			children = (
@@ -99,13 +158,13 @@
 		8B2794B31E2E5F8600A93642 /* Sokoban */ = {
 			isa = PBXGroup;
 			children = (
+				84C1A7521E2F735B00FCB4C3 /* DataModel */,
+				84C1A7431E2F724300FCB4C3 /* Classes */,
 				8B2794B41E2E5F8600A93642 /* AppDelegate.swift */,
-				8B2794B61E2E5F8600A93642 /* ViewController.swift */,
 				8B2794B81E2E5F8600A93642 /* Main.storyboard */,
 				8B2794BE1E2E5F8600A93642 /* Assets.xcassets */,
 				8B2794C01E2E5F8600A93642 /* LaunchScreen.storyboard */,
 				8B2794C31E2E5F8600A93642 /* Info.plist */,
-				8B2794BB1E2E5F8600A93642 /* Sokoban.xcdatamodeld */,
 			);
 			path = Sokoban;
 			sourceTree = "<group>";
@@ -261,8 +320,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8B2794B71E2E5F8600A93642 /* ViewController.swift in Sources */,
-				8B2794BD1E2E5F8600A93642 /* Sokoban.xcdatamodeld in Sources */,
+				84C1A75E1E2F74F800FCB4C3 /* PlaygroundController.swift in Sources */,
+				84C1A74F1E2F730D00FCB4C3 /* FloorCell.swift in Sources */,
+				84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */,
+				84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */,
+				84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */,
+				84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */,
+				84C1A75C1E2F74D300FCB4C3 /* LevelsProvider.swift in Sources */,
+				84C1A7511E2F734500FCB4C3 /* RootController.swift in Sources */,
 				8B2794B51E2E5F8600A93642 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -508,6 +573,7 @@
 				8B2794DE1E2E5F8600A93642 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B2794DF1E2E5F8600A93642 /* Build configuration list for PBXNativeTarget "SokobanTests" */ = {
 			isa = XCConfigurationList;
@@ -516,6 +582,7 @@
 				8B2794E11E2E5F8600A93642 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		8B2794E21E2E5F8600A93642 /* Build configuration list for PBXNativeTarget "SokobanUITests" */ = {
 			isa = XCConfigurationList;
@@ -524,16 +591,17 @@
 				8B2794E41E2E5F8600A93642 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		8B2794BB1E2E5F8600A93642 /* Sokoban.xcdatamodeld */ = {
+		84C1A7531E2F739600FCB4C3 /* Sokoban.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				8B2794BC1E2E5F8600A93642 /* Sokoban.xcdatamodel */,
+				84C1A7541E2F739600FCB4C3 /* Sokoban.xcdatamodel */,
 			);
-			currentVersion = 8B2794BC1E2E5F8600A93642 /* Sokoban.xcdatamodel */;
+			currentVersion = 84C1A7541E2F739600FCB4C3 /* Sokoban.xcdatamodel */;
 			path = Sokoban.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
