@@ -8,7 +8,7 @@
 
 import UIKit
 
-class RootController: UIView {
+class RootController: UIViewController {
 
     /*
     // Only override drawRect: if you perform custom drawing.

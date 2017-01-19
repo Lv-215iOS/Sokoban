@@ -9,27 +9,39 @@
 import UIKit
 
 class MenuController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBOutlet weak var userListButton: UIButton!
+    
+    /// to open playersViewController
+    @IBAction func userListButtonTapped(_ sender: UIButton) {
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBOutlet weak var menuPlayButton: UIButton!
+    
+    /// to open LevelsViewController
+    @IBAction func menuPlayButtonTapped(_ sender: UIButton) {
     }
-    */
+    
+    @IBOutlet weak var menuLeaderboardButton: UIButton!
+    
+    /// to open leaderboardViewController
+    @IBAction func menuLeaderboardButtonTapped(_ sender: UIButton) {
+    }
 
+    @IBOutlet weak var menuSettingsButton: UIButton!
+   
+    /// to open settingsViewController
+    @IBAction func menuSettingsButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBOutlet weak var menuAboutButton: UIButton!
+    
+    /// to open aboutViewController
+    @IBAction func menuAboutButtonTapped(_ sender: UIButton) {
+    }
+    
+    
+    
+    
+    
 }
