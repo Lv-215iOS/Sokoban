@@ -12,4 +12,8 @@ class LevelsProvider {
     static func getLevels() -> [Any]? {
         return nil
     }
+    
+    static func addLevel(level: Level) {
+        
+    }
 }
