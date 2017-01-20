@@ -11,7 +11,7 @@ import CoreData
 
 class CoreDataStack {
     
-    static let coreDataStack = CoreDataStack()
+    static let sharedStack = CoreDataStack()
     
     private init() {}
     
