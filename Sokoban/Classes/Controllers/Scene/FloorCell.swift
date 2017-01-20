@@ -10,12 +10,14 @@ import UIKit
 
 class FloorCell: UIView {
 
-    /*
-    // Only override drawRect: if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func drawRect(rect: CGRect) {
-        // Drawing code
+    override func draw(_ rect: CGRect) {
+        // 1. Get CG context
+        let context = UIGraphicsGetCurrentContext()
+        
+        // 2. Draw into context
+        context?.setFillColor(UIColor.blue.cgColor)
+        context?.fill(rect)
     }
-    */
+ 
 
 }
