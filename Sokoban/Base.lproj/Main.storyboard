@@ -82,9 +82,11 @@
                                 </state>
                                 <connections>
                                     <action selector="userListButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="H7p-pJ-YLJ"/>
-                                    <segue destination="RMG-na-NMU" kind="show" id="9nx-2d-eOr"/>
                                 </connections>
                             </button>
+                            <connections>
+                                <segue destination="0S6-c6-Kyf" kind="show" id="o6A-QS-tzN"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -197,6 +199,9 @@
                                 <rect key="frame" x="305" y="64" width="54" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Menu"/>
+                                <connections>
+                                    <action selector="backToMenu:" destination="QUR-DB-LXs" eventType="touchUpInside" id="Xsg-c1-M4n"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9W-Iv-2lI">
                                 <rect key="frame" x="55" y="572" width="42" height="21"/>
@@ -213,17 +218,28 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Playground" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ufx-eH-CqN">
-                                <rect key="frame" x="149" y="64" width="130" height="74"/>
+                                <rect key="frame" x="122" y="72" width="130" height="74"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <containerView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Rpn-4V-pKn">
+                                <rect key="frame" x="41" y="140" width="301" height="431"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <connections>
+                                    <segue destination="eAe-3m-S4e" kind="embed" id="yM9-4l-GTD"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <segue destination="K9D-Fu-9Ae" kind="unwind" identifier="unwindToMenu" unwindAction="unwindToMenuWithSegue:" id="e8m-EH-pCp"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7y-h1-19X" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="K9D-Fu-9Ae" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="2941.5999999999999" y="-145.27736131934034"/>
         </scene>
@@ -253,40 +269,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YeU-2W-sNO" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1881" y="756"/>
-        </scene>
-        <!--Players View Controller-->
-        <scene sceneID="yVO-GW-RbZ">
-            <objects>
-                <viewController id="RMG-na-NMU" customClass="PlayersViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="6Tl-R0-Cpe"/>
-                        <viewControllerLayoutGuide type="bottom" id="qVz-Zt-4Mh"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="RXh-NT-59h">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3QJ-Z2-abH">
-                                <rect key="frame" x="325" y="24" width="22" height="22"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <connections>
-                                    <action selector="addNewPlayerButtonTapped:" destination="RMG-na-NMU" eventType="touchUpInside" id="ljG-21-XDB"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7eZ-9q-Q1j">
-                                <rect key="frame" x="110" y="72" width="154" height="68"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="27"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="pu3-xS-5Mi" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="230" y="833"/>
         </scene>
         <!--Settings View Controller-->
         <scene sceneID="5Pd-U4-582">
@@ -416,6 +398,27 @@
             </objects>
             <point key="canvasLocation" x="-569" y="755"/>
         </scene>
+        <!--Players-->
+        <scene sceneID="LQd-Il-9it">
+            <objects>
+                <viewController id="0S6-c6-Kyf" customClass="PlayersViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xI5-Vs-KNL"/>
+                        <viewControllerLayoutGuide type="bottom" id="i26-pN-xyn"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="mqC-rX-YyI">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Players" id="iZT-7R-e16">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Rh-Gt-qze"/>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zFt-c4-vob" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="196" y="845"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cBb-9R-TfW">
             <objects>
@@ -433,6 +436,20 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Bno-Oi-zOy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="80.799999999999997" y="42.728635682158924"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="MCz-Sn-XWm">
+            <objects>
+                <viewController id="eAe-3m-S4e" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="03l-im-wix">
+                        <rect key="frame" x="0.0" y="0.0" width="301" height="431"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="frg-XU-036" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3761" y="-39"/>
         </scene>
     </scenes>
 </document>
