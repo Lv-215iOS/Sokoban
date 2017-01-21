@@ -19,11 +19,11 @@
 import Foundation
 
 class LevelsProvider {
-    ///returns all level
+    ///returns all levels
     static func getLevels() -> [Level]? {
         let dataStack = CoreDataStack.sharedStack
         var levels = [Level]()
-        let request = NSFetchRequest<Level>(entityName: "Level")
+        let request = Level.fetchRequest()
         do {
             let count = try dataStack.managedContext.count(for: request)
             if count == 0 {
