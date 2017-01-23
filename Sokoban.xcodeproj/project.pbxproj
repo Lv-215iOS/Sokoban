@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		84C12F991E36035400613C43 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C12F981E36035400613C43 /* CoreDataStack.swift */; };
 		84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */; };
 		84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7481E2F72C400FCB4C3 /* MenuController.swift */; };
 		84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */; };
@@ -53,6 +54,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		84C12F981E36035400613C43 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelsController.swift; path = Classes/Controllers/LevelsController.swift; sourceTree = "<group>"; };
 		84C1A7481E2F72C400FCB4C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Classes/Controllers/MenuController.swift; sourceTree = "<group>"; };
 		84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneController.swift; path = Classes/Controllers/Scene/SceneController.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 		84C1A7521E2F735B00FCB4C3 /* DataModel */ = {
 			isa = PBXGroup;
 			children = (
+				84C12F981E36035400613C43 /* CoreDataStack.swift */,
 				8BE462231E32091200F1E8D4 /* Player+CoreDataClass.h */,
 				8BE462241E32091200F1E8D4 /* Player+CoreDataClass.m */,
 				8BE462251E32091200F1E8D4 /* Player+CoreDataProperties.h */,
@@ -388,6 +391,7 @@
 				8BE462321E32091200F1E8D4 /* Level+CoreDataProperties.m in Sources */,
 				8BE462331E32091300F1E8D4 /* Scene+CoreDataClass.m in Sources */,
 				8B2794B51E2E5F8600A93642 /* AppDelegate.swift in Sources */,
+				84C12F991E36035400613C43 /* CoreDataStack.swift in Sources */,
 				8B359E561E30D662004646EC /* AboutViewController.swift in Sources */,
 				8BE462301E32091200F1E8D4 /* Player+CoreDataProperties.m in Sources */,
 				8B359E541E30D503004646EC /* SettingsViewController.swift in Sources */,
