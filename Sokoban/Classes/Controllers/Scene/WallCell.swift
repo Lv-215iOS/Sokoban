@@ -9,10 +9,10 @@
 import UIKit
 
 class FloorCell: UIView {
-    
+
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        
+
         context!.setFillColor(UIColor(red: 0.4392, green: 0.4118, blue: 0.4118, alpha: 1.0).cgColor)
         context?.fill(rect)
         
@@ -27,7 +27,7 @@ class FloorCell: UIView {
         context?.move(to: CGPoint(x: 0, y: rect.height/4))
         context?.addLine(to: CGPoint(x: rect.width, y: rect.height / 4))
         context?.strokePath()
-        
+     
         context?.setLineWidth((rect.width + rect.height)/100)
         context?.setStrokeColor(UIColor(red: 0.2863, green: 0.0431, blue: 0, alpha: 1.0).cgColor)
         context?.move(to: CGPoint(x: 0, y: 2 * rect.height/4))
@@ -87,7 +87,7 @@ class FloorCell: UIView {
         context?.move(to: CGPoint(x: 0.75 * rect.width / 3, y: 3 * rect.height / 4))
         context?.addLine(to: CGPoint(x: 0.75 * rect.width / 3, y: 4 * rect.height / 4))
         context?.strokePath()
-        
+
     }
-    
+
 }

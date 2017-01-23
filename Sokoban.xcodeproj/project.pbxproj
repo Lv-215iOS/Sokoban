@@ -7,10 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		258AD1191E35F60100195190 /* WallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD1181E35F60100195190 /* WallCell.swift */; };
 		84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */; };
 		84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7481E2F72C400FCB4C3 /* MenuController.swift */; };
 		84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */; };
-		84C1A74F1E2F730D00FCB4C3 /* FloorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A74E1E2F730D00FCB4C3 /* FloorCell.swift */; };
 		84C1A7511E2F734500FCB4C3 /* RootController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7501E2F734500FCB4C3 /* RootController.swift */; };
 		84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7531E2F739600FCB4C3 /* Sokoban.xcdatamodeld */; };
 		84C1A75C1E2F74D300FCB4C3 /* LevelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */; };
@@ -53,10 +53,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		258AD1181E35F60100195190 /* WallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WallCell.swift; path = Classes/Controllers/Scene/WallCell.swift; sourceTree = "<group>"; };
 		84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelsController.swift; path = Classes/Controllers/LevelsController.swift; sourceTree = "<group>"; };
 		84C1A7481E2F72C400FCB4C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Classes/Controllers/MenuController.swift; sourceTree = "<group>"; };
 		84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneController.swift; path = Classes/Controllers/Scene/SceneController.swift; sourceTree = "<group>"; };
-		84C1A74E1E2F730D00FCB4C3 /* FloorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorCell.swift; path = Classes/Controllers/Scene/FloorCell.swift; sourceTree = "<group>"; };
 		84C1A7501E2F734500FCB4C3 /* RootController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootController.swift; path = Classes/RootController.swift; sourceTree = "<group>"; };
 		84C1A7541E2F739600FCB4C3 /* Sokoban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sokoban.xcdatamodel; sourceTree = "<group>"; };
 		84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsProvider.swift; sourceTree = "<group>"; };
@@ -133,8 +133,8 @@
 		84C1A7441E2F724B00FCB4C3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				258AD1181E35F60100195190 /* WallCell.swift */,
 				84C1A74C1E2F72E500FCB4C3 /* SceneController.swift */,
-				84C1A74E1E2F730D00FCB4C3 /* FloorCell.swift */,
 				8BE462351E3210E000F1E8D4 /* PlayerCell.swift */,
 			);
 			name = Scene;
@@ -373,9 +373,9 @@
 			files = (
 				84C1A75E1E2F74F800FCB4C3 /* PlaygroundController.swift in Sources */,
 				8B359E581E30D71A004646EC /* PlayersViewController.swift in Sources */,
-				84C1A74F1E2F730D00FCB4C3 /* FloorCell.swift in Sources */,
 				8BE4622F1E32091200F1E8D4 /* Player+CoreDataClass.m in Sources */,
 				84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */,
+				258AD1191E35F60100195190 /* WallCell.swift in Sources */,
 				84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */,
 				8BE462341E32091300F1E8D4 /* Scene+CoreDataProperties.m in Sources */,
 				84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */,
