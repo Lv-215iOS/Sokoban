@@ -14,8 +14,8 @@ class SceneController: UIViewController {
     @IBOutlet weak var animationBtn: UIButton!
     var player = PlayerCell()
     
-    @IBAction func animationBtnClicked(_ sender: UIButton) {
-        switch sender.currentTitle! {
+    func animatePlayer(title: String) {
+        switch title {
         case "👉":
             animateImage(type: player.imageListRight)
         case "👆":
@@ -27,7 +27,6 @@ class SceneController: UIViewController {
         default:
             break
         }
-        
     }
     
     override func viewDidLoad() {
