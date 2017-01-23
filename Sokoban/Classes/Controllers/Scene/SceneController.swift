@@ -31,7 +31,6 @@ class SceneController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        player.initPlayer()
     }
     
     func animateImage(type: [UIImage]) {
