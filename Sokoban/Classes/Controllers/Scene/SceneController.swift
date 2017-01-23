@@ -9,27 +9,44 @@
 import UIKit
 
 class SceneController: UIViewController {
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var animationBtn: UIButton!
+    var player = PlayerCell()
+    
+    @IBAction func animationBtnClicked(_ sender: UIButton) {
+        switch sender.currentTitle! {
+        case "👉":
+            animateImage(type: player.imageListRight)
+        case "👆":
+            animateImage(type: player.imageListUp)
+        case "👈":
+            animateImage(type: player.imageListLeft)
+        case "👇🏿":
+            animateImage(type: player.imageListDown)
+        default:
+            break
+        }
+        
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        player.initPlayer()
     }
-    */
-
+    
+    func animateImage(type: [UIImage]) {
+        imageView.animationImages = type
+        imageView.animationDuration = 0.35
+        imageView.startAnimating()
+        delay(delay: 0.35) {
+            self.imageView.stopAnimating()
+        }
+    }
+    
+    func delay(delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            closure()
+        }
+    }
 }
