@@ -229,7 +229,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p7y-h1-19X" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="K9D-Fu-9Ae" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2941.5999999999999" y="-145.27736131934034"/>
+            <point key="canvasLocation" x="2948" y="-145"/>
         </scene>
         <!--Leaderboard-->
         <scene sceneID="YJp-ys-4Tn">
@@ -410,10 +410,10 @@
             </objects>
             <point key="canvasLocation" x="80.799999999999997" y="42.728635682158924"/>
         </scene>
-        <!--View Controller-->
+        <!--Scene Controller-->
         <scene sceneID="MCz-Sn-XWm">
             <objects>
-                <viewController id="eAe-3m-S4e" sceneMemberID="viewController">
+                <viewController id="eAe-3m-S4e" customClass="SceneController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="bIh-aw-xfm"/>
                         <viewControllerLayoutGuide type="bottom" id="hq0-dX-g6a"/>
@@ -437,18 +437,56 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yUo-zX-1RO" customClass="Player" customModule="Sokoban" customModuleProvider="target">
-                                <rect key="frame" x="64" y="175" width="100" height="100"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="down1.png" translatesAutoresizingMaskIntoConstraints="NO" id="osF-uC-0qK">
+                                <rect key="frame" x="80" y="210" width="68" height="66"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j78-Sf-DbJ">
+                                <rect key="frame" x="135" y="284" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="👉"/>
+                                <connections>
+                                    <action selector="animationBtnClicked:" destination="eAe-3m-S4e" eventType="touchUpInside" id="Knr-ky-Icf"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AGG-H3-4zu">
+                                <rect key="frame" x="97" y="284" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="👆"/>
+                                <connections>
+                                    <action selector="animationBtnClicked:" destination="eAe-3m-S4e" eventType="touchUpInside" id="LYp-Cr-Tbk"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ypn-5X-HFe">
+                                <rect key="frame" x="59" y="284" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="👈"/>
+                                <connections>
+                                    <action selector="animationBtnClicked:" destination="eAe-3m-S4e" eventType="touchUpInside" id="c2k-z5-o9t"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uT2-pi-fEU">
+                                <rect key="frame" x="99" y="322" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="👇🏿"/>
+                                <connections>
+                                    <action selector="animationBtnClicked:" destination="eAe-3m-S4e" eventType="touchUpInside" id="BBg-hI-Iqi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="animationBtn" destination="j78-Sf-DbJ" id="Gwf-5J-aMd"/>
+                        <outlet property="imageView" destination="osF-uC-0qK" id="Whp-ru-srl"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frg-XU-036" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3760.8000000000002" y="-39.130434782608695"/>
+            <point key="canvasLocation" x="3605.5999999999999" y="-55.322338830584712"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="down1.png" width="160" height="160"/>
+    </resources>
 </document>
