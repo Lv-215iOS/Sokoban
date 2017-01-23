@@ -2,18 +2,18 @@
 //  FloorCell.swift
 //  Sokoban
 //
-//  Created by admin on 1/18/17.
+//  Created by Oleksandr on 1/18/17.
 //
 //
 
 import UIKit
 
-class FloorCell: UIView {
+class WallCell: UIView {
 
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
 
-        context!.setFillColor(UIColor(red: 0.4392, green: 0.4118, blue: 0.4118, alpha: 1.0).cgColor)
+        context?.setFillColor(UIColor(red: 0.4392, green: 0.4118, blue: 0.4118, alpha: 1.0).cgColor)
         context?.fill(rect)
         
         context?.setLineWidth((rect.width + rect.height)/100)
