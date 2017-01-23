@@ -9,14 +9,17 @@
 import UIKit
 
 class PlayerCell: UIView {
-
-    let images: UIImageView? = nil
+    var imageListRight = [UIImage]()
+    var imageListLeft = [UIImage]()
+    var imageListUp = [UIImage]()
+    var imageListDown = [UIImage]()
     
     func initPlayer() {
-        
-        let image1 = UIImage(named: "")!
-        let image2 = UIImage(named: "")!
-        
-        images?.animationImages = [image1, image2]
+        for i in 1...5 {
+            imageListRight.append(UIImage(named: "right\(i).png")!)
+            imageListLeft.append(UIImage(named: "left\(i).png")!)
+            imageListUp.append(UIImage(named: "up\(i).png")!)
+            imageListDown.append(UIImage(named: "down\(i).png")!)
+        }
     }
 }
