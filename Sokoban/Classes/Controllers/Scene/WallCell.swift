@@ -1,8 +1,8 @@
 //
-//  FloorCell.swift
+//  WallCell.swift
 //  Sokoban
 //
-//  Created by Oleksandr on 1/18/17.
+//  Created by OleksandrYevdokymov on 1/18/17.
 //
 //
 
