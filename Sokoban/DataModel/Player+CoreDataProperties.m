@@ -2,7 +2,7 @@
 //  Player+CoreDataProperties.m
 //  Sokoban
 //
-//  Created by pasik_01 on 20.01.17.
+//  Created by Oleksiy Bilyi on 1/24/17.
 //
 //
 
@@ -16,6 +16,6 @@
 
 @dynamic name;
 @dynamic score;
-@dynamic levels;
+@dynamic levelsScores;
 
 @end
