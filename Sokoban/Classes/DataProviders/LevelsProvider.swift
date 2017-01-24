@@ -19,6 +19,7 @@
 import Foundation
 
 class LevelsProvider {
+    
     ///returns all levels
     static func getLevels() -> [Level]? {
         let dataStack = CoreDataStack.sharedStack
@@ -27,7 +28,7 @@ class LevelsProvider {
         do {
             let count = try dataStack.managedContext.count(for: request)
             if count == 0 {
-               addLevel()
+               addDefaultLevels()
             }
             levels = try dataStack.managedContext.fetch(request)
         } catch let error as NSError {
@@ -35,16 +36,31 @@ class LevelsProvider {
         }
         return levels
     }
-    /// add first level
-    private static func addLevel() {
+    
+    /// adds default levels
+    static func addDefaultLevels() {
+        addLevelWith(name: "starter",
+                     order: 1,
+                     sceneWidth: 10,
+                     sceneHeight: 5,
+                     sceneMatrix: "###########--#--#--##---&----##-*--%---###########")
+    }
+    
+    /// adds level
+    static func addLevelWith( name: String,
+                              order: NSNumber,
+                              sceneWidth: NSNumber,
+                              sceneHeight: NSNumber,
+                              sceneMatrix: String) {
+        
         let dataStack = CoreDataStack.sharedStack
         let level = Level(context: dataStack.managedContext)
-        level.name = "starter"
-        level.order = 1
+        level.name = name
+        level.order = order
         let scene = Scene(context: dataStack.managedContext)
-        scene.height = 5
-        scene.width = 10
-        scene.matrix = "###########--#--#--##---&----##-*--%---###########"
+        scene.height = sceneHeight
+        scene.width = sceneWidth
+        scene.matrix = sceneMatrix
         level.scene = scene
         dataStack.saveContext()
     }
