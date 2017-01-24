@@ -25,7 +25,7 @@ class PlayersProvider {
         do {
             let count = try dataStack.managedContext.count(for: request)
             if count == 0 {
-                addPlayer()
+                addPlayerWith(name: "testPlayer", score: 100500, levelsScores: [0.0])
             }
             players = try dataStack.managedContext.fetch(request)
         } catch let error as NSError {
@@ -33,12 +33,14 @@ class PlayersProvider {
         }
         return players
     }
+    
     /// add first player
-    private static func addPlayer() {
+    static func addPlayerWith(name : String, score : NSNumber, levelsScores: NSArray) {
         let dataStack = CoreDataStack.sharedStack
         let player = Player(context:dataStack.managedContext)
-        player.name = "testPlayer"
-        player.score = 100500
+        player.name = name
+        player.score = score
+        player.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
         dataStack.saveContext()
     }
 
