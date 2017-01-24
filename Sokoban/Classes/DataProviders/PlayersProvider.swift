@@ -17,7 +17,34 @@
 import UIKit
 
 class PlayersProvider {
-    ///returns all players
+    
+    static private(set) var currentPlayer : Player? = {
+        let request = Player.fetchRequest()
+        var players = getPlayers()
+        if let lastPlayer = UserDefaults.standard.value(forKey: "currentPlayer") as! String? {
+            for player in players! {
+                if player.name == lastPlayer { return player }
+            }
+        }
+        return players?[0]
+    }()
+    
+    /**
+     Sets the property currentPlayer
+     
+     - Parameter player: player that needs to be set to property currentPlayer
+    */
+    static func setCurrentPlayer(_ player : Player) {
+        UserDefaults.standard.setValue(player.name, forKey: "currentPlayer")
+        currentPlayer = player
+    }
+
+    
+    /**
+     Returns all players drom data base
+     
+     - Returns: An array of all players
+     */
     static func getPlayers() -> [Player]? {
         let dataStack = CoreDataStack.sharedStack
         var players = [Player]()
@@ -34,7 +61,13 @@ class PlayersProvider {
         return players
     }
     
-    /// add first player
+    /**
+     Inserts a new player to data base
+     
+     - Parameter name: name of player
+     - Parameter score: global score of player
+     - Parameter levelsScores: Array of level scores for passed levels of player
+     */
     static func addPlayerWith(name : String, score : NSNumber, levelsScores: NSArray) {
         let dataStack = CoreDataStack.sharedStack
         let player = Player(context:dataStack.managedContext)
