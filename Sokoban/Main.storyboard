@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1wN-0q-fst">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1wN-0q-fst">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -496,7 +496,19 @@
                     <view key="view" contentMode="scaleToFill" id="mqC-rX-YyI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uES-2a-Sgr">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="i26-pN-xyn" firstAttribute="top" secondItem="uES-2a-Sgr" secondAttribute="bottom" id="PGJ-hk-GHG"/>
+                            <constraint firstItem="uES-2a-Sgr" firstAttribute="top" secondItem="xI5-Vs-KNL" secondAttribute="bottom" id="SGl-oO-Xpv"/>
+                            <constraint firstItem="uES-2a-Sgr" firstAttribute="leading" secondItem="mqC-rX-YyI" secondAttribute="leading" id="ZFC-Qk-T9B"/>
+                            <constraint firstAttribute="trailing" secondItem="uES-2a-Sgr" secondAttribute="trailing" id="m7T-xQ-pNe"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Players" id="iZT-7R-e16">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Rh-Gt-qze">
@@ -505,10 +517,13 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="playersTableView" destination="uES-2a-Sgr" id="lSy-nK-0qg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zFt-c4-vob" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="196" y="845"/>
+            <point key="canvasLocation" x="196" y="844.22788605697156"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="cBb-9R-TfW">

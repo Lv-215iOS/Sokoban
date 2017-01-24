@@ -8,8 +8,9 @@
 
 import UIKit
 
-class PlayersViewController: UIViewController {
+class PlayersViewController: UIViewController, UITAD{
 
+    @IBOutlet weak var playersTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
     }
