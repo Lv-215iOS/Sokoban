@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2516B6231E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */; };
 		258AD1191E35F60100195190 /* WallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD1181E35F60100195190 /* WallCell.swift */; };
 		25D28FD11E3674EF009115D7 /* FloorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D28FD01E3674EF009115D7 /* FloorCell.swift */; };
 		25D28FE61E376E4F009115D7 /* down1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D28FD21E376E4F009115D7 /* down1.png */; };
@@ -79,6 +80,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLevelsTableViewCell.swift; path = Classes/Controllers/CustomLevelsTableViewCell.swift; sourceTree = "<group>"; };
 		258AD1181E35F60100195190 /* WallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WallCell.swift; path = Classes/Controllers/Scene/WallCell.swift; sourceTree = "<group>"; };
 		25D28FD01E3674EF009115D7 /* FloorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorCell.swift; path = Classes/Controllers/Scene/FloorCell.swift; sourceTree = "<group>"; };
 		25D28FD21E376E4F009115D7 /* down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down1.png; path = Images/down1.png; sourceTree = "<group>"; };
@@ -227,6 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */,
+				2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */,
 				84C1A7481E2F72C400FCB4C3 /* MenuController.swift */,
 				84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */,
 				8B359E4F1E30D0F7004646EC /* FirstLaunchViewController.swift */,
@@ -480,6 +483,7 @@
 				84C1A75E1E2F74F800FCB4C3 /* PlaygroundController.swift in Sources */,
 				8B359E581E30D71A004646EC /* PlayersViewController.swift in Sources */,
 				8BE4622F1E32091200F1E8D4 /* Player+CoreDataClass.m in Sources */,
+				2516B6231E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift in Sources */,
 				84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */,
 				258AD1191E35F60100195190 /* WallCell.swift in Sources */,
 				84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */,
