@@ -25,6 +25,8 @@ class PlayersProvider {
             for player in players! {
                 if player.name == lastPlayer { return player }
             }
+        } else {
+            UserDefaults.standard.setValue(players?[0].name, forKey: "currentPlayer")
         }
         return players?[0]
     }()
@@ -38,7 +40,16 @@ class PlayersProvider {
         UserDefaults.standard.setValue(player.name, forKey: "currentPlayer")
         currentPlayer = player
     }
-
+    
+    /**
+     Deletes senders player
+     
+     - Parameter player: player that needs to be deleted
+     */
+    static func deletePlayer(_ player : Player) {
+        CoreDataStack.sharedStack.managedContext.delete(player)
+        CoreDataStack.sharedStack.saveContext()
+    }
     
     /**
      Returns all players drom data base
@@ -52,6 +63,7 @@ class PlayersProvider {
         do {
             let count = try dataStack.managedContext.count(for: request)
             if count == 0 {
+                addPlayerWith(name: "testPlayer", score: 100500, levelsScores: [0.0])
                 addPlayerWith(name: "testPlayer", score: 100500, levelsScores: [0.0])
             }
             players = try dataStack.managedContext.fetch(request)
