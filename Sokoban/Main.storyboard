@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1wN-0q-fst">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2659" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1wN-0q-fst">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -165,7 +165,13 @@
                             <constraint firstAttribute="trailing" secondItem="l47-tY-5Pj" secondAttribute="trailing" id="fub-hY-qGS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Levels" id="Vox-uc-b8q"/>
+                    <navigationItem key="navigationItem" title="Levels" id="Vox-uc-b8q">
+                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="vrm-nz-K84">
+                            <connections>
+                                <segue destination="QUR-DB-LXs" kind="show" id="lxe-QJ-eLa"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="levelsTableView" destination="l47-tY-5Pj" id="aQ4-d0-Cu2"/>
                     </connections>
