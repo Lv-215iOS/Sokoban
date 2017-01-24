@@ -12,9 +12,12 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
 
     @IBOutlet weak var levelsTableView: UITableView!
     
+    var levelsScoresArray = [Double]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+    let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
+        levelsScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelsScoresData!) as! Array
     }
     
     // MARK: - Table view data source
@@ -38,10 +41,15 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 return cell
         }
         cell.levelNameLabel.text = level.name
+        cell.levelScoreLabel.text = String(levelsScoresArray[indexPath.row])//has to be corrected after we create more levels
+        
         return cell
     }
    
     // MARK: - Table view delegate
-
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)//highlights for a second
+    }
 
 }
