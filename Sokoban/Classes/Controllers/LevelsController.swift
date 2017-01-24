@@ -24,13 +24,20 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
      func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        guard let levels = LevelsProvider.getLevels() else {
+            return 1
+        }
+        return levels.count
     }
     
      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "levelsTableViewCell", for: indexPath) as! CustomLevelsTableViewCell
-        
+        guard let level = LevelsProvider.getLevels()?[indexPath.row]
+            else {
+                return cell
+        }
+        cell.levelNameLabel.text = level.name
         return cell
     }
    
