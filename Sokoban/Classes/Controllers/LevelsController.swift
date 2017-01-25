@@ -49,7 +49,24 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     // MARK: - Table view delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
         tableView.deselectRow(at: indexPath, animated: true)//highlights for a second
+        
+        let chosenLevel = LevelsProvider.getLevels()?[indexPath.row]
+        
+        performSegue(withIdentifier: "segueToPlaygroundVC", sender: chosenLevel)
+        
+    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if segue.identifier == "segueToPlaygroundVC" {
+            
+            let playgroundController: PlaygroundController = (segue.destination as? PlaygroundController)!
+            let chosenLevel = sender as? Level
+            playgroundController.currentLevel = chosenLevel
+            print(chosenLevel?.name ?? "error")
+            
+        }
     }
 
 }

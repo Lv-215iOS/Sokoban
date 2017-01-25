@@ -16,6 +16,7 @@ class PlaygroundController: UIViewController {
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var stepsCountLabel: UILabel!
     
+    var currentLevel: Level?
     
     var isPlaying = false
     var timer = Timer()
