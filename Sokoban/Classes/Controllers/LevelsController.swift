@@ -16,7 +16,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
+        let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
         levelsScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelsScoresData!) as! Array
     }
     
@@ -41,8 +41,13 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 return cell
         }
         cell.levelNameLabel.text = level.name
-        cell.levelScoreLabel.text = String(levelsScoresArray[indexPath.row])//has to be corrected after we create more levels
         
+        if indexPath.row < levelsScoresArray.count {
+            let levelScore = levelsScoresArray[indexPath.row]
+            cell.levelScoreLabel.text = String(describing: levelScore)
+        } else {
+            cell.levelScoreLabel.text = "0.0"
+        }
         return cell
     }
    
