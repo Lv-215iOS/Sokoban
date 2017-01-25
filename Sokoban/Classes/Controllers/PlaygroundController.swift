@@ -10,6 +10,7 @@ import UIKit
 
 class PlaygroundController: UIViewController {
     
+    @IBOutlet weak var movesCountLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var restartButton: UIButton!
@@ -19,6 +20,7 @@ class PlaygroundController: UIViewController {
     var isPlaying = false
     var timer = Timer()
     var time = 0
+    var movesCount = 0
     
     
     var sceneController: SceneController? = nil
@@ -65,10 +67,15 @@ class PlaygroundController: UIViewController {
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {
         time = 0
+        movesCount = 0
         timer.invalidate()
         timeLabel.text = String(0)
         stepsCountLabel.text = String(0)
         ///TODO:player respawns,view redraws
     }
     
+    @IBAction func moveActionTapped(_ sender: UIButton) {
+        movesCount += 1
+        movesCountLabel.text = String(movesCount)
+    }
 }
