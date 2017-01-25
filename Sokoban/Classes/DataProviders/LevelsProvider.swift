@@ -6,13 +6,25 @@
 //
 //
 /*
- first level example
+ Level 1
  
  ##########
  #--#--#--#
  #---&----#
  #-*--%---#
  ##########
+ 
+ Level 2
+ 
+ ########
+ #--#---#
+ #---*--#
+ #--#**-#
+ ##-#---#
+ #%%-*#-#
+ #%%---&#
+ ########
+ 
  
  */
 
@@ -39,11 +51,16 @@ class LevelsProvider {
     
     /// adds default levels
     static func addDefaultLevels() {
-        addLevelWith(name: "starter",
+        addLevelWith(name: "Level 1",
                      order: 1,
                      sceneWidth: 10,
                      sceneHeight: 5,
                      sceneMatrix: "###########--#--#--##---&----##-*--%---###########")
+        addLevelWith(name: "Level 2",
+                     order: 2,
+                     sceneWidth: 8,
+                     sceneHeight: 8,
+                     sceneMatrix: "#########--#---##---*--##--#**-###-#---##%%-*#-##%%---&#########")
     }
     
     /// adds level
