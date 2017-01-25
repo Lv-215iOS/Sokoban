@@ -14,6 +14,12 @@ class SceneController: UIViewController {
     @IBOutlet weak var animationBtn: UIButton!
     var player = PlayerCell()
     
+    var model: [[ModelType]] = []
+    struct ModelType {
+        var point: (x: Int, y: Int)
+        var type: Character
+    }
+    
     func animatePlayer(title: String) {
         switch title {
         case "👉":
