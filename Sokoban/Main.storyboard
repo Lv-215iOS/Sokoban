@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hbz-Nx-OPl">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hbz-Nx-OPl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -116,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZQW-Aw-ZOy" id="TnO-R9-CZX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="levelStateOpenedImage" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-oZ-YwT">
@@ -136,7 +136,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U61-eq-zJp">
-                                                    <rect key="frame" x="0.0" y="9" width="128" height="24"/>
+                                                    <rect key="frame" x="20" y="9" width="128" height="24"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="128" id="37E-A4-BZx"/>
                                                         <constraint firstAttribute="height" constant="24" id="x2X-o6-2VB"/>
@@ -149,7 +149,7 @@
                                             <constraints>
                                                 <constraint firstItem="afZ-oZ-YwT" firstAttribute="centerY" secondItem="TnO-R9-CZX" secondAttribute="centerY" id="N5H-n9-U4Q"/>
                                                 <constraint firstItem="U61-eq-zJp" firstAttribute="centerY" secondItem="TnO-R9-CZX" secondAttribute="centerY" id="UnE-Ja-oRe"/>
-                                                <constraint firstItem="U61-eq-zJp" firstAttribute="leading" secondItem="TnO-R9-CZX" secondAttribute="leading" id="WHF-Lg-4gs"/>
+                                                <constraint firstItem="U61-eq-zJp" firstAttribute="leading" secondItem="TnO-R9-CZX" secondAttribute="leading" constant="20" symbolic="YES" id="WHF-Lg-4gs"/>
                                                 <constraint firstItem="oiV-of-6D5" firstAttribute="centerY" secondItem="TnO-R9-CZX" secondAttribute="centerY" id="bQQ-bL-Rd8"/>
                                                 <constraint firstAttribute="trailing" secondItem="afZ-oZ-YwT" secondAttribute="trailing" constant="8" id="e94-TC-xrs"/>
                                                 <constraint firstItem="afZ-oZ-YwT" firstAttribute="leading" secondItem="oiV-of-6D5" secondAttribute="trailing" constant="16" id="gG4-lS-s4S"/>
@@ -176,15 +176,10 @@
                             <constraint firstAttribute="trailing" secondItem="l47-tY-5Pj" secondAttribute="trailing" id="fub-hY-qGS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Levels" id="Vox-uc-b8q">
-                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="vrm-nz-K84">
-                            <connections>
-                                <segue destination="QUR-DB-LXs" kind="show" id="lxe-QJ-eLa"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Levels" id="Vox-uc-b8q"/>
                     <connections>
                         <outlet property="levelsTableView" destination="l47-tY-5Pj" id="aQ4-d0-Cu2"/>
+                        <segue destination="QUR-DB-LXs" kind="show" identifier="segueToPlaygroundVC" id="PkV-WL-o5F"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e1i-84-mhE" userLabel="First Responder" sceneMemberID="firstResponder"/>
