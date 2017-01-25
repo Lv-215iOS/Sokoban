@@ -63,6 +63,10 @@ class PlaygroundController: UIViewController {
     }
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {
+        if isPlaying {
+            timer.invalidate()
+            isPlaying = false
+        }
         time = 0
         movesCount = 0
         timer.invalidate()
