@@ -208,7 +208,7 @@
                                 <constraints>
                                     <constraint firstAttribute="width" constant="40" id="7gr-ha-slq"/>
                                 </constraints>
-                                <state key="normal" title="⏯"/>
+                                <state key="normal" title="⏸"/>
                                 <connections>
                                     <action selector="playPauseTapped:" destination="QUR-DB-LXs" eventType="touchUpInside" id="dei-NL-OYM"/>
                                 </connections>
@@ -239,7 +239,7 @@
                                     <action selector="backToMenu:" destination="QUR-DB-LXs" eventType="touchUpInside" id="Xsg-c1-M4n"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9W-Iv-2lI">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p9W-Iv-2lI">
                                 <rect key="frame" x="55" y="572" width="42" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="42" id="Fsp-ui-90M"/>
@@ -248,7 +248,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="..." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfw-sE-aU2">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hfw-sE-aU2">
                                 <rect key="frame" x="55" y="625" width="28" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>

@@ -50,10 +50,7 @@ class PlaygroundController: UIViewController {
     
     @IBAction func playPauseTapped(_ sender: UIButton) {
         
-        if !isPlaying {
-            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(PlaygroundController.updateTime), userInfo: nil, repeats: true)
-            isPlaying = true
-        } else {
+        if isPlaying {
             timer.invalidate()
             isPlaying = false
         }
@@ -77,5 +74,9 @@ class PlaygroundController: UIViewController {
     @IBAction func moveActionTapped(_ sender: UIButton) {
         movesCount += 1
         movesCountLabel.text = String(movesCount)
+        if !isPlaying {
+            timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(PlaygroundController.updateTime), userInfo: nil, repeats: true)
+            isPlaying = true
+        }
     }
 }
