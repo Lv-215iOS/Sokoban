@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1212" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1wN-0q-fst">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hbz-Nx-OPl">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -116,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZQW-Aw-ZOy" id="TnO-R9-CZX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="levelStateOpenedImage" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-oZ-YwT">
@@ -463,7 +463,7 @@
         <!--Add player-->
         <scene sceneID="Yxa-mD-Djg">
             <objects>
-                <viewController id="6Dh-Uj-FNO" customClass="FirstLaunchViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="firstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6Dh-Uj-FNO" customClass="FirstLaunchViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="JQm-Rm-MBu"/>
                         <viewControllerLayoutGuide type="bottom" id="dJ7-ZR-msT"/>
@@ -541,10 +541,40 @@
             </objects>
             <point key="canvasLocation" x="196" y="844.22788605697156"/>
         </scene>
+        <!--Launch Screen View Controller-->
+        <scene sceneID="nRO-JW-Wv3">
+            <objects>
+                <viewController id="hbz-Nx-OPl" customClass="LaunchScreenViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="lqI-uI-THo"/>
+                        <viewControllerLayoutGuide type="bottom" id="6JH-jm-IwF"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lry-7D-zEm">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Sokoban" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="l0O-5i-Vob">
+                                <rect key="frame" x="100" y="323" width="147" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <outlet property="appTitle" destination="l0O-5i-Vob" id="DyA-51-yku"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XxZ-t7-NuS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-980" y="62.518740629685162"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="cBb-9R-TfW">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1wN-0q-fst" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="secondViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1wN-0q-fst" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="xQA-8J-8OI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
