@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayersProvider {
+class PlayersProvider: PlayersProviderInterface {
     
     static private(set) var currentPlayer : Player? = {
         let request = Player.fetchRequest()

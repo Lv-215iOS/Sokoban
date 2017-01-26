@@ -131,7 +131,7 @@
 
 import Foundation
 
-class LevelsProvider {
+class LevelsProvider: LevelsProviderInterface {
     
     /**
      Returns all levels from data base
