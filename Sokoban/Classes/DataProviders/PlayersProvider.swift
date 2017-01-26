@@ -5,14 +5,6 @@
 //  Created by Oleksiy Bilyi on 1/21/17.
 //
 //
-/*
- first player example
- 
- name - testPlayer
- score - 100500
- 
- */
-
 
 import UIKit
 
@@ -55,7 +47,7 @@ class PlayersProvider {
     }
     
     /**
-     Returns all players drom data base
+     Returns all players from data base
      
      - Returns: An array of all players
      */
