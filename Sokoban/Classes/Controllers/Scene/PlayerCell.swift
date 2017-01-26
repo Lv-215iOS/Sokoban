@@ -8,12 +8,12 @@
 
 import UIKit
 
-class PlayerCell: UIView {
+class PlayerCell: UIImage {
     var imageListRight = [UIImage]()
     var imageListLeft = [UIImage]()
     var imageListUp = [UIImage]()
     var imageListDown = [UIImage]()
-    
+        
     func initPlayer() {
         for i in 1...5 {
             imageListRight.append(UIImage(named: "right\(i).png")!)
