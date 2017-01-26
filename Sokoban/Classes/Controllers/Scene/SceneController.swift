@@ -68,6 +68,7 @@ class SceneController: UIViewController {
         drawDot(frame: CGRect(x: 130, y: 10, width: 20, height: 20))
         
         drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
+        
         drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
         
         drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
@@ -98,12 +99,12 @@ class SceneController: UIViewController {
      - Returns height: heigth of matrix
      - Returns matrix: array of elements
     */
-    func getLevel(_ level: Int) -> (width: NSNumber?, height: NSNumber?, matrix: String?) {
+    func getLevel(_ level: Int) -> (width: NSNumber?, height: NSNumber?, matrix: Array<String>) {
         let levelScene = levels?.currentLevel?.scene
         let levelHeight = levelScene?.height
         let levelWidth = levelScene?.width
-        let levelMatrix = levelScene?.matrix
-        return (levelWidth, levelHeight, levelMatrix)
+        let levelMatrix = levelScene?.matrix?.characters.map { String($0) }
+        return (levelWidth, levelHeight, levelMatrix!)
     }
     
     func changePlayerPosition(_ player: UIImageView, x: Int, y: Int) {
@@ -154,10 +155,13 @@ class SceneController: UIViewController {
         }
         return false
     }
-    
+
+
     func moveBlock(_ player: UIImageView, x: Int, y: Int) {
         for block in 0..<blockCellOut.count {
             if isWallNearBlock(blockCellOut[block], x: x, y: y) {
+                return
+            } else if isBlockNearBlock(blockCellOut[block], x: x, y: y) {
                 return
             } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == blockCellOut[block].center.y {
                 if isBlockOnDot(block: blockCellOut[block]) {
