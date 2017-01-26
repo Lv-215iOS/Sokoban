@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		2516B6231E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */; };
+		25327D521E3A2A0200567004 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25327D511E3A2A0200567004 /* Protocols.swift */; };
 		258AD1191E35F60100195190 /* WallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD1181E35F60100195190 /* WallCell.swift */; };
 		25D28FD11E3674EF009115D7 /* FloorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D28FD01E3674EF009115D7 /* FloorCell.swift */; };
 		25D28FE61E376E4F009115D7 /* down1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D28FD21E376E4F009115D7 /* down1.png */; };
@@ -82,6 +83,7 @@
 
 /* Begin PBXFileReference section */
 		2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLevelsTableViewCell.swift; path = Classes/Controllers/CustomLevelsTableViewCell.swift; sourceTree = "<group>"; };
+		25327D511E3A2A0200567004 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		258AD1181E35F60100195190 /* WallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WallCell.swift; path = Classes/Controllers/Scene/WallCell.swift; sourceTree = "<group>"; };
 		25D28FD01E3674EF009115D7 /* FloorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorCell.swift; path = Classes/Controllers/Scene/FloorCell.swift; sourceTree = "<group>"; };
 		25D28FD21E376E4F009115D7 /* down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down1.png; path = Images/down1.png; sourceTree = "<group>"; };
@@ -175,6 +177,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		25327D501E3A29E000567004 /* GlobalProtocols */ = {
+			isa = PBXGroup;
+			children = (
+				25327D511E3A2A0200567004 /* Protocols.swift */,
+			);
+			name = GlobalProtocols;
+			sourceTree = "<group>";
+		};
 		25D28FA71E366CA0009115D7 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -299,6 +309,7 @@
 		8B2794B31E2E5F8600A93642 /* Sokoban */ = {
 			isa = PBXGroup;
 			children = (
+				25327D501E3A29E000567004 /* GlobalProtocols */,
 				25D28FA71E366CA0009115D7 /* Images */,
 				84C1A7521E2F735B00FCB4C3 /* DataModel */,
 				84C1A7431E2F724300FCB4C3 /* Classes */,
@@ -498,6 +509,7 @@
 				25DF17191E361CBD007A468A /* Dot.swift in Sources */,
 				8B359E501E30D0F7004646EC /* FirstLaunchViewController.swift in Sources */,
 				8B29382F1E389850004E0ECA /* LaunchScreenViewController.swift in Sources */,
+				25327D521E3A2A0200567004 /* Protocols.swift in Sources */,
 				25DF17131E361B20007A468A /* PlayersProvider.swift in Sources */,
 				84C1A75C1E2F74D300FCB4C3 /* LevelsProvider.swift in Sources */,
 				25DF17181E361CBD007A468A /* BlockCellOut.swift in Sources */,
