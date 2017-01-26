@@ -9,7 +9,7 @@
 import UIKit
 
 class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    
     @IBOutlet weak var levelsTableView: UITableView!
     
     var levelsScoresArray = [Double]()
@@ -22,24 +22,26 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     // MARK: - Table view data source
     
-     func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         guard let levels = LevelsProvider.getLevels() else {
             return 1
         }
         return levels.count
     }
     
-     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "levelsTableViewCell", for: indexPath) as! CustomLevelsTableViewCell
+        
         guard let level = LevelsProvider.getLevels()?[indexPath.row]
             else {
                 return cell
         }
+        
         cell.levelNameLabel.text = level.name
         
         if indexPath.row < levelsScoresArray.count {
@@ -48,9 +50,10 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         } else {
             cell.levelScoreLabel.text = "0.0"
         }
+        
         return cell
     }
-   
+    
     // MARK: - Table view delegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -73,5 +76,5 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         }
     }
-
+    
 }

@@ -13,7 +13,7 @@ class CustomLevelsTableViewCell: UITableViewCell {
     @IBOutlet weak var levelNameLabel: UILabel!
     
     @IBOutlet weak var levelScoreLabel: UILabel!
-
+    
     @IBOutlet weak var levelStateImage: UIImageView!
     
     
@@ -21,11 +21,11 @@ class CustomLevelsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
