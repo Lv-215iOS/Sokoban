@@ -5,14 +5,6 @@
 //  Created by Oleksiy Bilyi on 1/21/17.
 //
 //
-/*
- first player example
- 
- name - testPlayer
- score - 100500
- 
- */
-
 
 import UIKit
 
@@ -20,7 +12,7 @@ class PlayersProvider {
     
     static private(set) var currentPlayer : Player? = {
         let request = Player.fetchRequest()
-        var players = getPlayers()
+        let players = getPlayers()
         if let lastPlayer = UserDefaults.standard.value(forKey: "currentPlayer") as! String? {
             for player in players! {
                 if player.name == lastPlayer { return player }
@@ -34,11 +26,14 @@ class PlayersProvider {
     /**
      Sets the property currentPlayer
      
-     - Parameter player: player that needs to be set to property currentPlayer
+     - Parameter name: name of the player that needs to be set to property currentPlayer
     */
-    static func setCurrentPlayer(_ player : Player) {
-        UserDefaults.standard.setValue(player.name, forKey: "currentPlayer")
-        currentPlayer = player
+    static func setCurrentPlayerWith(name : String) {
+        UserDefaults.standard.setValue(name, forKey: "currentPlayer")
+        let players = getPlayers()
+        for player in players! {
+            if player.name == name { currentPlayer = player }
+        }
     }
     
     /**
@@ -52,7 +47,7 @@ class PlayersProvider {
     }
     
     /**
-     Returns all players drom data base
+     Returns all players from data base
      
      - Returns: An array of all players
      */
@@ -61,11 +56,6 @@ class PlayersProvider {
         var players = [Player]()
         let request = Player.fetchRequest()
         do {
-            let count = try dataStack.managedContext.count(for: request)
-            if count == 0 {
-                addPlayerWith(name: "testPlayer", score: 100500, levelsScores: [0.0])
-                addPlayerWith(name: "testPlayer", score: 100500, levelsScores: [0.0])
-            }
             players = try dataStack.managedContext.fetch(request)
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
@@ -88,6 +78,14 @@ class PlayersProvider {
         player.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
         dataStack.saveContext()
     }
+    
+    /**
+     Saves changes, that was made to currentPlayer
+    */
+    static func saveCurrentPlayer() {
+        CoreDataStack.sharedStack.saveContext()
+    }
+
 
 
 }
