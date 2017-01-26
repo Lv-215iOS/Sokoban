@@ -2,9 +2,10 @@
 //  LevelsProvider.swift
 //  Sokoban
 //
-//  Created by admin on 1/18/17.
+//  Created by Oleksiy Bilyi on 1/18/17.
 //
 //
+
 /*
  Level 1
  
@@ -132,7 +133,11 @@ import Foundation
 
 class LevelsProvider {
     
-    ///returns all levels
+    /**
+     Returns all levels from data base
+     
+     - Returns: An array of all levels
+     */
     static func getLevels() -> [Level]? {
         let dataStack = CoreDataStack.sharedStack
         var levels = [Level]()
@@ -149,7 +154,10 @@ class LevelsProvider {
         return levels
     }
     
-    /// adds default levels
+    /**
+     Adds default levels to data base
+     
+    */
     static func addDefaultLevels() {
         addLevelWith(name: "Level 1",
                      order: 1,
@@ -203,7 +211,15 @@ class LevelsProvider {
                      sceneMatrix: "#################-----###-**#-###-###-*##------###--#--#---###--&-###%-###--#--#---####-#---%-#####---%-#--####---##################")
     }
     
-    /// adds level
+    /**
+     Inserts a new level to data base
+     
+     - Parameter name: name of level
+     - Parameter order: order of level
+     - Parameter sceneWidth: A width of level scene
+     - Parameter sceneHeight: A height of level scene
+     - Parameter sceneMatrix: A matrix of level scene consistently recorded in string
+     */
     static func addLevelWith( name: String,
                               order: NSNumber,
                               sceneWidth: NSNumber,
