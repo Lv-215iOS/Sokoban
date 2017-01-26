@@ -49,7 +49,7 @@ class PlaygroundController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func playPauseTapped(_ sender: UIButton) {
+    @IBAction func pauseTapped(_ sender: UIButton) {
         
         if isPlaying {
             timer.invalidate()
