@@ -13,8 +13,6 @@ class CoreDataStack {
     
     static let sharedStack = CoreDataStack()
     
-    private init() {}
-    
     private lazy var storeContainer : NSPersistentContainer = {
         let container = NSPersistentContainer(name: "Sokoban")
         container.loadPersistentStores {
@@ -27,7 +25,9 @@ class CoreDataStack {
     }()
     
     lazy var managedContext : NSManagedObjectContext = {
-        return self.storeContainer.viewContext
+        let mangedContext = self.storeContainer.viewContext
+        mangedContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
+        return mangedContext
     }()
     
     func saveContext() {
@@ -35,8 +35,7 @@ class CoreDataStack {
         do  {
             try managedContext.save()
         } catch let error as NSError {
-            print("Unresolved error \(error), \(error.userInfo)")		
+            print("Could not save \(error), \(error.userInfo)")
         }
     }
-    
 }
