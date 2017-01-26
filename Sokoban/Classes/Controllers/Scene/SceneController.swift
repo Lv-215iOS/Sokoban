@@ -11,10 +11,13 @@ import UIKit
 class SceneController: UIViewController {
     
     var wallViewArray: [WallCell] = []
+    var floorViewArray: [FloorCell] = []
+    var blockCellIn: [BlockCellIn] = []
+    var blockCellOut: [BlockCellOut] = []
     var playerView: UIImageView!
     
+    var levels: PlaygroundController? = nil
     var player = PlayerCell()
-    var levels = LevelsProvider.getLevels()
     
     var model: [[ModelType]] = []
     struct ModelType {
@@ -45,6 +48,25 @@ class SceneController: UIViewController {
         super.viewDidLoad()
         player.initPlayer()
         
+        //For Sasha
+        drawFloor(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 80, y: 0, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
+        
+        drawFloor(frame: CGRect(x: 0, y: 40, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 80, y: 40, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 120, y: 40, width: 40, height: 40))
+        
+        drawFloor(frame: CGRect(x: 0, y: 80, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 40, y: 80, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 80, y: 80, width: 40, height: 40))
+        drawFloor(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
+        
+        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
+        drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
+        
         drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         drawPlayer(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
     }
@@ -74,7 +96,7 @@ class SceneController: UIViewController {
      - Returns matrix: array of elements
     */
     func getLevel(_ level: Int) -> (width: NSNumber?, height: NSNumber?, matrix: String?) {
-        let levelScene = levels?[level].scene
+        let levelScene = levels?.currentLevel?.scene
         let levelHeight = levelScene?.height
         let levelWidth = levelScene?.width
         let levelMatrix = levelScene?.matrix
@@ -82,14 +104,55 @@ class SceneController: UIViewController {
     }
     
     func changePlayerPosition(_ player: UIImageView, x: Int, y: Int) {
-        for wall in wallViewArray {
-            if wall.center.x == (player.center.x + CGFloat(x) * player.bounds.size.width) && wall.center.y == (player.center.y + CGFloat(y) * player.bounds.size.height) {
-                return
-            }
+        if isWallNearPlayer(player, x: x, y: y) {
+            return
+        } else {
+            
+            moveBlock(player, x: x, y: y)
+            movePlayer(player, x: x, y: y)
         }
+    }
+    
+    func movePlayer(_ player: UIImageView, x: Int, y: Int) {
         UIView.animate(withDuration: 0.35) {
             player.center.x += CGFloat(x) * player.bounds.size.width
             player.center.y += CGFloat(y) * player.bounds.size.height
+        }
+//        if (player, x: x, y: y) {
+//            return
+//        } else {
+//            
+//        }
+    }
+    
+    func isWallNearPlayer(_ player: UIImageView, x: Int, y: Int) -> Bool {
+        for wall in wallViewArray {
+            if wall.center.x == (player.center.x + CGFloat(x) * player.bounds.size.width) && wall.center.y == (player.center.y + CGFloat(y) * player.bounds.size.height) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func isWallNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
+        for wall in wallViewArray {
+            if wall.center.x == (block.center.x + CGFloat(x) * block.bounds.size.width) && wall.center.y == (block.center.y + CGFloat(y) * block.bounds.size.height) {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func moveBlock(_ player: UIImageView, x: Int, y: Int) {
+        for block in 0..<blockCellOut.count {
+            if isWallNearBlock(blockCellOut[block], x: x, y: y) {
+                return
+            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == blockCellOut[block].center.y {
+                UIView.animate(withDuration: 0.35) {
+                    self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                    self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                }
+            }
         }
     }
     
@@ -103,5 +166,20 @@ class SceneController: UIViewController {
         playerView = UIImageView(image: image)
         playerView.frame = frame
         self.view.addSubview(playerView)
+    }
+    
+    func drawFloor(frame: CGRect) {
+        floorViewArray.append(FloorCell(frame: frame))
+        self.view.addSubview(floorViewArray.last!)
+    }
+    
+    func drawBlockCellIn(frame: CGRect) {
+        blockCellIn.append(BlockCellIn(frame: frame))
+        self.view.addSubview(blockCellIn.last!)
+    }
+    
+    func drawBlockCellOut(frame: CGRect) {
+        blockCellOut.append(BlockCellOut(frame: frame))
+        self.view.addSubview(blockCellOut.last!)
     }
 }
