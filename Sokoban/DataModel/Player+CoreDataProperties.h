@@ -2,7 +2,7 @@
 //  Player+CoreDataProperties.h
 //  Sokoban
 //
-//  Created by Oleksiy Bilyi on 1/24/17.
+//  Created by Oleksiy Bilyi on 1/27/17.
 //
 //
 
@@ -15,9 +15,10 @@ NS_ASSUME_NONNULL_BEGIN
 
 + (NSFetchRequest<Player *> *)fetchRequest;
 
+@property (nullable, nonatomic, retain) NSData *levelsScores;
 @property (nullable, nonatomic, copy) NSString *name;
 @property (nullable, nonatomic, copy) NSNumber *score;
-@property (nullable, nonatomic, retain) NSData *levelsScores;
+@property (nullable, nonatomic, retain) NSData *photo;
 
 @end
 
