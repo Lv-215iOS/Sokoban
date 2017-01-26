@@ -13,6 +13,7 @@ class SceneController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var animationBtn: UIButton!
     var player = PlayerCell()
+    var levels = LevelsProvider.getLevels()
     
     var model: [[ModelType]] = []
     struct ModelType {
@@ -53,5 +54,22 @@ class SceneController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }
+    }
+    
+    /**
+     Get level matrix with width and heigth
+     
+     - Parameter level: order of level
+     
+     - Returns width: width of matrix
+     - Returns height: heigth of matrix
+     - Returns matrix: array of elements
+    */
+    func getLevel(_ level: Int) -> (width: NSNumber?, height: NSNumber?, matrix: String?) {
+        let levelScene = levels?[level].scene
+        let levelHeight = levelScene?.height
+        let levelWidth = levelScene?.width
+        let levelMatrix = levelScene?.matrix
+        return (levelWidth, levelHeight, levelMatrix)
     }
 }
