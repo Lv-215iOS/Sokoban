@@ -48,6 +48,7 @@ class SceneController: UIViewController {
         super.viewDidLoad()
         player.initPlayer()
         
+        //For Sasha
         drawFloor(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         drawFloor(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
         drawFloor(frame: CGRect(x: 80, y: 0, width: 40, height: 40))
