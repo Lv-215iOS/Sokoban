@@ -60,7 +60,9 @@ class PlaygroundController: UIViewController {
     
     func updateTime() {
         time += 1
-        timeLabel.text = String(time)
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        timeLabel.text = String(format:"%02i:%02i", minutes, seconds)
     }
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {
