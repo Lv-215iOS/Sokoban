@@ -116,7 +116,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ZQW-Aw-ZOy" id="TnO-R9-CZX">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="levelStateOpenedImage" translatesAutoresizingMaskIntoConstraints="NO" id="afZ-oZ-YwT">
@@ -487,7 +487,6 @@
                                 <state key="normal" title="Create"/>
                                 <connections>
                                     <action selector="createNewPlayerButtonTapped:" destination="6Dh-Uj-FNO" eventType="touchUpInside" id="Bbw-lv-bMh"/>
-                                    <segue destination="LYv-cK-Naq" kind="unwind" unwindAction="unwindToMenuWithSegue:" id="hzO-WC-ZGG"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -500,14 +499,13 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Doi-lC-rX3" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="LYv-cK-Naq" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="-569" y="755"/>
         </scene>
         <!--Players-->
         <scene sceneID="LQd-Il-9it">
             <objects>
-                <viewController id="0S6-c6-Kyf" customClass="PlayersViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ThirdViewController" id="0S6-c6-Kyf" customClass="PlayersViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="xI5-Vs-KNL"/>
                         <viewControllerLayoutGuide type="bottom" id="i26-pN-xyn"/>

@@ -13,6 +13,7 @@ class LaunchScreenViewController: UIViewController {
     @IBOutlet weak var appTitle: UILabel!
     
     @IBOutlet weak var groupName: UILabel!
+    let defaults = UserDefaults.standard
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -49,7 +50,7 @@ class LaunchScreenViewController: UIViewController {
         super.didReceiveMemoryWarning()
         
     }
-    let defaults = UserDefaults.standard
+    
     func whatControllerToOpen()
     {
         
