@@ -14,6 +14,7 @@ class SceneController: UIViewController {
     var floorViewArray: [FloorCell] = []
     var blockCellIn: [BlockCellIn] = []
     var blockCellOut: [BlockCellOut] = []
+    var dotCell: [Dot] = []
     var playerView: UIImageView!
     
     var levels: PlaygroundController? = nil
@@ -64,8 +65,10 @@ class SceneController: UIViewController {
         drawFloor(frame: CGRect(x: 80, y: 80, width: 40, height: 40))
         drawFloor(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
         
-        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
+        drawDot(frame: CGRect(x: 130, y: 10, width: 20, height: 20))
+        
         drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
+        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
         
         drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
         drawPlayer(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
@@ -107,22 +110,20 @@ class SceneController: UIViewController {
         if isWallNearPlayer(player, x: x, y: y) {
             return
         } else {
-            
             moveBlock(player, x: x, y: y)
             movePlayer(player, x: x, y: y)
         }
     }
     
     func movePlayer(_ player: UIImageView, x: Int, y: Int) {
-        UIView.animate(withDuration: 0.35) {
-            player.center.x += CGFloat(x) * player.bounds.size.width
-            player.center.y += CGFloat(y) * player.bounds.size.height
+        for block in 0..<blockCellOut.count {
+            if !(isWallNearPlayer(player, x: x * 2, y: y * 2) && isWallNearBlock(blockCellOut[block], x: x, y: y)) {
+                UIView.animate(withDuration: 0.35) {
+                    player.center.x += CGFloat(x) * player.bounds.size.width
+                    player.center.y += CGFloat(y) * player.bounds.size.height
+                }
+            }
         }
-//        if (player, x: x, y: y) {
-//            return
-//        } else {
-//            
-//        }
     }
     
     func isWallNearPlayer(_ player: UIImageView, x: Int, y: Int) -> Bool {
@@ -143,17 +144,69 @@ class SceneController: UIViewController {
         return false
     }
     
+    func isBlockNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
+        for block in blockCellOut {
+            for blockNext in blockCellOut {
+                if block.center.x == (blockNext.center.x + CGFloat(x) * blockNext.bounds.size.width) && block.center.y == (blockNext.center.y + CGFloat(y) * blockNext.bounds.size.height) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+    
     func moveBlock(_ player: UIImageView, x: Int, y: Int) {
         for block in 0..<blockCellOut.count {
             if isWallNearBlock(blockCellOut[block], x: x, y: y) {
                 return
             } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == blockCellOut[block].center.y {
+                if isBlockOnDot(block: blockCellOut[block]) {
+                    let newBlock = findBlockIn(x: blockCellOut[block].center.x, y: blockCellOut[block].center.y)
+                    newBlock.isHidden = true
+                } else {
+                    blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                    blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                    if isBlockOnDot(block: blockCellOut[block]) {
+                        let newBlock = findBlockIn(x: blockCellOut[block].center.x, y: blockCellOut[block].center.y)
+                        blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+                        blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+                        UIView.animate(withDuration: 0.35) {
+                            self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                            self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                        }
+                        delay(delay: 0.25) {
+                            newBlock.isHidden = false
+                        }
+                        return
+                    }
+                    blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+                    blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+                }
                 UIView.animate(withDuration: 0.35) {
                     self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
                     self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
                 }
+                
             }
         }
+    }
+    
+    func isBlockOnDot(block: BlockCellOut) -> Bool {
+        for dot in dotCell {
+            if block.center.x == dot.center.x && block.center.y == dot.center.y {
+                return true
+            }
+        }
+        return false
+    }
+    
+    func findBlockIn(x: CGFloat, y: CGFloat) -> BlockCellIn {
+        for block in blockCellIn {
+            if block.center.x == x && block.center.y == y {
+                return block
+            }
+        }
+        return blockCellIn.last!
     }
     
     func drawWall(frame: CGRect) {
@@ -175,11 +228,28 @@ class SceneController: UIViewController {
     
     func drawBlockCellIn(frame: CGRect) {
         blockCellIn.append(BlockCellIn(frame: frame))
+        blockCellIn.last?.isHidden = true
         self.view.addSubview(blockCellIn.last!)
     }
     
     func drawBlockCellOut(frame: CGRect) {
         blockCellOut.append(BlockCellOut(frame: frame))
         self.view.addSubview(blockCellOut.last!)
+    }
+    
+    func drawDot(frame: CGRect) {
+        dotCell.append(Dot(frame: frame))
+        self.view.addSubview(dotCell.last!)
+    }
+    
+    func isFinish() -> Bool {
+        for block in blockCellIn {
+            if block.isHidden {
+                return false
+            }
+        }
+        //save result
+        _ = navigationController?.popToRootViewController(animated: true)
+        return true
     }
 }
