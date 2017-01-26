@@ -63,8 +63,9 @@ extension PlayersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         let path = IndexPath(row: 0, section: 0)
         guard let playerToRemove = PlayersProvider.getPlayers()?[indexPath.row],
-              let cell = tableView.cellForRow(at: path),
-              let cellText = cell.textLabel?.text,
+              let firstCell = tableView.cellForRow(at: path),
+              let firstCellText = firstCell.textLabel?.text,
+              let currentCellText = tableView.cellForRow(at: indexPath)?.textLabel?.text,
               editingStyle == .delete else {
                 return
         }
@@ -78,8 +79,10 @@ extension PlayersViewController: UITableViewDataSource {
         }
         PlayersProvider.deletePlayer(playerToRemove)
         playersTableView.deleteRows(at: [indexPath], with: .automatic)
-        cell.accessoryType = .checkmark
-        PlayersProvider.setCurrentPlayerWith(name: cellText)
+        if PlayersProvider.currentPlayer?.name == currentCellText {
+            firstCell.accessoryType = .checkmark
+            PlayersProvider.setCurrentPlayerWith(name: firstCellText)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
