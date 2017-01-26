@@ -14,6 +14,7 @@ class SceneController: UIViewController {
     var floorViewArray: [FloorCell] = []
     var blockCellIn: [BlockCellIn] = []
     var blockCellOut: [BlockCellOut] = []
+    var dotCell: [Dot] = []
     var playerView: UIImageView!
     
     var levels: PlaygroundController? = nil
@@ -181,5 +182,10 @@ class SceneController: UIViewController {
     func drawBlockCellOut(frame: CGRect) {
         blockCellOut.append(BlockCellOut(frame: frame))
         self.view.addSubview(blockCellOut.last!)
+    }
+    
+    func drawDot(frame: CGRect) {
+        dotCell.append(Dot(frame: frame))
+        self.view.addSubview(dotCell.last!)
     }
 }

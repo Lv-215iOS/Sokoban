@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		2516B6231E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */; };
 		25327D521E3A2A0200567004 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25327D511E3A2A0200567004 /* Protocols.swift */; };
+		257F088A1E3A70F100D2FAB6 /* SceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F08891E3A70F100D2FAB6 /* SceneBuilder.swift */; };
 		258AD1191E35F60100195190 /* WallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD1181E35F60100195190 /* WallCell.swift */; };
 		25D28FD11E3674EF009115D7 /* FloorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25D28FD01E3674EF009115D7 /* FloorCell.swift */; };
 		25D28FE61E376E4F009115D7 /* down1.png in Resources */ = {isa = PBXBuildFile; fileRef = 25D28FD21E376E4F009115D7 /* down1.png */; };
@@ -84,6 +85,7 @@
 /* Begin PBXFileReference section */
 		2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLevelsTableViewCell.swift; path = Classes/Controllers/CustomLevelsTableViewCell.swift; sourceTree = "<group>"; };
 		25327D511E3A2A0200567004 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		257F08891E3A70F100D2FAB6 /* SceneBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneBuilder.swift; path = Classes/Controllers/Scene/SceneBuilder.swift; sourceTree = "<group>"; };
 		258AD1181E35F60100195190 /* WallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WallCell.swift; path = Classes/Controllers/Scene/WallCell.swift; sourceTree = "<group>"; };
 		25D28FD01E3674EF009115D7 /* FloorCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FloorCell.swift; path = Classes/Controllers/Scene/FloorCell.swift; sourceTree = "<group>"; };
 		25D28FD21E376E4F009115D7 /* down1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = down1.png; path = Images/down1.png; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 		84C1A7441E2F724B00FCB4C3 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				257F08891E3A70F100D2FAB6 /* SceneBuilder.swift */,
 				258AD1181E35F60100195190 /* WallCell.swift */,
 				25DF17141E361CBD007A468A /* BlockCellIn.swift */,
 				25DF17151E361CBD007A468A /* BlockCellOut.swift */,
@@ -512,6 +515,7 @@
 				25327D521E3A2A0200567004 /* Protocols.swift in Sources */,
 				25DF17131E361B20007A468A /* PlayersProvider.swift in Sources */,
 				84C1A75C1E2F74D300FCB4C3 /* LevelsProvider.swift in Sources */,
+				257F088A1E3A70F100D2FAB6 /* SceneBuilder.swift in Sources */,
 				25DF17181E361CBD007A468A /* BlockCellOut.swift in Sources */,
 				8B359E521E30D492004646EC /* LeaderboardViewController.swift in Sources */,
 				84C1A7511E2F734500FCB4C3 /* RootController.swift in Sources */,
