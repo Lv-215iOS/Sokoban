@@ -49,7 +49,7 @@ class PlaygroundController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    @IBAction func playPauseTapped(_ sender: UIButton) {
+    @IBAction func pauseTapped(_ sender: UIButton) {
         
         if isPlaying {
             timer.invalidate()
@@ -60,7 +60,9 @@ class PlaygroundController: UIViewController {
     
     func updateTime() {
         time += 1
-        timeLabel.text = String(time)
+        let minutes = Int(time) / 60 % 60
+        let seconds = Int(time) % 60
+        timeLabel.text = String(format:"%02i:%02i", minutes, seconds)
     }
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {

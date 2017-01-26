@@ -6,6 +6,129 @@
 //
 //
 
+/*
+ Level 1
+ 
+ ##########
+ #--#--#--#
+ #---&----#
+ #-*--%---#
+ ##########
+ 
+ Level 2
+ 
+ ########
+ #--#---#
+ #---*--#
+ #--#**-#
+ ##-#---#
+ #%%-*#-#
+ #%%---&#
+ ########
+ 
+ Level 3
+ 
+ ########
+ #---#--#
+ #-#-#%*#
+ #----%*#
+ #-#-#%*#
+ #---#--#
+ #####&-#
+ ########
+ 
+ Level 4
+ 
+ ########
+ #----###
+ #-##-###
+ #--%---#
+ #%*%-%-#
+ #&*##%##
+ #**---##
+ ########
+ 
+ Level 5
+ 
+ #########
+ ##--#####
+ #--%%---#
+ #&%--*-##
+ ####*#*##
+ ##-%-*--#
+ ##-----##
+ #########
+ 
+ Level 6
+ 
+ #######
+ ##--*-#
+ #--*#-#
+ #&--*-#
+ ##-##-#
+ ##-%--#
+ ##-%--#
+ ##-#%-#
+ ##-%-##
+ ##----#
+ #######
+ 
+ Level 7
+ 
+ ######
+ ##---#
+ #--%-#
+ #&%--#
+ ###-##
+ #****#
+ #-%%-#
+ ##---#
+ ######
+ 
+ Level 8
+ 
+ ########
+ ##----##
+ #--%---#
+ #-%%%#&#
+ #-%--###
+ ##-%-#*#
+ ####-#*#
+ #-----*#
+ #-#---*#
+ #-##%#*#
+ #----**#
+ ########
+ 
+ Level 9
+ 
+ ########
+ #----&-#
+ #-%--#-#
+ ###%##-#
+ ##-*-%-#
+ ##-*-#-#
+ ###**%-#
+ ####*%-#
+ ######-#
+ ########
+ 
+ Level 10
+ 
+ ############
+ #####-----##
+ #-**#-###-##
+ #-*##------#
+ ##--#--#---#
+ ##--&-###%-#
+ ##--#--#---#
+ ###-#---%-##
+ ###---%-#--#
+ ###---######
+ ############
+ 
+ */
+
 import Foundation
 
 class LevelsProvider {
@@ -22,7 +145,7 @@ class LevelsProvider {
         do {
             let count = try dataStack.managedContext.count(for: request)
             if count == 0 {
-               addDefaultLevels()
+                addDefaultLevels()
             }
             levels = try dataStack.managedContext.fetch(request)
         } catch let error as NSError {
@@ -36,11 +159,56 @@ class LevelsProvider {
      
     */
     static func addDefaultLevels() {
-        addLevelWith(name: "starter",
+        addLevelWith(name: "Level 1",
                      order: 1,
                      sceneWidth: 10,
                      sceneHeight: 5,
                      sceneMatrix: "###########--#--#--##---&----##-*--%---###########")
+        addLevelWith(name: "Level 2",
+                     order: 2,
+                     sceneWidth: 8,
+                     sceneHeight: 8,
+                     sceneMatrix: "#########--#---##---*--##--#**-###-#---##%%-*#-##%%---&#########")
+        addLevelWith(name: "Level 3",
+                     order: 3,
+                     sceneWidth: 8,
+                     sceneHeight: 8,
+                     sceneMatrix: "#########---#--##-#-#%*##----%*##-#-#%*##---#--######&-#########")
+        addLevelWith(name: "Level 4",
+                     order: 4,
+                     sceneWidth: 8,
+                     sceneHeight: 8,
+                     sceneMatrix: "#########----####-##-####--%---##%*%-%-##&*##%###**---##########")
+        addLevelWith(name: "Level 5",
+                     order: 5,
+                     sceneWidth: 9,
+                     sceneHeight: 8,
+                     sceneMatrix: "###########--######--%%---##&%--*-######*#*####-%-*--###-----###########")
+        addLevelWith(name: "Level 6",
+                     order: 6,
+                     sceneWidth: 7,
+                     sceneHeight: 11,
+                     sceneMatrix: "#########--*-##--*#-##&--*-###-##-###-%--###-%--###-#%-###-%-####----########")
+        addLevelWith(name: "Level 7",
+                     order: 7,
+                     sceneWidth: 6,
+                     sceneHeight: 9,
+                     sceneMatrix: "########---##--%-##&%--####-###****##-%%-###---#######")
+        addLevelWith(name: "Level 8",
+                     order: 8,
+                     sceneWidth: 8,
+                     sceneHeight: 12,
+                     sceneMatrix: "##########----###--%---##-%%%#&##-%--#####-%-#*#####-#*##-----*##-#---*##-##%#*##----**#########")
+        addLevelWith(name: "Level 9",
+                     order: 9,
+                     sceneWidth: 8,
+                     sceneHeight: 10,
+                     sceneMatrix: "#########----&-##-%--#-####%##-###-*-%-###-*-#-####**%-#####*%-#######-#########")
+        addLevelWith(name: "Level 10",
+                     order: 10,
+                     sceneWidth: 12,
+                     sceneHeight: 11,
+                     sceneMatrix: "#################-----###-**#-###-###-*##------###--#--#---###--&-###%-###--#--#---####-#---%-#####---%-#--####---##################")
     }
     
     /**
