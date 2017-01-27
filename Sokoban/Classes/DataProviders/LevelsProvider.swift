@@ -17,14 +17,14 @@
  
  Level 2
  
- ########
- #--#---#
- #---*--#
- #--#**-#
- ##-#---#
- #%%-*#-#
- #%%---&#
- ########
+ #######
+ ####--#
+ #--#--#
+ #-*-*-#
+ #-&%%-#
+ #-#-###
+ #---###
+ #######
  
  Level 3
  
@@ -166,9 +166,9 @@ class LevelsProvider: LevelsProviderInterface {
                      sceneMatrix: "###########--#--#--##---&----##-*--%---###########")
         addLevelWith(name: "Level 2",
                      order: 2,
-                     sceneWidth: 8,
+                     sceneWidth: 7,
                      sceneHeight: 8,
-                     sceneMatrix: "#########--#---##---*--##--#**-###-#---##%%-*#-##%%---&#########")
+                     sceneMatrix: " ###########--##--#--##-*-*-##-&%%-##-#-####---##########")
         addLevelWith(name: "Level 3",
                      order: 3,
                      sceneWidth: 8,
