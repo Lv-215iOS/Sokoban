@@ -36,6 +36,8 @@
 		25DF17171E361CBD007A468A /* BlockCellIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17141E361CBD007A468A /* BlockCellIn.swift */; };
 		25DF17181E361CBD007A468A /* BlockCellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17151E361CBD007A468A /* BlockCellOut.swift */; };
 		25DF17191E361CBD007A468A /* Dot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17161E361CBD007A468A /* Dot.swift */; };
+		51E6B3D41E3BBEEB00249B3E /* backgroundMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51E6B3D31E3BBEEB00249B3E /* backgroundMusic.wav */; };
+		51E6B3D81E3BD55C00249B3E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E6B3D71E3BD55C00249B3E /* AudioPlayer.swift */; };
 		84C12F991E36035400613C43 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C12F981E36035400613C43 /* CoreDataStack.swift */; };
 		84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */; };
 		84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7481E2F72C400FCB4C3 /* MenuController.swift */; };
@@ -112,6 +114,8 @@
 		25DF17141E361CBD007A468A /* BlockCellIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellIn.swift; path = Classes/Controllers/Scene/BlockCellIn.swift; sourceTree = "<group>"; };
 		25DF17151E361CBD007A468A /* BlockCellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellOut.swift; path = Classes/Controllers/Scene/BlockCellOut.swift; sourceTree = "<group>"; };
 		25DF17161E361CBD007A468A /* Dot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dot.swift; path = Classes/Controllers/Scene/Dot.swift; sourceTree = "<group>"; };
+		51E6B3D31E3BBEEB00249B3E /* backgroundMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backgroundMusic.wav; sourceTree = "<group>"; };
+		51E6B3D71E3BD55C00249B3E /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioPlayer.swift; path = Classes/Controllers/AudioPlayer.swift; sourceTree = "<group>"; };
 		84C12F981E36035400613C43 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelsController.swift; path = Classes/Controllers/LevelsController.swift; sourceTree = "<group>"; };
 		84C1A7481E2F72C400FCB4C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Classes/Controllers/MenuController.swift; sourceTree = "<group>"; };
@@ -214,6 +218,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		51E6B3D01E3BA10600249B3E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				51E6B3D31E3BBEEB00249B3E /* backgroundMusic.wav */,
+			);
+			name = "Supporting Files";
+			path = Sokoban;
+			sourceTree = "<group>";
+		};
 		84C1A7431E2F724300FCB4C3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +263,7 @@
 				8B359E4F1E30D0F7004646EC /* FirstLaunchViewController.swift */,
 				8B359E511E30D492004646EC /* LeaderboardViewController.swift */,
 				8B359E531E30D503004646EC /* SettingsViewController.swift */,
+				51E6B3D71E3BD55C00249B3E /* AudioPlayer.swift */,
 				8B359E551E30D662004646EC /* AboutViewController.swift */,
 				8B359E571E30D71A004646EC /* PlayersViewController.swift */,
 				8B29382E1E389850004E0ECA /* LaunchScreenViewController.swift */,
@@ -293,6 +307,7 @@
 			isa = PBXGroup;
 			children = (
 				8B2794B31E2E5F8600A93642 /* Sokoban */,
+				51E6B3D01E3BA10600249B3E /* Supporting Files */,
 				8B2794CB1E2E5F8600A93642 /* SokobanTests */,
 				8B2794D61E2E5F8600A93642 /* SokobanUITests */,
 				8B2794B21E2E5F8600A93642 /* Products */,
@@ -459,6 +474,7 @@
 				25D28FEB1E376E4F009115D7 /* left1.png in Resources */,
 				25D28FE81E376E4F009115D7 /* down3.png in Resources */,
 				25D28FE61E376E4F009115D7 /* down1.png in Resources */,
+				51E6B3D41E3BBEEB00249B3E /* backgroundMusic.wav in Resources */,
 				25D28FF91E376E4F009115D7 /* up5.png in Resources */,
 				25D28FE71E376E4F009115D7 /* down2.png in Resources */,
 				25D28FF01E376E4F009115D7 /* right1.png in Resources */,
@@ -509,6 +525,7 @@
 				8BE462341E32091300F1E8D4 /* Scene+CoreDataProperties.m in Sources */,
 				84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */,
 				84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */,
+				51E6B3D81E3BD55C00249B3E /* AudioPlayer.swift in Sources */,
 				8BE462361E3210E000F1E8D4 /* PlayerCell.swift in Sources */,
 				25DF17191E361CBD007A468A /* Dot.swift in Sources */,
 				8B359E501E30D0F7004646EC /* FirstLaunchViewController.swift in Sources */,

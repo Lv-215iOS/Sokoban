@@ -27,9 +27,9 @@ class MenuController: UIViewController {
     /// to open leaderboardViewController
     @IBAction func menuLeaderboardButtonTapped(_ sender: UIButton) {
     }
-
+    
     @IBOutlet weak var menuSettingsButton: UIButton!
-   
+    
     /// to open settingsViewController
     @IBAction func menuSettingsButtonTapped(_ sender: UIButton) {
     }
@@ -43,6 +43,20 @@ class MenuController: UIViewController {
     
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
         
+    }
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+           AudioPlayer.sharedInstance.backgroundMusic()
+    
+        let musicIsPlaying = UserDefaults.standard.bool(forKey: "musicIsPlaying")
+        if musicIsPlaying == false {
+            AudioPlayer.sharedInstance.stopMusic()
+        } else {
+            AudioPlayer.sharedInstance.playMusic()
+        }
     }
     
     func configureButton() {
