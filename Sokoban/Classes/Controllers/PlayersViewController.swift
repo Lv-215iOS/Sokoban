@@ -77,12 +77,12 @@ extension PlayersViewController: UITableViewDataSource {
             present(alert, animated: true)
             return
         }
-        PlayersProvider.deletePlayer(playerToRemove)
-        playersTableView.deleteRows(at: [indexPath], with: .automatic)
         if PlayersProvider.currentPlayer?.name == currentCellText {
             firstCell.accessoryType = .checkmark
             PlayersProvider.setCurrentPlayerWith(name: firstCellText)
         }
+        PlayersProvider.deletePlayer(playerToRemove)
+        playersTableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

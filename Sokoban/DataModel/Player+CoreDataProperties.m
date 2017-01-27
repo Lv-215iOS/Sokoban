@@ -2,7 +2,7 @@
 //  Player+CoreDataProperties.m
 //  Sokoban
 //
-//  Created by Oleksiy Bilyi on 1/24/17.
+//  Created by Oleksiy Bilyi on 1/27/17.
 //
 //
 
@@ -14,8 +14,9 @@
 	return [[NSFetchRequest alloc] initWithEntityName:@"Player"];
 }
 
+@dynamic levelsScores;
 @dynamic name;
 @dynamic score;
-@dynamic levelsScores;
+@dynamic photo;
 
 @end

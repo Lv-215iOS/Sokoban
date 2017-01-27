@@ -6,8 +6,9 @@
         <relationship name="scene" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Scene" inverseName="level" inverseEntity="Scene" syncable="YES"/>
     </entity>
     <entity name="Player" representedClassName="Player" syncable="YES">
-        <attribute name="levelsScores" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="levelsScores" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="photo" optional="YES" attributeType="Binary" syncable="YES"/>
         <attribute name="score" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="NO" syncable="YES"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -23,7 +24,7 @@
     </entity>
     <elements>
         <element name="Level" positionX="-63" positionY="-18" width="128" height="88"/>
-        <element name="Player" positionX="-63" positionY="36" width="128" height="90"/>
+        <element name="Player" positionX="-63" positionY="36" width="128" height="105"/>
         <element name="Scene" positionX="-54" positionY="9" width="128" height="105"/>
     </elements>
 </model>

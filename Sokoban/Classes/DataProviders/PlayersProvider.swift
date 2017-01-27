@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayersProvider {
+class PlayersProvider: PlayersProviderInterface {
     
     static private(set) var currentPlayer : Player? = {
         let request = Player.fetchRequest()
@@ -69,12 +69,16 @@ class PlayersProvider {
      - Parameter name: name of player
      - Parameter score: global score of player
      - Parameter levelsScores: Array of level scores for passed levels of player
+     - Parameter photo: photo of player
      */
-    static func addPlayerWith(name : String, score : NSNumber, levelsScores: NSArray) {
+    static func addPlayerWith(name : String, score : NSNumber, levelsScores: NSArray, photo: UIImage) {
         let dataStack = CoreDataStack.sharedStack
         let player = Player(context:dataStack.managedContext)
         player.name = name
         player.score = score
+        if let photoData = UIImagePNGRepresentation(photo) {
+            player.photo = Data(photoData)
+        }
         player.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
         dataStack.saveContext()
     }

@@ -19,7 +19,7 @@ class FirstLaunchViewController: UIViewController {
     
     /// to open MenuViewController and change nickname
     @IBAction func createNewPlayerButtonTapped(_ sender: UIButton) {
-        PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0])
+        PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:UIImage())
         
         if defaults.string(forKey: "isPlayerAlreadyCreated") != nil{
             _ = navigationController?.popViewController(animated: true)
