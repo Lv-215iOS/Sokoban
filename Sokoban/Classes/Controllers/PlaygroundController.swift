@@ -49,13 +49,13 @@ class PlaygroundController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+
     @IBAction func pauseTapped(_ sender: UIButton) {
         
         if isPlaying {
             timer.invalidate()
             isPlaying = false
         }
-        ///TODO:joystick becomes unable
     }
     
     func updateTime() {

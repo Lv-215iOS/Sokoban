@@ -45,6 +45,24 @@ class MenuController: UIViewController {
         
     }
     
+    func configureButton() {
+        menuPlayButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuPlayButton.clipsToBounds = true
+        
+        menuLeaderboardButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuLeaderboardButton.clipsToBounds = true
+        
+        menuSettingsButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuSettingsButton.clipsToBounds = true
+        
+        menuAboutButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuAboutButton.clipsToBounds = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        configureButton()
+    }
+  
     
     
 }
