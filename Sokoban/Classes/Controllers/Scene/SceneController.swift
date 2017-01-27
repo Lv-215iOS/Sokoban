@@ -10,6 +10,10 @@ import UIKit
 
 class SceneController: UIViewController {
     
+//    @IBAction func showSceneCanvas(_ sender: AnyObject) {
+//        self.view.addSubview(sceneCanvas)
+//    }
+    
     var wallViewArray: [WallCell] = []
     var floorViewArray: [FloorCell] = []
     var blockCellIn: [BlockCellIn] = []
@@ -20,11 +24,11 @@ class SceneController: UIViewController {
     var levels: PlaygroundController? = nil
     var player = PlayerCell()
     
-    var model: [[ModelType]] = []
-    struct ModelType {
-        var point: (x: Int, y: Int)
-        var type: Character
-    }
+//    var model: [[ModelType]] = []
+//    struct ModelType {
+//        var point: (x: Int, y: Int)
+//        var type: Character
+//    }
     
     func animatePlayer(title: String) {
         switch title {
@@ -49,30 +53,34 @@ class SceneController: UIViewController {
         super.viewDidLoad()
         player.initPlayer()
         
+        let sceneBuilder = SceneBuilder()
+        let getScene = sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[7])!)
+        
+        view.addSubview(getScene)
         //For Sasha
-        drawFloor(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
-        
-        drawFloor(frame: CGRect(x: 0, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 40, width: 40, height: 40))
-        
-        drawFloor(frame: CGRect(x: 0, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
-        
-        drawDot(frame: CGRect(x: 130, y: 10, width: 20, height: 20))
-        
-        drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
-        
-        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
-        
-        drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawPlayer(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 80, y: 0, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
+//        
+//        drawFloor(frame: CGRect(x: 0, y: 40, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 80, y: 40, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 120, y: 40, width: 40, height: 40))
+//        
+//        drawFloor(frame: CGRect(x: 0, y: 80, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 40, y: 80, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 80, y: 80, width: 40, height: 40))
+//        drawFloor(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
+//        
+//        drawDot(frame: CGRect(x: 130, y: 10, width: 20, height: 20))
+//        
+//        drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
+//        
+//        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
+//        
+//        drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
+//        drawPlayer(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
     }
     
     func animateImage(type: [UIImage]) {
@@ -90,6 +98,11 @@ class SceneController: UIViewController {
         }
     }
     
+//    func getPlayer (
+//        
+//        ) -> (x: Int y: Int){
+//        
+//    }
     /**
      Get level matrix with width and heigth
      
@@ -213,39 +226,7 @@ class SceneController: UIViewController {
         return blockCellIn.last!
     }
     
-    func drawWall(frame: CGRect) {
-        wallViewArray.append(WallCell(frame: frame))
-        self.view.addSubview(wallViewArray.last!)
-    }
-    
-    func drawPlayer(frame: CGRect) {
-        let image = UIImage(named: "down1")
-        playerView = UIImageView(image: image)
-        playerView.frame = frame
-        self.view.addSubview(playerView)
-    }
-    
-    func drawFloor(frame: CGRect) {
-        floorViewArray.append(FloorCell(frame: frame))
-        self.view.addSubview(floorViewArray.last!)
-    }
-    
-    func drawBlockCellIn(frame: CGRect) {
-        blockCellIn.append(BlockCellIn(frame: frame))
-        blockCellIn.last?.isHidden = true
-        self.view.addSubview(blockCellIn.last!)
-    }
-    
-    func drawBlockCellOut(frame: CGRect) {
-        blockCellOut.append(BlockCellOut(frame: frame))
-        self.view.addSubview(blockCellOut.last!)
-    }
-    
-    func drawDot(frame: CGRect) {
-        dotCell.append(Dot(frame: frame))
-        self.view.addSubview(dotCell.last!)
-    }
-    
+        
     func isFinish() -> Bool {
         for block in blockCellIn {
             if block.isHidden {

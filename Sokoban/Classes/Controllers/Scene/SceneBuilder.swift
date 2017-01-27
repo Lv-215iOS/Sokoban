@@ -10,8 +10,20 @@
 import UIKit
 import Foundation
 
+
 class SceneBuilder : UIView, SceneBuilderInterface {
-    var dimensionOfCell = 30
+    
+    var wallViewArray: [WallCell] = []
+    var floorViewArray: [FloorCell] = []
+    var blockCellIn: [BlockCellIn] = []
+    var blockCellOut: [BlockCellOut] = []
+    var dotCell: [Dot] = []
+    var playerView: UIImageView!
+    
+    var player = PlayerCell()
+
+    
+    var dimensionOfCell = 40
     var sceneWidth = 0
     var sceneHeight = 0
     
@@ -22,26 +34,35 @@ class SceneBuilder : UIView, SceneBuilderInterface {
     var rectY = 0
     
     var scene = UIView()
-    func getSceneCanvas(sceneW: Int, SceneH: Int, levelData: Array<String>) -> UIView {
-        let sceneController = SceneController()
-        sceneWidth = sceneW
-        sceneHeight = SceneH
-        for levelItem in levelData {
+    func getSceneCanvas(level: Level) -> UIView {
+        
+        sceneWidth = level.scene?.width as! Int
+        sceneHeight = level.scene?.height as! Int
+        var levelStr = level.scene?.matrix
+        //var levelData = Array<String>()
+        
+        let levelData = levelStr?.characters.map { String($0) }
+        
+        //let sceneController = SceneController()
+        //sceneWidth = sceneW
+        //sceneHeight = SceneH
+        for levelItem in levelData! {
             switch levelItem {
                 case "#":
-                    sceneController.drawWall(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                    drawWall(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                
                 case "-":
-                    sceneController.drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                    drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 case "*":
-                    sceneController.drawDot(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                    drawDot(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 case "%":
-                    sceneController.drawBlockCellIn(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                    drawBlockCellOut(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 case "&":
-                    scene.addSubview(FloorCell(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell)))
-                    sceneController.drawPlayer(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                    scene.addSubview(sceneController.view)
+                    drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                    drawPlayer(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                  //  scene.addSubview(sceneController.view)
                 default:
-                    sceneController.drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                    drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
             }
             countWidth += 1
             if countWidth == sceneWidth {
@@ -51,7 +72,43 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         }
         return scene
     }
+    
+    func drawWall(frame: CGRect) {
+        wallViewArray.append(WallCell(frame: frame))
+        scene.addSubview(wallViewArray.last!)
+    }
+    
+    func drawPlayer(frame: CGRect) {
+        let image = UIImage(named: "down1")
+        playerView = UIImageView(image: image)
+        playerView.frame = frame
+        scene.addSubview(playerView)
+    }
+    
+    func drawFloor(frame: CGRect) {
+        floorViewArray.append(FloorCell(frame: frame))
+        scene.addSubview(floorViewArray.last!)
+    }
+    
+    func drawBlockCellIn(frame: CGRect) {
+        blockCellIn.append(BlockCellIn(frame: frame))
+        //blockCellIn.last?.isHidden = true
+        scene.addSubview(blockCellIn.last!)
+    }
+    
+    func drawBlockCellOut(frame: CGRect) {
+        blockCellOut.append(BlockCellOut(frame: frame))
+        scene.addSubview(blockCellOut.last!)
+    }
+    
+    func drawDot(frame: CGRect) {
+        dotCell.append(Dot(frame: frame))
+        scene.addSubview(dotCell.last!)
+    }
+
 }
+
+
 
 
 
