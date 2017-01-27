@@ -22,7 +22,7 @@ protocol SceneControllerInterface {
 }
 
 protocol SceneBuilderInterface {
-    func getSceneCanvas(sceneW: Int, SceneH: Int, levelData: Array<String>) -> UIView
+    func getSceneCanvas(level: Level) -> UIView
 }
 
 protocol PlayersProviderInterface {
