@@ -14,6 +14,8 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     var levelsScoresArray = [Double]()
     
+    //TODO: Implement code for SNAPSHOT
+    
     //var levelScene: SceneBuilder?
     
     override func viewDidLoad() {
