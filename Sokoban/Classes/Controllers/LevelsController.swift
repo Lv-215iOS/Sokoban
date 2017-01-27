@@ -48,7 +48,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
             let levelScore = levelsScoresArray[indexPath.row]
             cell.levelScoreLabel.text = String(describing: levelScore)
         } else {
-            cell.levelScoreLabel.text = "0.0"
+            cell.levelScoreLabel.text = "Untried"
         }
         
         return cell

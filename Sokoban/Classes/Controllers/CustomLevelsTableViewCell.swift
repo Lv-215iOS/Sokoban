@@ -16,6 +16,7 @@ class CustomLevelsTableViewCell: UITableViewCell {
     
     @IBOutlet weak var levelStateImage: UIImageView!
     
+    @IBOutlet weak var levelSnapshotImage: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
