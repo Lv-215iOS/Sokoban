@@ -2,10 +2,6 @@
 //  SceneBuilder.swift
 //  Sokoban
 //
-//  Created by adminaccount on 1/23/17.
-//
-//
-
 
 import UIKit
 import Foundation
@@ -41,37 +37,26 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         sceneWidth = level.scene?.width as! Int
         sceneHeight = level.scene?.height as! Int
         var levelStr = level.scene?.matrix
-        //var levelData = Array<String>()
-        
         let levelData = levelStr?.characters.map { String($0) }
-        
-        //let sceneController = SceneController()
-        //sceneWidth = sceneW
-        //sceneHeight = SceneH
         var i = 0
         for levelItem in levelData! {
             switch levelItem {
             case "#":
                 drawWall(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                
-                coordsOfCell.append(("#", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+
             case "-":
                 drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                
-                coordsOfCell.append(("-", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+
             case "*":
                 drawDot(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 
-                coordsOfCell.append(("*", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             case "%":
                 drawBlockCellOut(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 
-                coordsOfCell.append(("%", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             case "&":
                 drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 drawPlayer(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 
-                coordsOfCell.append(("&", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             default:
                 drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
             }
@@ -117,10 +102,6 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         dotCell.append(Dot(frame: frame))
         scene.addSubview(dotCell.last!)
     }
-    
-   
-    
+
 }
-
-
 

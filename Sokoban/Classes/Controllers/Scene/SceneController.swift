@@ -8,51 +8,24 @@
 
 import UIKit
 
- var sceneBuilder = SceneBuilder()
-
 class SceneController: UIViewController {
     
-//    var wallViewArray: [WallCell] = []
-//    var floorViewArray: [FloorCell] = []
-//    var blockCellIn: [BlockCellIn] = []
-//    var blockCellOut: [BlockCellOut] = []
-//    var dotCell: [Dot] = []
-    //var playerView: UIImageView!
-//    
-//    var levels: PlaygroundController? = nil
-//    var player = PlayerCell()
-    
-//    var sceneBuilder = SceneBuilder()
-    
-    var player = sceneBuilder.player
-    var blockCellIn: [BlockCellIn] = sceneBuilder.blockCellIn
-    var blockCellOut: [BlockCellOut] = sceneBuilder.blockCellOut
-    var dotCell: [Dot] = sceneBuilder.dotCell
-    var wallViewArray: [WallCell] = sceneBuilder.wallViewArray
-    var floorViewArray: [FloorCell] = sceneBuilder.floorViewArray
-    var playerView = sceneBuilder.playerView
-
-    
-    var model: [[ModelType]] = []
-    struct ModelType {
-        var point: (x: Int, y: Int)
-        var type: Character
-    }
+    var sceneBuilder = SceneBuilder()
     
     func animatePlayer(title: String) {
         switch title {
         case "👉":
-            animateImage(type: player.imageListRight)
-            changePlayerPosition(playerView!, x: 1, y: 0)
+            animateImage(type: sceneBuilder.player.imageListRight)
+            changePlayerPosition(sceneBuilder.playerView!, x: 1, y: 0)
         case "👆":
-            animateImage(type: player.imageListUp)
-            changePlayerPosition(playerView!, x: 0, y: -1)
+            animateImage(type: sceneBuilder.player.imageListUp)
+            changePlayerPosition(sceneBuilder.playerView!, x: 0, y: -1)
         case "👈":
-            animateImage(type: player.imageListLeft)
-            changePlayerPosition(playerView!, x: -1, y: 0)
+            animateImage(type: sceneBuilder.player.imageListLeft)
+            changePlayerPosition(sceneBuilder.playerView!, x: -1, y: 0)
         case "👇🏿":
-            animateImage(type: player.imageListDown)
-            changePlayerPosition(playerView!, x: 0, y: 1)
+            animateImage(type: sceneBuilder.player.imageListDown)
+            changePlayerPosition(sceneBuilder.playerView!, x: 0, y: 1)
         default:
             break
         }
@@ -60,17 +33,16 @@ class SceneController: UIViewController {
     
      override func viewDidLoad() {
         super.viewDidLoad()
-        player.initPlayer()
-        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[0])!))
-        
+        sceneBuilder.player.initPlayer()
+        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[5])!))
     }
   
     func animateImage(type: [UIImage]) {
-        playerView?.animationImages = type
-        playerView?.animationDuration = 0.35
-        playerView?.startAnimating()
+        sceneBuilder.playerView?.animationImages = type
+        sceneBuilder.playerView?.animationDuration = 0.35
+        sceneBuilder.playerView?.startAnimating()
         delay(delay: 0.35) {
-            self.playerView?.stopAnimating()
+            self.sceneBuilder.playerView?.stopAnimating()
         }
     }
     
@@ -90,8 +62,8 @@ class SceneController: UIViewController {
     }
     
     func movePlayer(_ player: UIImageView, x: Int, y: Int) {
-        for block in 0..<blockCellOut.count {
-            if !(isWallNearPlayer(player, x: x * 2, y: y * 2) && isWallNearBlock(blockCellOut[block], x: x, y: y)) {
+        for block in 0..<sceneBuilder.blockCellOut.count {
+            if !(isWallNearPlayer(player, x: x * 2, y: y * 2) && isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y)) {
                 UIView.animate(withDuration: 0.35) {
                     player.center.x += CGFloat(x) * player.bounds.size.width
                     player.center.y += CGFloat(y) * player.bounds.size.height
@@ -101,7 +73,7 @@ class SceneController: UIViewController {
     }
     
     func isWallNearPlayer(_ player: UIImageView, x: Int, y: Int) -> Bool {
-        for wall in wallViewArray {
+        for wall in sceneBuilder.wallViewArray {
             if wall.center.x == (player.center.x + CGFloat(x) * player.bounds.size.width) && wall.center.y == (player.center.y + CGFloat(y) * player.bounds.size.height) {
                 return true
             }
@@ -110,7 +82,7 @@ class SceneController: UIViewController {
     }
     
     func isWallNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
-        for wall in wallViewArray {
+        for wall in sceneBuilder.wallViewArray {
             if wall.center.x == (block.center.x + CGFloat(x) * block.bounds.size.width) && wall.center.y == (block.center.y + CGFloat(y) * block.bounds.size.height) {
                 return true
             }
@@ -119,8 +91,8 @@ class SceneController: UIViewController {
     }
     
     func isBlockNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
-        for block in blockCellOut {
-            for blockNext in blockCellOut {
+        for block in sceneBuilder.blockCellOut {
+            for blockNext in sceneBuilder.blockCellOut {
                 if block.center.x == (blockNext.center.x + CGFloat(x) * blockNext.bounds.size.width) && block.center.y == (blockNext.center.y + CGFloat(y) * blockNext.bounds.size.height) {
                     return true
                 }
@@ -131,37 +103,37 @@ class SceneController: UIViewController {
 
 
     func moveBlock(_ player: UIImageView, x: Int, y: Int) {
-        for block in 0..<blockCellOut.count {
-            if isWallNearBlock(blockCellOut[block], x: x, y: y) {
+        for block in 0..<sceneBuilder.blockCellOut.count {
+            if isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
                 return
-            } else if isBlockNearBlock(blockCellOut[block], x: x, y: y) {
+            } else if isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
                 return
-            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == blockCellOut[block].center.y {
-                if isBlockOnDot(block: blockCellOut[block]) {
-                    let newBlock = findBlockIn(x: blockCellOut[block].center.x, y: blockCellOut[block].center.y)
+            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == sceneBuilder.blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == sceneBuilder.blockCellOut[block].center.y {
+                if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
+                    let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
                     newBlock.isHidden = true
                 } else {
-                    blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                    blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-                    if isBlockOnDot(block: blockCellOut[block]) {
-                        let newBlock = findBlockIn(x: blockCellOut[block].center.x, y: blockCellOut[block].center.y)
-                        blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-                        blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+                    sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                    sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                    if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
+                        let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
+                        sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+                        sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
                         UIView.animate(withDuration: 0.35) {
-                            self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                            self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                            self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                            self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
                         }
                         delay(delay: 0.25) {
                             newBlock.isHidden = false
                         }
                         return
                     }
-                    blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-                    blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+                    sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+                    sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
                 }
                 UIView.animate(withDuration: 0.35) {
-                    self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                    self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                    self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                    self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
                 }
                 
             }
@@ -169,7 +141,7 @@ class SceneController: UIViewController {
     }
     
     func isBlockOnDot(block: BlockCellOut) -> Bool {
-        for dot in dotCell {
+        for dot in sceneBuilder.dotCell {
             if block.center.x == dot.center.x && block.center.y == dot.center.y {
                 return true
             }
@@ -178,16 +150,16 @@ class SceneController: UIViewController {
     }
     
     func findBlockIn(x: CGFloat, y: CGFloat) -> BlockCellIn {
-        for block in blockCellIn {
+        for block in sceneBuilder.blockCellIn {
             if block.center.x == x && block.center.y == y {
                 return block
             }
         }
-        return blockCellIn.last!
+        return sceneBuilder.blockCellIn.last!
     }
     
     func isFinish() -> Bool {
-        for block in blockCellIn {
+        for block in sceneBuilder.blockCellIn {
             if block.isHidden {
                 return false
             }
