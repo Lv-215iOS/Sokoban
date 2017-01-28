@@ -100,8 +100,8 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
 //    func createLevelSnapshot() -> UIImage {
 //        
-//        UIGraphicsBeginImageContext((levelScene?.frame.size)!)
-//        levelScene?.layer.render(in: UIGraphicsGetCurrentContext()!)
+//        UIGraphicsBeginImageContext((levelScene?.scene.frame.size)!)
+//        levelScene?.scene.layer.render(in: UIGraphicsGetCurrentContext()!)
 //        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
 //        UIGraphicsEndImageContext()
 //        return snapshot!
