@@ -15,6 +15,16 @@ var sceneController = SceneController()
 
 class SceneBuilder : UIView, SceneBuilderInterface {
     
+    var wallViewArray: [WallCell] = []
+    var floorViewArray: [FloorCell] = []
+    var blockCellIn: [BlockCellIn] = []
+    var blockCellOut: [BlockCellOut] = []
+    var dotCell: [Dot] = []
+    var playerView: UIImageView!
+    
+    var levels: PlaygroundController? = nil
+    var player = PlayerCell()
+    
     var dimensionOfCell = 40
     var sceneWidth = 0
     var sceneHeight = 0
@@ -76,37 +86,39 @@ class SceneBuilder : UIView, SceneBuilderInterface {
     }
     
     func drawWall(frame: CGRect) {
-        sceneController.wallViewArray.append(WallCell(frame: frame))
-        scene.addSubview(sceneController.wallViewArray.last!)
+        wallViewArray.append(WallCell(frame: frame))
+        scene.addSubview(wallViewArray.last!)
     }
     
     func drawPlayer(frame: CGRect) {
         let image = UIImage(named: "down1")
-        sceneController.playerView = UIImageView(image: image)
-        sceneController.playerView.frame = frame
-        scene.addSubview(sceneController.playerView)
+        playerView = UIImageView(image: image)
+        playerView.frame = frame
+        scene.addSubview(playerView)
     }
     
     func drawFloor(frame: CGRect) {
-        sceneController.floorViewArray.append(FloorCell(frame: frame))
-        scene.addSubview(sceneController.floorViewArray.last!)
+        floorViewArray.append(FloorCell(frame: frame))
+        scene.addSubview(floorViewArray.last!)
     }
     
     func drawBlockCellIn(frame: CGRect) {
-        sceneController.blockCellIn.append(BlockCellIn(frame: frame))
-        sceneController.blockCellIn.last?.isHidden = true
-        scene.addSubview(sceneController.blockCellIn.last!)
+        blockCellIn.append(BlockCellIn(frame: frame))
+        blockCellIn.last?.isHidden = true
+        scene.addSubview(blockCellIn.last!)
     }
     
     func drawBlockCellOut(frame: CGRect) {
-        sceneController.blockCellOut.append(BlockCellOut(frame: frame))
-        scene.addSubview(sceneController.blockCellOut.last!)
+        blockCellOut.append(BlockCellOut(frame: frame))
+        scene.addSubview(blockCellOut.last!)
     }
     
     func drawDot(frame: CGRect) {
-        sceneController.dotCell.append(Dot(frame: frame))
-        scene.addSubview(sceneController.dotCell.last!)
+        dotCell.append(Dot(frame: frame))
+        scene.addSubview(dotCell.last!)
     }
+    
+   
     
 }
 

@@ -8,17 +8,30 @@
 
 import UIKit
 
+ var sceneBuilder = SceneBuilder()
+
 class SceneController: UIViewController {
     
-    var wallViewArray: [WallCell] = []
-    var floorViewArray: [FloorCell] = []
-    var blockCellIn: [BlockCellIn] = []
-    var blockCellOut: [BlockCellOut] = []
-    var dotCell: [Dot] = []
-    var playerView: UIImageView!
+//    var wallViewArray: [WallCell] = []
+//    var floorViewArray: [FloorCell] = []
+//    var blockCellIn: [BlockCellIn] = []
+//    var blockCellOut: [BlockCellOut] = []
+//    var dotCell: [Dot] = []
+    //var playerView: UIImageView!
+//    
+//    var levels: PlaygroundController? = nil
+//    var player = PlayerCell()
     
-    var levels: PlaygroundController? = nil
-    var player = PlayerCell()
+//    var sceneBuilder = SceneBuilder()
+    
+    var player = sceneBuilder.player
+    var blockCellIn: [BlockCellIn] = sceneBuilder.blockCellIn
+    var blockCellOut: [BlockCellOut] = sceneBuilder.blockCellOut
+    var dotCell: [Dot] = sceneBuilder.dotCell
+    var wallViewArray: [WallCell] = sceneBuilder.wallViewArray
+    var floorViewArray: [FloorCell] = sceneBuilder.floorViewArray
+    var playerView = sceneBuilder.playerView
+
     
     var model: [[ModelType]] = []
     struct ModelType {
@@ -30,57 +43,34 @@ class SceneController: UIViewController {
         switch title {
         case "👉":
             animateImage(type: player.imageListRight)
-            changePlayerPosition(playerView, x: 1, y: 0)
+            changePlayerPosition(playerView!, x: 1, y: 0)
         case "👆":
             animateImage(type: player.imageListUp)
-            changePlayerPosition(playerView, x: 0, y: -1)
+            changePlayerPosition(playerView!, x: 0, y: -1)
         case "👈":
             animateImage(type: player.imageListLeft)
-            changePlayerPosition(playerView, x: -1, y: 0)
+            changePlayerPosition(playerView!, x: -1, y: 0)
         case "👇🏿":
             animateImage(type: player.imageListDown)
-            changePlayerPosition(playerView, x: 0, y: 1)
+            changePlayerPosition(playerView!, x: 0, y: 1)
         default:
             break
         }
     }
     
-    override func viewDidLoad() {
+     override func viewDidLoad() {
         super.viewDidLoad()
         player.initPlayer()
+        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[0])!))
         
-        //For Sasha
-        drawFloor(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
-        
-        drawFloor(frame: CGRect(x: 0, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 40, width: 40, height: 40))
-        
-        drawFloor(frame: CGRect(x: 0, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
-        
-        drawDot(frame: CGRect(x: 130, y: 10, width: 20, height: 20))
-        
-        drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
-        
-        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
-        
-        drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawPlayer(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
     }
-    
+  
     func animateImage(type: [UIImage]) {
-        playerView.animationImages = type
-        playerView.animationDuration = 0.35
-        playerView.startAnimating()
+        playerView?.animationImages = type
+        playerView?.animationDuration = 0.35
+        playerView?.startAnimating()
         delay(delay: 0.35) {
-            self.playerView.stopAnimating()
+            self.playerView?.stopAnimating()
         }
     }
     
@@ -88,23 +78,6 @@ class SceneController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }
-    }
-    
-    /**
-     Get level matrix with width and heigth
-     
-     - Parameter level: order of level
-     
-     - Returns width: width of matrix
-     - Returns height: heigth of matrix
-     - Returns matrix: array of elements
-    */
-    func getLevel(_ level: Int) -> (width: NSNumber?, height: NSNumber?, matrix: Array<String>) {
-        let levelScene = levels?.currentLevel?.scene
-        let levelHeight = levelScene?.height
-        let levelWidth = levelScene?.width
-        let levelMatrix = levelScene?.matrix?.characters.map { String($0) }
-        return (levelWidth, levelHeight, levelMatrix!)
     }
     
     func changePlayerPosition(_ player: UIImageView, x: Int, y: Int) {
@@ -211,39 +184,6 @@ class SceneController: UIViewController {
             }
         }
         return blockCellIn.last!
-    }
-    
-    func drawWall(frame: CGRect) {
-        wallViewArray.append(WallCell(frame: frame))
-        self.view.addSubview(wallViewArray.last!)
-    }
-    
-    func drawPlayer(frame: CGRect) {
-        let image = UIImage(named: "down1")
-        playerView = UIImageView(image: image)
-        playerView.frame = frame
-        self.view.addSubview(playerView)
-    }
-    
-    func drawFloor(frame: CGRect) {
-        floorViewArray.append(FloorCell(frame: frame))
-        self.view.addSubview(floorViewArray.last!)
-    }
-    
-    func drawBlockCellIn(frame: CGRect) {
-        blockCellIn.append(BlockCellIn(frame: frame))
-        blockCellIn.last?.isHidden = true
-        self.view.addSubview(blockCellIn.last!)
-    }
-    
-    func drawBlockCellOut(frame: CGRect) {
-        blockCellOut.append(BlockCellOut(frame: frame))
-        self.view.addSubview(blockCellOut.last!)
-    }
-    
-    func drawDot(frame: CGRect) {
-        dotCell.append(Dot(frame: frame))
-        self.view.addSubview(dotCell.last!)
     }
     
     func isFinish() -> Bool {
