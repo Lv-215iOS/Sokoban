@@ -10,6 +10,19 @@ import UIKit
 
 class PlayersProvider: PlayersProviderInterface {
     
+    static private(set) var fetchedResultController : NSFetchedResultsController<Player> = {
+        let fetchController = NSFetchedResultsController(fetchRequest: Player.fetchRequest(),
+                                                         managedObjectContext: CoreDataStack.sharedStack.managedContext,
+                                                         sectionNameKeyPath: nil,
+                                                         cacheName: nil)
+        do {
+            try fetchController.performFetch()
+        } catch let error as NSError {
+            print("Fetching error \(error), \(error.userInfo)")
+        }
+        return fetchController
+    }()
+    
     static private(set) var currentPlayer : Player? = {
         let request = Player.fetchRequest()
         let players = getPlayers()
