@@ -10,6 +10,8 @@ import UIKit
 
 class PlayersViewController: UIViewController {
     
+    fileprivate let playerCellIdentifier = "playerCellReuseIdentifier"
+    
     /// Index for selected player cell
     var selectedIndex: Int = 1
 
@@ -17,7 +19,7 @@ class PlayersViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        playersTableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        //playersTableView.register(CustomPlayerCell.self, forCellReuseIdentifier: playerCellIdentifier)
         playersTableView.dataSource = self
         playersTableView.delegate = self
     }
@@ -42,10 +44,8 @@ extension PlayersViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell(style: .subtitle, reuseIdentifier: "Cell")
-        guard let player = PlayersProvider.getPlayers()?[indexPath.row],
-              let cellTextLabel = cell.textLabel,
-              let cellDetailTextLabel = cell.detailTextLabel else {
+        let cell = tableView.dequeueReusableCell(withIdentifier: playerCellIdentifier, for: indexPath) as! CustomPlayerCell
+        guard let player = PlayersProvider.getPlayers()?[indexPath.row] else {
                 return cell
         }
         // if player in current cell is currentPlayer, check cell
@@ -55,8 +55,8 @@ extension PlayersViewController: UITableViewDataSource {
         } else {
             cell.accessoryType = .none
         }
-        cellTextLabel.text = player.name
-        cellDetailTextLabel.text = "score - " + (player.score?.stringValue)!
+        cell.playerName.text = player.name
+        cell.playerScore.text = "score - " + (player.score?.stringValue)!
         return cell
     }
     
