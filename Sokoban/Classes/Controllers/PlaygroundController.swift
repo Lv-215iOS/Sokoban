@@ -73,8 +73,9 @@ class PlaygroundController: UIViewController {
         time = 0
         movesCount = 0
         timer.invalidate()
-        timeLabel.text = String(0)
+        timeLabel.text = String("00:00")
         stepsCountLabel.text = String(0)
+        sceneController?.restartLevel()
         ///TODO:player respawns,view redraws
     }
     
