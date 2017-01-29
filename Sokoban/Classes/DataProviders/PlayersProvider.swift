@@ -10,8 +10,11 @@ import UIKit
 
 class PlayersProvider: PlayersProviderInterface {
     
-    static private(set) var fetchedResultController : NSFetchedResultsController<Player> = {
-        let fetchController = NSFetchedResultsController(fetchRequest: Player.fetchRequest(),
+    static let fetchedResultController : NSFetchedResultsController<Player> = {
+        let request = Player.fetchRequest()
+        let scoreSort = NSSortDescriptor(key: #keyPath(Player.score), ascending: false)
+        request.sortDescriptors = [scoreSort]
+        let fetchController = NSFetchedResultsController(fetchRequest: request,
                                                          managedObjectContext: CoreDataStack.sharedStack.managedContext,
                                                          sectionNameKeyPath: nil,
                                                          cacheName: nil)
@@ -46,6 +49,27 @@ class PlayersProvider: PlayersProviderInterface {
         let players = getPlayers()
         for player in players! {
             if player.name == name { currentPlayer = player }
+        }
+    }
+    
+    /**
+     Loads the photo for player with senders name asynchronously
+     
+     - Parameter name: name of the player that photo needs to get
+     - Parameter completionHandler: closure that handles fetched image 
+    */
+    static func asynchGetPhotoForPlayer(_ name : String, completionHandler: @escaping (UIImage?) -> Void ) {
+        let request = Player.fetchRequest()
+        request.predicate = NSPredicate(format: "%K == %@", #keyPath(Player.name), name)
+        let asynchRequst = NSAsynchronousFetchRequest<Player>(fetchRequest: request) { result in
+            if let data = result.finalResult?[0].photo {
+                completionHandler(UIImage(data: data))
+            }
+        }
+        do {
+            try CoreDataStack.sharedStack.managedContext.execute(asynchRequst)
+        } catch let error as NSError {
+            print("Could not fetch \(error), \(error.userInfo)")
         }
     }
     
@@ -102,7 +126,5 @@ class PlayersProvider: PlayersProviderInterface {
     static func saveCurrentPlayer() {
         CoreDataStack.sharedStack.saveContext()
     }
-
-
 
 }

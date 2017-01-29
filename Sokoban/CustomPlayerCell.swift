@@ -8,36 +8,32 @@
 
 import UIKit
 
-extension UIImage {
-    static func fromColor(color: UIColor) -> UIImage {
-        let rect = CGRect(x: 0, y: 0, width: 1, height: 1)
-        UIGraphicsBeginImageContext(rect.size)
-        let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(color.cgColor)
-        context!.fill(rect)
-        let img = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return img!
-    }
-}
-
 class CustomPlayerCell: UITableViewCell {
 
+    // MARK: - IBOutlets
     @IBOutlet weak var playerScore: UILabel!
     @IBOutlet weak var playerName: UILabel!
     @IBOutlet weak var playerImageView: UIImageView!
+    
+    // MARK: - Properties
+    private let activity = UIActivityIndicatorView()
+    
+    // MARK: - Cell life cycle
     override func awakeFromNib() {
         super.awakeFromNib()
         playerImageView.layer.cornerRadius = 30
         playerImageView.clipsToBounds = true
-        playerImageView.image = UIImage(cgImage: UIImage.fromColor(color: .black).cgImage!)
-        // Initialization code
+        activity.alpha = 1
+        activity.center = CGPoint(x: 30, y: 30)
+        activity.color = UIColor.black
+        playerImageView.addSubview(activity)
+        activity.startAnimating()
     }
-
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
+    
+    // MARK: - Internal
+    /// Remaves Activity Indicator from playerImageView
+    func removeActivityIndicator() {
+        activity.removeFromSuperview()
     }
 
 }
