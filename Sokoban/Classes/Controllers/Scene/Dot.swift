@@ -20,9 +20,9 @@ class Dot: UIView {
 
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
-        context!.setFillColor(UIColor(red:0.00, green:0.50, blue:0.00, alpha:1.0).cgColor)
+        context!.setFillColor(UIColor(red:0.50, green:0.49, blue:0.49, alpha:1.0).cgColor)
         context?.fill(rect)
-        context?.setFillColor(UIColor.blue.cgColor)
+        context?.setFillColor(UIColor(red:0.07, green:0.29, blue:0.51, alpha:1.0).cgColor)
         context?.addArc(center: CGPoint(x: rect.midX, y: rect.midY), radius: rect.width < rect.height ? rect.width/2 : rect.height/2, startAngle: 0.0, endAngle: 2 * CGFloat.pi, clockwise: false)
         context?.strokePath()        
         context?.fillEllipse(in: rect)

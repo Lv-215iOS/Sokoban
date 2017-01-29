@@ -8,79 +8,83 @@
 
 import UIKit
 
-class SceneController: UIViewController {
+class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface {
+    //TODO: complete ScrollView
+    //    @IBOutlet weak var background: UIScrollView!
+    //    @IBOutlet weak var foreground: UIScrollView!
     
-    var wallViewArray: [WallCell] = []
-    var floorViewArray: [FloorCell] = []
-    var blockCellIn: [BlockCellIn] = []
-    var blockCellOut: [BlockCellOut] = []
-    var dotCell: [Dot] = []
-    var playerView: UIImageView!
+    var sceneBuilder = SceneBuilder()
+    var scrollView: UIScrollView!
     
-    var levels: PlaygroundController? = nil
-    var player = PlayerCell()
-    
-    var model: [[ModelType]] = []
-    struct ModelType {
-        var point: (x: Int, y: Int)
-        var type: Character
+    /// take actions from PlaygroundController to start moving
+    func movePlayerButtons(operation: Moves) {
+        switch operation {
+        case .Right:
+            animateImage(type: sceneBuilder.player.imageListRight)
+            changePlayerPosition(sceneBuilder.playerView!, x: 1, y: 0)
+        case .Up:
+            animateImage(type: sceneBuilder.player.imageListUp)
+            changePlayerPosition(sceneBuilder.playerView!, x: 0, y: -1)
+        case .Left:
+            animateImage(type: sceneBuilder.player.imageListLeft)
+            changePlayerPosition(sceneBuilder.playerView!, x: -1, y: 0)
+        case .Down:
+            animateImage(type: sceneBuilder.player.imageListDown)
+            changePlayerPosition(sceneBuilder.playerView!, x: 0, y: 1)
+        }
     }
     
-    func animatePlayer(title: String) {
-        switch title {
-        case "👉":
-            animateImage(type: player.imageListRight)
-            changePlayerPosition(playerView, x: 1, y: 0)
-        case "👆":
-            animateImage(type: player.imageListUp)
-            changePlayerPosition(playerView, x: 0, y: -1)
-        case "👈":
-            animateImage(type: player.imageListLeft)
-            changePlayerPosition(playerView, x: -1, y: 0)
-        case "👇🏿":
-            animateImage(type: player.imageListDown)
-            changePlayerPosition(playerView, x: 0, y: 1)
-        default:
-            break
-        }
+    /// take action from PlaygroundController to restart level
+    func restartLevel() {
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        player.initPlayer()
+        sceneBuilder.player.initPlayer()
+        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[4])!))
+        view.backgroundColor = UIColor.gray
         
-        //For Sasha
-        drawFloor(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 0, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
-        
-        drawFloor(frame: CGRect(x: 0, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 40, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 40, width: 40, height: 40))
-        
-        drawFloor(frame: CGRect(x: 0, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 40, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 80, y: 80, width: 40, height: 40))
-        drawFloor(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
-        
-        drawDot(frame: CGRect(x: 130, y: 10, width: 20, height: 20))
-        
-        drawBlockCellOut(frame: CGRect(x: 120, y: 80, width: 40, height: 40))
-        
-        drawBlockCellIn(frame: CGRect(x: 120, y: 0, width: 40, height: 40))
-        
-        drawWall(frame: CGRect(x: 0, y: 0, width: 40, height: 40))
-        drawPlayer(frame: CGRect(x: 40, y: 0, width: 40, height: 40))
+        //TODO: complete ScrollView
+        //        scrollView = UIScrollView(frame: view.bounds)
+        //        scrollView.contentSize = view.bounds.size
+        //        scrollView.addSubview(view)
+        //        if view.frame.height <= scrollView.frame.height {
+        //            let shiftHeight = scrollView.frame.height/2.0 - scrollView.contentSize.height/2.0
+        //            scrollView.contentInset.top = shiftHeight
+        //        }
+        //        if view.frame.width <= scrollView.frame.width {
+        //            let shiftWidth = scrollView.frame.width/2.0 - scrollView.contentSize.width/2.0
+        //            scrollView.contentInset.left = shiftWidth
+        //        }
+        //         scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        //        foreground.delegate = self
     }
     
+    //TODO: complete ScrollView
+    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //
+    //                let foregroundHeight = foreground.contentSize.height - foreground.bounds.height
+    //                let percentageScroll = foreground.contentOffset.y / foregroundHeight
+    //                let backgroundHeight = background.contentSize.height - background.bounds.height
+    //
+    //                background.contentOffset = CGPoint(x: 0, y: backgroundHeight * percentageScroll)
+    //
+    //        let foregroundWidth = foreground.contentSize.width - foreground.bounds.width
+    //        let percentageScroll = foreground.contentOffset.x / foregroundWidth
+    //        let backgroundWidth = background.contentSize.width - background.bounds.width
+    //
+    //        background.contentOffset = CGPoint(x: backgroundWidth * percentageScroll, y: 0)
+    //
+    //    }
+    
+    /// animate players moves
     func animateImage(type: [UIImage]) {
-        playerView.animationImages = type
-        playerView.animationDuration = 0.35
-        playerView.startAnimating()
+        sceneBuilder.playerView?.animationImages = type
+        sceneBuilder.playerView?.animationDuration = 0.35
+        sceneBuilder.playerView?.startAnimating()
         delay(delay: 0.35) {
-            self.playerView.stopAnimating()
+            self.sceneBuilder.playerView?.stopAnimating()
         }
     }
     
@@ -88,23 +92,6 @@ class SceneController: UIViewController {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }
-    }
-    
-    /**
-     Get level matrix with width and heigth
-     
-     - Parameter level: order of level
-     
-     - Returns width: width of matrix
-     - Returns height: heigth of matrix
-     - Returns matrix: array of elements
-    */
-    func getLevel(_ level: Int) -> (width: NSNumber?, height: NSNumber?, matrix: Array<String>) {
-        let levelScene = levels?.currentLevel?.scene
-        let levelHeight = levelScene?.height
-        let levelWidth = levelScene?.width
-        let levelMatrix = levelScene?.matrix?.characters.map { String($0) }
-        return (levelWidth, levelHeight, levelMatrix!)
     }
     
     func changePlayerPosition(_ player: UIImageView, x: Int, y: Int) {
@@ -116,28 +103,33 @@ class SceneController: UIViewController {
         }
     }
     
+    /// check if player is able to move
     func movePlayer(_ player: UIImageView, x: Int, y: Int) {
-        for block in 0..<blockCellOut.count {
-            if !(isWallNearPlayer(player, x: x * 2, y: y * 2) && isWallNearBlock(blockCellOut[block], x: x, y: y)) {
-                UIView.animate(withDuration: 0.35) {
-                    player.center.x += CGFloat(x) * player.bounds.size.width
-                    player.center.y += CGFloat(y) * player.bounds.size.height
-                }
-            }
+        //FIX: player go over block, when block is near wall
+        //      for block in 0..<sceneBuilder.blockCellOut.count {
+        //           if !(isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) && isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y)) {
+        //                   }
+        //                }
+        UIView.animate(withDuration: 0.35) {
+            player.center.x += CGFloat(x) * player.bounds.size.width
+            player.center.y += CGFloat(y) * player.bounds.size.height
         }
     }
     
+    /// check if wall is next to player
     func isWallNearPlayer(_ player: UIImageView, x: Int, y: Int) -> Bool {
-        for wall in wallViewArray {
+        for wall in sceneBuilder.wallViewArray {
             if wall.center.x == (player.center.x + CGFloat(x) * player.bounds.size.width) && wall.center.y == (player.center.y + CGFloat(y) * player.bounds.size.height) {
                 return true
             }
         }
+        
         return false
     }
     
+    /// check if wall is next to block
     func isWallNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
-        for wall in wallViewArray {
+        for wall in sceneBuilder.wallViewArray {
             if wall.center.x == (block.center.x + CGFloat(x) * block.bounds.size.width) && wall.center.y == (block.center.y + CGFloat(y) * block.bounds.size.height) {
                 return true
             }
@@ -145,58 +137,68 @@ class SceneController: UIViewController {
         return false
     }
     
+    /// check if block is next to block
     func isBlockNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
-        for block in blockCellOut {
-            for blockNext in blockCellOut {
+        for block in sceneBuilder.blockCellOut {
+            for blockNext in sceneBuilder.blockCellOut {
                 if block.center.x == (blockNext.center.x + CGFloat(x) * blockNext.bounds.size.width) && block.center.y == (blockNext.center.y + CGFloat(y) * blockNext.bounds.size.height) {
                     return true
+                    
                 }
             }
         }
         return false
     }
-
-
+    
+    /**
+     Moves block with direction
+     
+     - Parameter player: players subview
+     - Parameter x: x coordinate
+     - Parameter y: y coordinate
+     */
     func moveBlock(_ player: UIImageView, x: Int, y: Int) {
-        for block in 0..<blockCellOut.count {
-            if isWallNearBlock(blockCellOut[block], x: x, y: y) {
+        for block in 0..<sceneBuilder.blockCellOut.count {
+            if isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
                 return
-            } else if isBlockNearBlock(blockCellOut[block], x: x, y: y) {
-                return
-            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == blockCellOut[block].center.y {
-                if isBlockOnDot(block: blockCellOut[block]) {
-                    let newBlock = findBlockIn(x: blockCellOut[block].center.x, y: blockCellOut[block].center.y)
+                //FIX: player go over blocks when block is near block
+                //            } else if isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
+                //                return
+            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == sceneBuilder.blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == sceneBuilder.blockCellOut[block].center.y {
+                if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
+                    let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
                     newBlock.isHidden = true
                 } else {
-                    blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                    blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-                    if isBlockOnDot(block: blockCellOut[block]) {
-                        let newBlock = findBlockIn(x: blockCellOut[block].center.x, y: blockCellOut[block].center.y)
-                        blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-                        blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+                    sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                    sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                    if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
+                        let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
+                        sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+                        sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
                         UIView.animate(withDuration: 0.35) {
-                            self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                            self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                            self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                            self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
                         }
                         delay(delay: 0.25) {
                             newBlock.isHidden = false
                         }
                         return
                     }
-                    blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-                    blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+                    sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+                    sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
                 }
                 UIView.animate(withDuration: 0.35) {
-                    self.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                    self.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+                    self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+                    self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
                 }
                 
             }
         }
     }
     
+    // check if block is on cell
     func isBlockOnDot(block: BlockCellOut) -> Bool {
-        for dot in dotCell {
+        for dot in sceneBuilder.dotCell {
             if block.center.x == dot.center.x && block.center.y == dot.center.y {
                 return true
             }
@@ -205,49 +207,16 @@ class SceneController: UIViewController {
     }
     
     func findBlockIn(x: CGFloat, y: CGFloat) -> BlockCellIn {
-        for block in blockCellIn {
+        for block in sceneBuilder.blockCellIn {
             if block.center.x == x && block.center.y == y {
                 return block
             }
         }
-        return blockCellIn.last!
-    }
-    
-    func drawWall(frame: CGRect) {
-        wallViewArray.append(WallCell(frame: frame))
-        self.view.addSubview(wallViewArray.last!)
-    }
-    
-    func drawPlayer(frame: CGRect) {
-        let image = UIImage(named: "down1")
-        playerView = UIImageView(image: image)
-        playerView.frame = frame
-        self.view.addSubview(playerView)
-    }
-    
-    func drawFloor(frame: CGRect) {
-        floorViewArray.append(FloorCell(frame: frame))
-        self.view.addSubview(floorViewArray.last!)
-    }
-    
-    func drawBlockCellIn(frame: CGRect) {
-        blockCellIn.append(BlockCellIn(frame: frame))
-        blockCellIn.last?.isHidden = true
-        self.view.addSubview(blockCellIn.last!)
-    }
-    
-    func drawBlockCellOut(frame: CGRect) {
-        blockCellOut.append(BlockCellOut(frame: frame))
-        self.view.addSubview(blockCellOut.last!)
-    }
-    
-    func drawDot(frame: CGRect) {
-        dotCell.append(Dot(frame: frame))
-        self.view.addSubview(dotCell.last!)
+        return sceneBuilder.blockCellIn.last!
     }
     
     func isFinish() -> Bool {
-        for block in blockCellIn {
+        for block in sceneBuilder.blockCellIn {
             if block.isHidden {
                 return false
             }
