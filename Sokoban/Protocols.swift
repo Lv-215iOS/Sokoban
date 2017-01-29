@@ -18,7 +18,7 @@ enum Moves: String {
 
 protocol SceneControllerInterface {
     func restartLevel()
-    func movePlayer(operation:Moves)
+    func movePlayerButtons(operation:Moves)
 }
 
 protocol SceneBuilderInterface {

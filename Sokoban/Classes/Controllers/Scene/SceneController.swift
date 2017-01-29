@@ -8,35 +8,73 @@
 
 import UIKit
 
-class SceneController: UIViewController {
+class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface {
+    //TODO: complete ScrollView
+    @IBOutlet weak var background: UIScrollView!
+    @IBOutlet weak var foreground: UIScrollView!
     
     var sceneBuilder = SceneBuilder()
-    
-    func animatePlayer(title: String) {
-        switch title {
-        case "👉":
+    var scrollView: UIScrollView!
+
+    func movePlayerButtons(operation: Moves) {
+        switch operation {
+        case .Right:
             animateImage(type: sceneBuilder.player.imageListRight)
             changePlayerPosition(sceneBuilder.playerView!, x: 1, y: 0)
-        case "👆":
+        case .Up:
             animateImage(type: sceneBuilder.player.imageListUp)
             changePlayerPosition(sceneBuilder.playerView!, x: 0, y: -1)
-        case "👈":
+        case .Left:
             animateImage(type: sceneBuilder.player.imageListLeft)
             changePlayerPosition(sceneBuilder.playerView!, x: -1, y: 0)
-        case "👇🏿":
+        case .Down:
             animateImage(type: sceneBuilder.player.imageListDown)
             changePlayerPosition(sceneBuilder.playerView!, x: 0, y: 1)
-        default:
-            break
         }
+    }
+    
+    func restartLevel() {
+    
     }
     
      override func viewDidLoad() {
         super.viewDidLoad()
         sceneBuilder.player.initPlayer()
-        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[5])!))
+        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[6])!))
+        scrollView = UIScrollView(frame: view.bounds)
+        scrollView.contentSize = view.bounds.size
+        scrollView.addSubview(view)
+        
+        if view.frame.height <= scrollView.frame.height {
+            let shiftHeight = scrollView.frame.height/2.0 - scrollView.contentSize.height/2.0
+            scrollView.contentInset.top = shiftHeight
+        }
+        if view.frame.width <= scrollView.frame.width {
+            let shiftWidth = scrollView.frame.width/2.0 - scrollView.contentSize.width/2.0
+            scrollView.contentInset.left = shiftWidth
+        }
+       
+        //TODO: complete ScrollView
+        // scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        //foreground.delegate = self
     }
-  
+    //TODO: complete ScrollView
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+//        let foregroundHeight = foreground.contentSize.height - foreground.bounds.height
+//        let percentageScroll = foreground.contentOffset.y / foregroundHeight
+//        let backgroundHeight = background.contentSize.height - background.bounds.height
+//        
+//        background.contentOffset = CGPoint(x: 0, y: backgroundHeight * percentageScroll)
+        
+        let foregroundWidth = foreground.contentSize.width - foreground.bounds.width
+         let percentageScroll = foreground.contentOffset.x / foregroundWidth
+        let backgroundWidth = background.contentSize.width - background.bounds.width
+        
+        background.contentOffset = CGPoint(x: backgroundWidth * percentageScroll, y: 0)
+        
+    }
+   
     func animateImage(type: [UIImage]) {
         sceneBuilder.playerView?.animationImages = type
         sceneBuilder.playerView?.animationDuration = 0.35

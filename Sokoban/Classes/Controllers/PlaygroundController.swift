@@ -33,7 +33,7 @@ class PlaygroundController: UIViewController {
     }
     
     @IBAction func MoveAction(_ sender: UIButton) {
-        sceneController?.animatePlayer(title: sender.currentTitle!)
+        sceneController?.movePlayerButtons(operation: Moves(rawValue: sender.currentTitle!)!)
     }
     
     
