@@ -10,8 +10,8 @@ import UIKit
 
 class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface {
     //TODO: complete ScrollView
-//    @IBOutlet weak var background: UIScrollView!
-//    @IBOutlet weak var foreground: UIScrollView!
+    //    @IBOutlet weak var background: UIScrollView!
+    //    @IBOutlet weak var foreground: UIScrollView!
     
     var sceneBuilder = SceneBuilder()
     var scrollView: UIScrollView!
@@ -46,37 +46,37 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         view.backgroundColor = UIColor.gray
         
         //TODO: complete ScrollView
-//        scrollView = UIScrollView(frame: view.bounds)
-//        scrollView.contentSize = view.bounds.size
-//        scrollView.addSubview(view)
-//        if view.frame.height <= scrollView.frame.height {
-//            let shiftHeight = scrollView.frame.height/2.0 - scrollView.contentSize.height/2.0
-//            scrollView.contentInset.top = shiftHeight
-//        }
-//        if view.frame.width <= scrollView.frame.width {
-//            let shiftWidth = scrollView.frame.width/2.0 - scrollView.contentSize.width/2.0
-//            scrollView.contentInset.left = shiftWidth
-//        }
-//         scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-//        foreground.delegate = self
+        //        scrollView = UIScrollView(frame: view.bounds)
+        //        scrollView.contentSize = view.bounds.size
+        //        scrollView.addSubview(view)
+        //        if view.frame.height <= scrollView.frame.height {
+        //            let shiftHeight = scrollView.frame.height/2.0 - scrollView.contentSize.height/2.0
+        //            scrollView.contentInset.top = shiftHeight
+        //        }
+        //        if view.frame.width <= scrollView.frame.width {
+        //            let shiftWidth = scrollView.frame.width/2.0 - scrollView.contentSize.width/2.0
+        //            scrollView.contentInset.left = shiftWidth
+        //        }
+        //         scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        //        foreground.delegate = self
     }
     
     //TODO: complete ScrollView
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        
-//                let foregroundHeight = foreground.contentSize.height - foreground.bounds.height
-//                let percentageScroll = foreground.contentOffset.y / foregroundHeight
-//                let backgroundHeight = background.contentSize.height - background.bounds.height
-//        
-//                background.contentOffset = CGPoint(x: 0, y: backgroundHeight * percentageScroll)
-//        
-//        let foregroundWidth = foreground.contentSize.width - foreground.bounds.width
-//        let percentageScroll = foreground.contentOffset.x / foregroundWidth
-//        let backgroundWidth = background.contentSize.width - background.bounds.width
-//        
-//        background.contentOffset = CGPoint(x: backgroundWidth * percentageScroll, y: 0)
-//        
-//    }
+    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    //
+    //                let foregroundHeight = foreground.contentSize.height - foreground.bounds.height
+    //                let percentageScroll = foreground.contentOffset.y / foregroundHeight
+    //                let backgroundHeight = background.contentSize.height - background.bounds.height
+    //
+    //                background.contentOffset = CGPoint(x: 0, y: backgroundHeight * percentageScroll)
+    //
+    //        let foregroundWidth = foreground.contentSize.width - foreground.bounds.width
+    //        let percentageScroll = foreground.contentOffset.x / foregroundWidth
+    //        let backgroundWidth = background.contentSize.width - background.bounds.width
+    //
+    //        background.contentOffset = CGPoint(x: backgroundWidth * percentageScroll, y: 0)
+    //
+    //    }
     
     /// animate players moves
     func animateImage(type: [UIImage]) {
@@ -93,7 +93,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             closure()
         }
     }
-    
     
     func changePlayerPosition(_ player: UIImageView, x: Int, y: Int) {
         if isWallNearPlayer(player, x: x, y: y) {
@@ -138,7 +137,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         return false
     }
     
-     /// check if block is next to block
+    /// check if block is next to block
     func isBlockNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
         for block in sceneBuilder.blockCellOut {
             for blockNext in sceneBuilder.blockCellOut {

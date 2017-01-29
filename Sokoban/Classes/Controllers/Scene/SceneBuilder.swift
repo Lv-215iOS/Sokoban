@@ -18,7 +18,6 @@ class SceneBuilder : UIView, SceneBuilderInterface {
     var dotCell: [Dot] = []
     var playerView: UIImageView!
     
-    var levels: PlaygroundController? = nil
     var player = PlayerCell()
     
     var dimensionOfCell = 40
@@ -38,27 +37,35 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         sceneHeight = level.scene?.height as! Int
         var levelStr = level.scene?.matrix
         let levelData = levelStr?.characters.map { String($0) }
+        
+        ///FIX: set background of scene to gray
+        scene.backgroundColor = UIColor.gray
+        
+        var playerCoordX: Int = 0
+        var playerCoordY: Int = 0
         var i = 0
+        
         for levelItem in levelData! {
             switch levelItem {
             case "#":
                 drawWall(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-
+                coordsOfCell.append(("#", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             case "-":
-                drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-
+                //drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                coordsOfCell.append(("-", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             case "*":
                 drawDot(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                
+                drawBlockCellIn(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                coordsOfCell.append(("*", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             case "%":
                 drawBlockCellOut(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                
+                coordsOfCell.append(("%", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             case "&":
-                drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                drawPlayer(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                
+                playerCoordX = rectX + dimensionOfCell * countWidth
+                playerCoordY = rectY + dimensionOfCell * countHeight
+                coordsOfCell.append(("&", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
             default:
-                drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                break
             }
             countWidth += 1
             if countWidth == sceneWidth {
@@ -67,6 +74,7 @@ class SceneBuilder : UIView, SceneBuilderInterface {
             }
             i += 1
         }
+        drawPlayer(frame: CGRect(x: playerCoordX, y: playerCoordY, width: dimensionOfCell, height: dimensionOfCell))
         return scene
     }
     
@@ -102,6 +110,5 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         dotCell.append(Dot(frame: frame))
         scene.addSubview(dotCell.last!)
     }
-
+    
 }
-
