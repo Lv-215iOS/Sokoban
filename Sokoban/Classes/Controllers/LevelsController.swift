@@ -14,6 +14,10 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     var levelsScoresArray = [Double]()
     
+    //TODO: Implement code for SNAPSHOT
+    
+    //var levelScene: SceneBuilder?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
@@ -44,11 +48,32 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.levelNameLabel.text = level.name
         
-        if indexPath.row < levelsScoresArray.count {
+        //        DispatchQueue.global(qos: .utility).async {
+        //            let levelSnapshot = self.createLevelSnapshot()
+        //
+        //            // do something time consuming here
+        //
+        //            DispatchQueue.main.async {
+        //                // now update UI on main thread
+        //                cell.levelSnapshotImage.image = levelSnapshot
+        //            }
+        //        }
+        
+        if indexPath.row < levelsScoresArray.count {//level score in levelScoreLabel
             let levelScore = levelsScoresArray[indexPath.row]
             cell.levelScoreLabel.text = String(describing: levelScore)
+            
+                if levelScore > 0.0 {//sets correct levelStateImage
+                    cell.levelStateImage.image = UIImage(named: "levelPassedImage")
+                    cell.levelScoreLabel.textColor = UIColor.green
+                } else if levelScore == 0.0 {//sets correct levelStateImage
+                    cell.levelScoreLabel.text = "Untried"
+                    cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
+                }
+            
         } else {
-            cell.levelScoreLabel.text = "0.0"
+            cell.levelScoreLabel.text = "Untried"
+            cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
         }
         
         return cell
@@ -76,5 +101,19 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         }
     }
+    
+    //MARK: Additional funcs
+    
+    //CALL THIS in SEPARATE THREAD in cellForRowAt
+    
+    //    func createLevelSnapshot() -> UIImage {
+    //
+    //        UIGraphicsBeginImageContext((levelScene?.scene.frame.size)!)
+    //        levelScene?.scene.layer.render(in: UIGraphicsGetCurrentContext()!)
+    //        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
+    //        UIGraphicsEndImageContext()
+    //        return snapshot!
+    //        
+    //    }
     
 }

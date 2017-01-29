@@ -27,9 +27,9 @@ class MenuController: UIViewController {
     /// to open leaderboardViewController
     @IBAction func menuLeaderboardButtonTapped(_ sender: UIButton) {
     }
-
+    
     @IBOutlet weak var menuSettingsButton: UIButton!
-   
+    
     /// to open settingsViewController
     @IBAction func menuSettingsButtonTapped(_ sender: UIButton) {
     }
@@ -46,5 +46,35 @@ class MenuController: UIViewController {
     }
     
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+           AudioPlayer.sharedInstance.backgroundMusic()
+    
+        let musicIsPlaying = UserDefaults.standard.bool(forKey: "musicIsPlaying")
+        if musicIsPlaying == false {
+            AudioPlayer.sharedInstance.stopMusic()
+        } else {
+            AudioPlayer.sharedInstance.playMusic()
+        }
+    }
+    
+    func configureButton() {
+        menuPlayButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuPlayButton.clipsToBounds = true
+        
+        menuLeaderboardButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuLeaderboardButton.clipsToBounds = true
+        
+        menuSettingsButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuSettingsButton.clipsToBounds = true
+        
+        menuAboutButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
+        menuAboutButton.clipsToBounds = true
+    }
+    
+    override func viewDidLayoutSubviews() {
+        configureButton()
+    }
     
 }

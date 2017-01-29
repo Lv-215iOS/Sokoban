@@ -9,18 +9,38 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    
+    @IBOutlet weak var soundSwitch: UISwitch!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-    }
-   
-    /// to turn sound on/off
-    @IBAction func switchSoundChanged(_ sender: UISwitch) {
+        
+        if (AudioPlayer.sharedInstance.backgroundMusicAudioPlayer?.isPlaying)! {
+            soundSwitch.isOn = true
+        } else {
+            soundSwitch.isOn = false
+        }
     }
     
-    /// to reset current player scores
-    @IBAction func resetScoresButtonTapped(_ sender: UIButton) {
+    /// turns background on/off
+    @IBAction func switchSoundChanged(_ sender: UISwitch) {
+        if  sender.isOn {
+            AudioPlayer.sharedInstance.playMusic()
+        } else {
+            AudioPlayer.sharedInstance.stopMusic()
+        }
     }
- 
+    
+    /// resets current player scores
+    @IBAction func resetScoresButtonTapped(_ sender: UIButton) {
+        
+        let currentPlayer = PlayersProvider.currentPlayer
+        var levelsScores = Array<Any>()
+        
+        currentPlayer?.score = 0.0
+        levelsScores = [0.0]
+        currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
+        
+        PlayersProvider.saveCurrentPlayer()
+    }    
 }
