@@ -63,7 +63,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
             
             if levelScore > 0.0 {//sets correct levelStateImage
                 cell.levelStateImage.image = UIImage(named: "levelPassedImage")
-                cell.levelScoreLabel.textColor = UIColor.green
+                cell.levelScoreLabel.textColor = UIColor.yellow
             } else if levelScore == 0.0 {//sets correct levelStateImage
                 cell.levelScoreLabel.text = "Untried"
                 cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
