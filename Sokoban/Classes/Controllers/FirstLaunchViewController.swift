@@ -36,17 +36,31 @@ UINavigationControllerDelegate {
     
     /// to open MenuViewController and change nickname
     @IBAction func createNewPlayerButtonTapped(_ sender: UIButton) {
-        PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:imageDisplay.image!)
-        
-        if defaults.string(forKey: "isPlayerAlreadyCreated") != nil{
-            _ = navigationController?.popViewController(animated: true)
+        if addPlayerTextField.text == "" {
+            let alert = UIAlertController(title: "NO PLAYER NAME", message: "Please, enter player name", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
             
         } else {
-            defaults.set(true, forKey: "isPlayerAlreadyCreated")
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "secondViewController") as! UINavigationController
-            self.present(vc, animated: true, completion: nil)
+            if let image = imageDisplay.image {
+                PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:image)
+                PlayersProvider.setCurrentPlayerWith(name: addPlayerTextField.text!)
+            } else {
+                PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:#imageLiteral(resourceName: "down4.png"))
+                PlayersProvider.setCurrentPlayerWith(name: addPlayerTextField.text!)
+            }
             
+            
+            if defaults.string(forKey: "isPlayerAlreadyCreated") != nil{
+                _ = navigationController?.popViewController(animated: true)
+                
+            } else {
+                defaults.set(true, forKey: "isPlayerAlreadyCreated")
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "secondViewController") as! UINavigationController
+                self.present(vc, animated: true, completion: nil)
+                
+            }
         }
         
     }
@@ -81,13 +95,18 @@ UINavigationControllerDelegate {
         image.draw(in: CGRect(0, 0, newWidth, newHeight))
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         return newImage!
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FirstLaunchViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         self.imageDisplay.layer.cornerRadius = self.imageDisplay.frame.size.width / 2;
         self.imageDisplay.clipsToBounds = true;
+    }
+    func dismissKeyboard() {
+        
+        view.endEditing(true)
     }
 }
