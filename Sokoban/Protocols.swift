@@ -26,6 +26,7 @@ protocol SceneBuilderInterface {
 }
 
 protocol PlayersProviderInterface {
+    static var fetchedResultController : NSFetchedResultsController<Player> { get }
     static var currentPlayer : Player? { get }
     static func setCurrentPlayerWith(name : String)
     static func deletePlayer(_ player : Player)
