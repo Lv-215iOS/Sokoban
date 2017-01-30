@@ -54,6 +54,8 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
         contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
         scrollView.layoutIfNeeded()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
         
         gameView.center = CGPoint(x: contentWidth.constant / 2, y: contentHeight.constant / 2)
         contentView.addSubview(gameView)
