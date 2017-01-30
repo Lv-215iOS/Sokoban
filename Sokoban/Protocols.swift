@@ -24,7 +24,7 @@ protocol SceneControllerInterface {
 protocol SceneBuilderInterface {
     func getSceneCanvas(level: Level) -> UIView
 }
- 
+  
 protocol PlayersProviderInterface {
     static var fetchedResultController : NSFetchedResultsController<Player> { get }
     static var currentPlayer : Player? { get }
