@@ -439,6 +439,7 @@
 					};
 					8B2794D21E2E5F8600A93642 = {
 						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = M3UST45RNV;
 						ProvisioningStyle = Automatic;
 						TestTargetID = 8B2794B01E2E5F8600A93642;
 					};
@@ -754,6 +755,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = M3UST45RNV;
 				INFOPLIST_FILE = SokobanUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pasik-01.SokobanUITests";
@@ -767,6 +769,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				DEVELOPMENT_TEAM = M3UST45RNV;
 				INFOPLIST_FILE = SokobanUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.pasik-01.SokobanUITests";

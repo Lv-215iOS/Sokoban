@@ -63,10 +63,10 @@ extension PlayersViewController: UITableViewDataSource {
         } else {
             playerCell.accessoryType = .none
         }
-        PlayersProvider.asynchGetPhotoForPlayer(player.name!) { (image) in
-            DispatchQueue.main.sync {
-                playerCell.playerImageView.image = image
-                playerCell.removeActivityIndicator()
+        PlayersProvider.asynchGetPhotoForPlayer(player.name!) { [weak playerCell] (image) in
+            DispatchQueue.main.async {
+                playerCell?.removeActivityIndicator()
+                playerCell?.playerImageView.image = image
             }
         }
         playerCell.playerName.text = player.name
@@ -79,9 +79,9 @@ extension PlayersViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         let path = IndexPath(row: 0, section: 0)
         guard let playerToRemove = PlayersProvider.getPlayers()?[indexPath.row],
-              let firstCell = tableView.cellForRow(at: path),
-              let firstCellText = firstCell.textLabel?.text,
-              let currentCellText = tableView.cellForRow(at: indexPath)?.textLabel?.text,
+              let firstCell = tableView.cellForRow(at: path) as? CustomPlayerCell,
+              let firstCellText = firstCell.playerName.text,
+              let currentCellText = (tableView.cellForRow(at: indexPath) as? CustomPlayerCell)?.playerName.text,
               editingStyle == .delete else {
                 return
         }
@@ -98,7 +98,7 @@ extension PlayersViewController: UITableViewDataSource {
             PlayersProvider.setCurrentPlayerWith(name: firstCellText)
         }
         PlayersProvider.deletePlayer(playerToRemove)
-        playersTableView.deleteRows(at: [indexPath], with: .automatic)
+        //playersTableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -137,6 +137,13 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
             let cell = playersTableView.cellForRow(at: indexPath!) as! CustomPlayerCell
             cell.playerImageView.image = UIImage(data: PlayersProvider.fetchedResultController.object(at: indexPath!).photo!)
         }
+        if type == .insert {
+            playersTableView.insertRows(at: [newIndexPath!], with: .automatic)
+        }
+        if type == .delete {
+            playersTableView.deleteRows(at: [indexPath!], with: .automatic)
+        }
+
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
