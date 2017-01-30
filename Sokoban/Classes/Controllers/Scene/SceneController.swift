@@ -8,12 +8,13 @@
 
 import UIKit
 
-class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface {
+class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface, GameLogic {
     //TODO: complete ScrollView
     //    @IBOutlet weak var background: UIScrollView!
     //    @IBOutlet weak var foreground: UIScrollView!
     
     var currentLevel: Level?
+    var matrix: String!
     
     var sceneBuilder = SceneBuilder()
     @IBOutlet weak var scrollView: UIScrollView!
@@ -26,16 +27,16 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         switch operation {
         case .Right:
             animateImage(type: sceneBuilder.player.imageListRight)
-            changePlayerPosition(sceneBuilder.playerView!, x: 1, y: 0)
+            movePlayer(sceneBuilder.playerView!, x: 1, y: 0)
         case .Up:
             animateImage(type: sceneBuilder.player.imageListUp)
-            changePlayerPosition(sceneBuilder.playerView!, x: 0, y: -1)
+            movePlayer(sceneBuilder.playerView!, x: 0, y: -1)
         case .Left:
             animateImage(type: sceneBuilder.player.imageListLeft)
-            changePlayerPosition(sceneBuilder.playerView!, x: -1, y: 0)
+            movePlayer(sceneBuilder.playerView!, x: -1, y: 0)
         case .Down:
             animateImage(type: sceneBuilder.player.imageListDown)
-            changePlayerPosition(sceneBuilder.playerView!, x: 0, y: 1)
+            movePlayer(sceneBuilder.playerView!, x: 0, y: 1)
         }
     }
     
@@ -54,11 +55,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
         contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
         scrollView.layoutIfNeeded()
-        scrollView.showsHorizontalScrollIndicator = false
-        scrollView.showsVerticalScrollIndicator = false
         
         gameView.center = CGPoint(x: contentWidth.constant / 2, y: contentHeight.constant / 2)
         contentView.addSubview(gameView)
+    }
+    
+    override func viewDidLoad() {
+        matrix = currentLevel?.scene?.matrix
     }
     
     /// animate players moves
@@ -77,61 +80,105 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         }
     }
     
-    func changePlayerPosition(_ player: UIImageView, x: Int, y: Int) {
-        if isWallNearPlayer(player, x: x, y: y) {
-            return
-        } else {
-            moveBlock(player, x: x, y: y)
-            movePlayer(player, x: x, y: y)
-        }
+    func getBlockToMove(_ player: UIImageView, x: Int, y: Int) -> Int {
+//        let matrix = currentLevel?.scene?.matrix
+        let sceneWidth = currentLevel?.scene?.width?.intValue
+        let pos = getPosition(str: matrix!, findElement: "&")
+//        print(pos)
+        return pos! + y * sceneWidth! + x
     }
     
     /// check if player is able to move
     func movePlayer(_ player: UIImageView, x: Int, y: Int) {
         //FIX: player go over block, when block is near wall
-        //      for block in 0..<sceneBuilder.blockCellOut.count {
-        //           if !(isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) && isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y)) {
-        //                   }
-        //                }
-        UIView.animate(withDuration: 0.35) {
-            player.center.x += CGFloat(x) * player.bounds.size.width
-            player.center.y += CGFloat(y) * player.bounds.size.height
-        }
-    }
-    
-    /// check if wall is next to player
-    func isWallNearPlayer(_ player: UIImageView, x: Int, y: Int) -> Bool {
-        for wall in sceneBuilder.wallViewArray {
-            if wall.center.x == (player.center.x + CGFloat(x) * player.bounds.size.width) && wall.center.y == (player.center.y + CGFloat(y) * player.bounds.size.height) {
-                return true
-            }
-        }
+//        let matrix = currentLevel?.scene?.matrix
+        let sceneWidth = currentLevel?.scene?.width?.intValue
         
-        return false
-    }
-    
-    /// check if wall is next to block
-    func isWallNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
-        for wall in sceneBuilder.wallViewArray {
-            if wall.center.x == (block.center.x + CGFloat(x) * block.bounds.size.width) && wall.center.y == (block.center.y + CGFloat(y) * block.bounds.size.height) {
-                return true
-            }
-        }
-        return false
-    }
-    
-    /// check if block is next to block
-    func isBlockNearBlock(_ block: UIView, x: Int, y: Int) -> Bool {
-        for block in sceneBuilder.blockCellOut {
-            for blockNext in sceneBuilder.blockCellOut {
-                if block.center.x == (blockNext.center.x + CGFloat(x) * blockNext.bounds.size.width) && block.center.y == (blockNext.center.y + CGFloat(y) * blockNext.bounds.size.height) {
-                    return true
-                    
+//        print(getPosition(str: matrix!, findElement: "&"))
+        let y_pos = getPosition(str: matrix!, findElement: "&")! / sceneWidth!
+        let x_pos = getPosition(str: matrix!, findElement: "&")! - sceneWidth! * y_pos
+        
+        if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
+//            print(getSymbol(x: x_pos + x, y: y_pos + y))
+            if getSymbol(x: x_pos + x, y: y_pos + y) == "%" {
+                if !moveBlock(block: getBlockToMove(player, x: x, y: y), x: x, y: y) {
+                    return
                 }
             }
+            UIView.animate(withDuration: 0.35) {
+                player.center.x += CGFloat(x) * player.bounds.size.width
+                player.center.y += CGFloat(y) * player.bounds.size.height
+                self.swapSymbol(x: x_pos, y: y_pos, x_next: x_pos + x, y_next: y_pos + y)
+            }
         }
-        return false
     }
+    
+    func isAbleToMove(x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
+        return !isWall(near: x, y: y, move_x: move_x, move_y: move_y)
+    }
+    
+    /// check if next step is wall (wall near player, wall near block)
+    func isWall(near x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
+        return getSymbol(x: x + move_x, y: y + move_y) == "#"
+    }
+    
+    /// check if next step is block (block near block)
+    func isBlock(near x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
+        return getSymbol(x: x + move_x, y: y + move_y) == "%"
+    }
+    
+    func getSymbol(x: Int, y: Int) -> String {
+        if let width = currentLevel?.scene?.width?.intValue {
+            let index = matrix.index(matrix.startIndex, offsetBy: width * y + x)
+            return String(matrix[index])
+        }
+        return ""
+    }
+    
+    func swapSymbol(x: Int, y: Int, x_next: Int, y_next: Int) {
+        if let width = currentLevel?.scene?.width?.intValue {
+            var index = matrix.index(matrix.startIndex, offsetBy: width * y + x)
+            let temp = matrix[index]
+            matrix.remove(at: index)
+            matrix.insert("0", at: index)
+//            print(getSymbol(x: x_next, y: y_next).characters.last!)
+            matrix.insert(getSymbol(x: x_next, y: y_next).characters.last!, at: index)
+            index = matrix.index(matrix.startIndex, offsetBy: width * y + x + 1)
+            matrix.remove(at: index)
+            index = matrix.index(matrix.startIndex, offsetBy: width * y_next + x_next)
+            matrix.remove(at: index)
+            matrix.insert(temp, at: index)
+        }
+    }
+    
+    func getPosition(str :String, findElement: Character, block_index: Int = 0) -> Int? {
+        var str = str
+        for (index, value) in Array(str.characters).enumerated() {
+            if value == findElement {
+                if block_index > 0 {
+                    for i in 0...index {
+                        str.remove(at: str.startIndex)
+                    }
+                    return index + 1 + getPosition(str: str, findElement: findElement, block_index: block_index - 1)!
+                }
+                return index
+            }
+        }
+        return nil
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     /**
      Moves block with direction
@@ -140,43 +187,76 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
      - Parameter x: x coordinate
      - Parameter y: y coordinate
      */
-    func moveBlock(_ player: UIImageView, x: Int, y: Int) {
-        for block in 0..<sceneBuilder.blockCellOut.count {
-            if isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
-                return
-                //FIX: player go over blocks when block is near block
-                //            } else if isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
-                //                return
-            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == sceneBuilder.blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == sceneBuilder.blockCellOut[block].center.y {
-                if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
-                    let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
-                    newBlock.isHidden = true
-                } else {
-                    sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                    sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-                    if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
-                        let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
-                        sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-                        sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
-                        UIView.animate(withDuration: 0.35) {
-                            self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                            self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-                        }
-                        delay(delay: 0.25) {
-                            newBlock.isHidden = false
-                        }
-                        return
-                    }
-                    sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-                    sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
-                }
-                UIView.animate(withDuration: 0.35) {
-                    self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-                    self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-                }
-                
+    func moveBlock(block: Int, x: Int, y: Int) -> Bool {
+        
+        let sceneWidth = currentLevel?.scene?.width?.intValue
+        var index : String.Index!
+        var block_index = -1
+        
+        for i in 0...block {
+            index = matrix?.index((matrix?.startIndex)!, offsetBy: i)
+            print(String(describing: matrix?[index]))
+            if String(describing: matrix![index]) == "%" {
+                block_index += 1
             }
         }
+        
+        
+        print(getPosition(str: matrix!, findElement: "%", block_index: block_index))
+        let y_pos = getPosition(str: matrix!, findElement: "%", block_index: block_index)! / sceneWidth!
+        let x_pos = (getPosition(str: matrix!, findElement: "%", block_index: block_index)! - sceneWidth! * y_pos)
+        
+        if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
+            UIView.animate(withDuration: 0.35) {
+                self.sceneBuilder.blockCellOut[block_index].center.x += CGFloat(x) * self.sceneBuilder.blockCellOut[block_index].bounds.size.width
+                self.sceneBuilder.blockCellOut[block_index].center.y += CGFloat(y) * self.sceneBuilder.blockCellOut[block_index].bounds.size.height
+                self.swapSymbol(x: x_pos, y: y_pos, x_next: x_pos + x, y_next: y_pos + y)
+            }
+            return true
+        } else {
+            return false
+        }
+        
+        
+        
+        
+        
+        //        for block in 0..<sceneBuilder.blockCellOut.count {
+        //            if isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
+        //                return
+        //                //FIX: player go over blocks when block is near block
+        //                //            } else if isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
+        //                //                return
+        //            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == sceneBuilder.blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == sceneBuilder.blockCellOut[block].center.y {
+        //                if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
+        //                    let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
+        //                    newBlock.isHidden = true
+        //                } else {
+        //                    sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+        //                    sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+        //                    if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
+        //                        let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
+        //                        sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+        //                        sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+        //                        UIView.animate(withDuration: 0.35) {
+        //                            self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+        //                            self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+        //                        }
+        //                        delay(delay: 0.25) {
+        //                            newBlock.isHidden = false
+        //                        }
+        //                        return
+        //                    }
+        //                    sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
+        //                    sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
+        //                }
+        //                UIView.animate(withDuration: 0.35) {
+        //                    self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
+        //                    self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
+        //                }
+        //
+        //            }
+        //        }
     }
     
     // check if block is on cell
