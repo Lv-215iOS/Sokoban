@@ -27,8 +27,9 @@ class PlaygroundController: UIViewController {
     var sceneController: SceneController? = nil
         
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "SceneController" {
+        if segue.identifier == "SceneControllerEmbed" {
             sceneController = segue.destination as? SceneController
+            sceneController?.currentLevel = currentLevel
         }
     }
     
