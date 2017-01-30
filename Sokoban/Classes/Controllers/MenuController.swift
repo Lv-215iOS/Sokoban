@@ -21,7 +21,7 @@ class MenuController: UIViewController {
     /// to open LevelsViewController
     @IBAction func menuPlayButtonTapped(_ sender: UIButton) {
     }
-    
+     
     @IBOutlet weak var menuLeaderboardButton: UIButton!
     
     /// to open leaderboardViewController

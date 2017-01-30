@@ -13,8 +13,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     //    @IBOutlet weak var background: UIScrollView!
     //    @IBOutlet weak var foreground: UIScrollView!
     
+    var currentLevel: Level?
+    
     var sceneBuilder = SceneBuilder()
-    var scrollView: UIScrollView!
+    @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var contentView: UIView!
+    @IBOutlet weak var contentWidth: NSLayoutConstraint!
+    @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
     /// take actions from PlaygroundController to start moving
     func movePlayerButtons(operation: Moves) {
@@ -39,44 +44,22 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        sceneBuilder.player.initPlayer()
-        view.addSubview(sceneBuilder.getSceneCanvas(level: (LevelsProvider.getLevels()?[4])!))
-        view.backgroundColor = UIColor.gray
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         
-        //TODO: complete ScrollView
-        //        scrollView = UIScrollView(frame: view.bounds)
-        //        scrollView.contentSize = view.bounds.size
-        //        scrollView.addSubview(view)
-        //        if view.frame.height <= scrollView.frame.height {
-        //            let shiftHeight = scrollView.frame.height/2.0 - scrollView.contentSize.height/2.0
-        //            scrollView.contentInset.top = shiftHeight
-        //        }
-        //        if view.frame.width <= scrollView.frame.width {
-        //            let shiftWidth = scrollView.frame.width/2.0 - scrollView.contentSize.width/2.0
-        //            scrollView.contentInset.left = shiftWidth
-        //        }
-        //         scrollView.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
-        //        foreground.delegate = self
+        sceneBuilder.player.initPlayer()
+        
+        let gameView = sceneBuilder.getSceneCanvas(level: currentLevel!)
+        
+        contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
+        contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
+        scrollView.layoutIfNeeded()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        gameView.center = CGPoint(x: contentWidth.constant / 2, y: contentHeight.constant / 2)
+        contentView.addSubview(gameView)
     }
-    
-    //TODO: complete ScrollView
-    //    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-    //
-    //                let foregroundHeight = foreground.contentSize.height - foreground.bounds.height
-    //                let percentageScroll = foreground.contentOffset.y / foregroundHeight
-    //                let backgroundHeight = background.contentSize.height - background.bounds.height
-    //
-    //                background.contentOffset = CGPoint(x: 0, y: backgroundHeight * percentageScroll)
-    //
-    //        let foregroundWidth = foreground.contentSize.width - foreground.bounds.width
-    //        let percentageScroll = foreground.contentOffset.x / foregroundWidth
-    //        let backgroundWidth = background.contentSize.width - background.bounds.width
-    //
-    //        background.contentOffset = CGPoint(x: backgroundWidth * percentageScroll, y: 0)
-    //
-    //    }
     
     /// animate players moves
     func animateImage(type: [UIImage]) {

@@ -62,7 +62,7 @@ class PlayersProvider: PlayersProviderInterface {
         let request = Player.fetchRequest()
         request.predicate = NSPredicate(format: "%K == %@", #keyPath(Player.name), name)
         let asynchRequst = NSAsynchronousFetchRequest<Player>(fetchRequest: request) { result in
-            if let data = result.finalResult?[0].photo {
+            if result.finalResult?.count ?? 0 > 0, let data = result.finalResult?[0].photo {
                 completionHandler(UIImage(data: data))
             }
         }
