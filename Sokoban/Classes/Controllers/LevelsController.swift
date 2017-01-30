@@ -14,9 +14,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     var levelsScoresArray = [Double]()
     
-    //TODO: Implement code for SNAPSHOT
-    
-    //var levelScene: SceneBuilder?
+    var builder = SceneBuilder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,28 +46,28 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.levelNameLabel.text = level.name
         
-        //        DispatchQueue.global(qos: .utility).async {
-        //            let levelSnapshot = self.createLevelSnapshot()
-        //
-        //            // do something time consuming here
-        //
-        //            DispatchQueue.main.async {
-        //                // now update UI on main thread
-        //                cell.levelSnapshotImage.image = levelSnapshot
-        //            }
-        //        }
+        //--------------------------------------------
+        //Snapshot:
+        
+        let view = self.builder.getSceneCanvas(level: level)
+        let image = UIImage(view: view)
+        
+        cell.levelSnapshotImage.image = image
+        
+        //--------------------------------------------
+        
         
         if indexPath.row < levelsScoresArray.count {//level score in levelScoreLabel
             let levelScore = levelsScoresArray[indexPath.row]
             cell.levelScoreLabel.text = String(describing: levelScore)
             
-                if levelScore > 0.0 {//sets correct levelStateImage
-                    cell.levelStateImage.image = UIImage(named: "levelPassedImage")
-                    cell.levelScoreLabel.textColor = UIColor.green
-                } else if levelScore == 0.0 {//sets correct levelStateImage
-                    cell.levelScoreLabel.text = "Untried"
-                    cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
-                }
+            if levelScore > 0.0 {//sets correct levelStateImage
+                cell.levelStateImage.image = UIImage(named: "levelPassedImage")
+                cell.levelScoreLabel.textColor = UIColor.green
+            } else if levelScore == 0.0 {//sets correct levelStateImage
+                cell.levelScoreLabel.text = "Untried"
+                cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
+            }
             
         } else {
             cell.levelScoreLabel.text = "Untried"
@@ -103,17 +101,16 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     
     //MARK: Additional funcs
-    
-    //CALL THIS in SEPARATE THREAD in cellForRowAt
-    
-    //    func createLevelSnapshot() -> UIImage {
     //
-    //        UIGraphicsBeginImageContext((levelScene?.scene.frame.size)!)
-    //        levelScene?.scene.layer.render(in: UIGraphicsGetCurrentContext()!)
-    //        let snapshot = UIGraphicsGetImageFromCurrentImageContext()
-    //        UIGraphicsEndImageContext()
-    //        return snapshot!
-    //        
-    //    }
+}
+
+extension UIImage {
+    convenience init(view: UIView) {
+        UIGraphicsBeginImageContext(view.frame.size)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        self.init(cgImage: (image?.cgImage)!)
+    }
     
 }
