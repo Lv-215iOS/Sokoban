@@ -34,7 +34,7 @@ class PlaygroundController: UIViewController {
     }
     
     @IBAction func MoveAction(_ sender: UIButton) {
-        sceneController?.movePlayerButtons(operation: Moves(rawValue: sender.currentTitle!)!)
+        sceneController?.movePlayerButtons(operation: Moves(rawValue: sender.tag)!)
     }
     
     
@@ -88,4 +88,6 @@ class PlaygroundController: UIViewController {
             isPlaying = true
         }
     }
+    
+    
 }
