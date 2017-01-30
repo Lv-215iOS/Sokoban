@@ -168,7 +168,7 @@ class LevelsProvider: LevelsProviderInterface {
                      order: 2,
                      sceneWidth: 7,
                      sceneHeight: 8,
-                     sceneMatrix: " ###########--##--#--##-*-*-##-&%%-##-#-####---##########")
+                     sceneMatrix: "###########--##--#--##-*-*-##-&%%-##-#-####---##########")
         addLevelWith(name: "Level 3",
                      order: 3,
                      sceneWidth: 8,
