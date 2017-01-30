@@ -34,6 +34,8 @@ class SettingsViewController: UIViewController {
     /// resets current player scores
     @IBAction func resetScoresButtonTapped(_ sender: UIButton) {
         
+        sender.highlight()
+        
         let currentPlayer = PlayersProvider.currentPlayer
         var levelsScores = Array<Any>()
         

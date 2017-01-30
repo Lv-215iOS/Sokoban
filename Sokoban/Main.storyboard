@@ -502,7 +502,7 @@
                                     <constraint firstAttribute="height" constant="40" id="BUL-jW-9e2"/>
                                     <constraint firstAttribute="width" constant="40" id="e27-bo-qPh"/>
                                 </constraints>
-                                <state key="normal" image="resetAllScoredImage"/>
+                                <state key="normal" backgroundImage="resetAllScoredImage"/>
                                 <connections>
                                     <action selector="resetScoresButtonTapped:" destination="7un-kc-RhZ" eventType="touchUpInside" id="4F4-6Z-s35"/>
                                 </connections>

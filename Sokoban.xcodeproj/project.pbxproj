@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2516B6231E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */; };
 		25327D521E3A2A0200567004 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25327D511E3A2A0200567004 /* Protocols.swift */; };
 		257F088A1E3A70F100D2FAB6 /* SceneBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257F08891E3A70F100D2FAB6 /* SceneBuilder.swift */; };
 		258AD1191E35F60100195190 /* WallCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 258AD1181E35F60100195190 /* WallCell.swift */; };
@@ -37,8 +36,11 @@
 		25DF17181E361CBD007A468A /* BlockCellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17151E361CBD007A468A /* BlockCellOut.swift */; };
 		25DF17191E361CBD007A468A /* Dot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17161E361CBD007A468A /* Dot.swift */; };
 		489755FB1E3D4A5000EAF4C2 /* CustomPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */; };
+		5108B8221E3FB568001597AE /* IUButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108B8211E3FB568001597AE /* IUButton+Highlighting.swift */; };
+		5108B8261E3FBE9D001597AE /* UIImage+ImageFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108B8251E3FBE9D001597AE /* UIImage+ImageFromView.swift */; };
+		5108B8281E3FC0BB001597AE /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108B8271E3FC0BB001597AE /* AudioPlayer.swift */; };
+		5108B82A1E3FC0CA001597AE /* CustomLevelsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108B8291E3FC0CA001597AE /* CustomLevelsTableViewCell.swift */; };
 		51E6B3D41E3BBEEB00249B3E /* backgroundMusic.wav in Resources */ = {isa = PBXBuildFile; fileRef = 51E6B3D31E3BBEEB00249B3E /* backgroundMusic.wav */; };
-		51E6B3D81E3BD55C00249B3E /* AudioPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51E6B3D71E3BD55C00249B3E /* AudioPlayer.swift */; };
 		84C12F991E36035400613C43 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C12F981E36035400613C43 /* CoreDataStack.swift */; };
 		84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */; };
 		84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7481E2F72C400FCB4C3 /* MenuController.swift */; };
@@ -86,7 +88,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLevelsTableViewCell.swift; path = Classes/Controllers/CustomLevelsTableViewCell.swift; sourceTree = "<group>"; };
 		25327D511E3A2A0200567004 /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		257F08891E3A70F100D2FAB6 /* SceneBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SceneBuilder.swift; path = Classes/Controllers/Scene/SceneBuilder.swift; sourceTree = "<group>"; };
 		258AD1181E35F60100195190 /* WallCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = WallCell.swift; path = Classes/Controllers/Scene/WallCell.swift; sourceTree = "<group>"; };
@@ -116,8 +117,11 @@
 		25DF17151E361CBD007A468A /* BlockCellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellOut.swift; path = Classes/Controllers/Scene/BlockCellOut.swift; sourceTree = "<group>"; };
 		25DF17161E361CBD007A468A /* Dot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dot.swift; path = Classes/Controllers/Scene/Dot.swift; sourceTree = "<group>"; };
 		489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPlayerCell.swift; sourceTree = "<group>"; };
+		5108B8211E3FB568001597AE /* IUButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "IUButton+Highlighting.swift"; path = "Classes/Extentions/IUButton+Highlighting.swift"; sourceTree = "<group>"; };
+		5108B8251E3FBE9D001597AE /* UIImage+ImageFromView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+ImageFromView.swift"; path = "Classes/Extentions/UIImage+ImageFromView.swift"; sourceTree = "<group>"; };
+		5108B8271E3FC0BB001597AE /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioPlayer.swift; path = Classes/AudioPlayer.swift; sourceTree = "<group>"; };
+		5108B8291E3FC0CA001597AE /* CustomLevelsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomLevelsTableViewCell.swift; path = Classes/CustomLevelsTableViewCell.swift; sourceTree = "<group>"; };
 		51E6B3D31E3BBEEB00249B3E /* backgroundMusic.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = backgroundMusic.wav; sourceTree = "<group>"; };
-		51E6B3D71E3BD55C00249B3E /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioPlayer.swift; path = Classes/Controllers/AudioPlayer.swift; sourceTree = "<group>"; };
 		84C12F981E36035400613C43 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LevelsController.swift; path = Classes/Controllers/LevelsController.swift; sourceTree = "<group>"; };
 		84C1A7481E2F72C400FCB4C3 /* MenuController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuController.swift; path = Classes/Controllers/MenuController.swift; sourceTree = "<group>"; };
@@ -220,6 +224,15 @@
 			name = Images;
 			sourceTree = "<group>";
 		};
+		5108B8231E3FB57E001597AE /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				5108B8211E3FB568001597AE /* IUButton+Highlighting.swift */,
+				5108B8251E3FBE9D001597AE /* UIImage+ImageFromView.swift */,
+			);
+			name = Extentions;
+			sourceTree = "<group>";
+		};
 		51E6B3D01E3BA10600249B3E /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -232,6 +245,9 @@
 		84C1A7431E2F724300FCB4C3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				5108B8271E3FC0BB001597AE /* AudioPlayer.swift */,
+				5108B8291E3FC0CA001597AE /* CustomLevelsTableViewCell.swift */,
+				5108B8231E3FB57E001597AE /* Extentions */,
 				84C1A75A1E2F74D300FCB4C3 /* DataProviders */,
 				84C1A74B1E2F72C900FCB4C3 /* Controller */,
 				84C1A7441E2F724B00FCB4C3 /* Scene */,
@@ -260,13 +276,11 @@
 			children = (
 				489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */,
 				84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */,
-				2516B6221E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift */,
 				84C1A7481E2F72C400FCB4C3 /* MenuController.swift */,
 				84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */,
 				8B359E4F1E30D0F7004646EC /* FirstLaunchViewController.swift */,
 				8B359E511E30D492004646EC /* LeaderboardViewController.swift */,
 				8B359E531E30D503004646EC /* SettingsViewController.swift */,
-				51E6B3D71E3BD55C00249B3E /* AudioPlayer.swift */,
 				8B359E551E30D662004646EC /* AboutViewController.swift */,
 				8B359E571E30D71A004646EC /* PlayersViewController.swift */,
 				8B29382E1E389850004E0ECA /* LaunchScreenViewController.swift */,
@@ -521,7 +535,6 @@
 				84C1A75E1E2F74F800FCB4C3 /* PlaygroundController.swift in Sources */,
 				8B359E581E30D71A004646EC /* PlayersViewController.swift in Sources */,
 				8BE4622F1E32091200F1E8D4 /* Player+CoreDataClass.m in Sources */,
-				2516B6231E378E4B00A6DA41 /* CustomLevelsTableViewCell.swift in Sources */,
 				84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */,
 				258AD1191E35F60100195190 /* WallCell.swift in Sources */,
 				84C1A74D1E2F72E500FCB4C3 /* SceneController.swift in Sources */,
@@ -529,7 +542,6 @@
 				8BE462341E32091300F1E8D4 /* Scene+CoreDataProperties.m in Sources */,
 				84C1A74A1E2F72C400FCB4C3 /* MenuController.swift in Sources */,
 				84C1A7491E2F72C400FCB4C3 /* LevelsController.swift in Sources */,
-				51E6B3D81E3BD55C00249B3E /* AudioPlayer.swift in Sources */,
 				8BE462361E3210E000F1E8D4 /* PlayerCell.swift in Sources */,
 				25DF17191E361CBD007A468A /* Dot.swift in Sources */,
 				8B359E501E30D0F7004646EC /* FirstLaunchViewController.swift in Sources */,
@@ -541,13 +553,17 @@
 				257F088A1E3A70F100D2FAB6 /* SceneBuilder.swift in Sources */,
 				25DF17181E361CBD007A468A /* BlockCellOut.swift in Sources */,
 				8B359E521E30D492004646EC /* LeaderboardViewController.swift in Sources */,
+				5108B8221E3FB568001597AE /* IUButton+Highlighting.swift in Sources */,
 				84C1A7511E2F734500FCB4C3 /* RootController.swift in Sources */,
 				8BE462321E32091200F1E8D4 /* Level+CoreDataProperties.m in Sources */,
 				8BE462331E32091300F1E8D4 /* Scene+CoreDataClass.m in Sources */,
 				8B2794B51E2E5F8600A93642 /* AppDelegate.swift in Sources */,
 				25D28FD11E3674EF009115D7 /* FloorCell.swift in Sources */,
+				5108B8281E3FC0BB001597AE /* AudioPlayer.swift in Sources */,
 				84C12F991E36035400613C43 /* CoreDataStack.swift in Sources */,
+				5108B8261E3FBE9D001597AE /* UIImage+ImageFromView.swift in Sources */,
 				8B359E561E30D662004646EC /* AboutViewController.swift in Sources */,
+				5108B82A1E3FC0CA001597AE /* CustomLevelsTableViewCell.swift in Sources */,
 				8BE462301E32091200F1E8D4 /* Player+CoreDataProperties.m in Sources */,
 				8B359E541E30D503004646EC /* SettingsViewController.swift in Sources */,
 				8BE462311E32091200F1E8D4 /* Level+CoreDataClass.m in Sources */,

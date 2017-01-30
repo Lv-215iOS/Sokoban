@@ -39,6 +39,8 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "levelsTableViewCell", for: indexPath) as! CustomLevelsTableViewCell
         
+        
+        
         guard let level = LevelsProvider.getLevels()?[indexPath.row]
             else {
                 return cell
@@ -99,18 +101,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         }
     }
-    
-    //MARK: Additional funcs
-    //
+
 }
 
-extension UIImage {
-    convenience init(view: UIView) {
-        UIGraphicsBeginImageContext(view.frame.size)
-        view.layer.render(in: UIGraphicsGetCurrentContext()!)
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        self.init(cgImage: (image?.cgImage)!)
-    }
-    
-}
+
