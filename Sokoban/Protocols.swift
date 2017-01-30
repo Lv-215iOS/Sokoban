@@ -24,7 +24,7 @@ protocol SceneControllerInterface {
 protocol SceneBuilderInterface {
     func getSceneCanvas(level: Level) -> UIView
 }
-
+ 
 protocol PlayersProviderInterface {
     static var fetchedResultController : NSFetchedResultsController<Player> { get }
     static var currentPlayer : Player? { get }
@@ -37,7 +37,7 @@ protocol PlayersProviderInterface {
                               levelsScores: NSArray,
                               photo: UIImage)
 }
-  
+
 protocol LevelsProviderInterface {
     static func getLevels() -> [Level]?
     static func addDefaultLevels()
