@@ -37,7 +37,7 @@ protocol PlayersProviderInterface {
                               levelsScores: NSArray,
                               photo: UIImage)
 }
-  
+   
 protocol LevelsProviderInterface {
     static func getLevels() -> [Level]?
     static func addDefaultLevels()
