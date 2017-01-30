@@ -106,22 +106,18 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="t2Z-Zy-sWs"/>
-                                <exclude reference="xX0-t9-Bl8"/>
                                 <exclude reference="Ayc-EK-aVx"/>
                                 <exclude reference="LXx-bg-opT"/>
                                 <exclude reference="Ssa-Jz-GqT"/>
                                 <exclude reference="YFg-km-hHK"/>
-                                <exclude reference="G0w-mN-w3n"/>
+                                <exclude reference="t2Z-Zy-sWs"/>
+                                <exclude reference="xX0-t9-Bl8"/>
                                 <exclude reference="qfI-EQ-x4H"/>
+                                <exclude reference="G0w-mN-w3n"/>
                             </mask>
                         </variation>
                         <variation key="heightClass=compact">
                             <mask key="constraints">
-                                <exclude reference="YL9-xb-Lyw"/>
-                                <include reference="t2Z-Zy-sWs"/>
-                                <exclude reference="tQy-qD-x2L"/>
-                                <include reference="xX0-t9-Bl8"/>
                                 <exclude reference="3KL-eY-u6T"/>
                                 <include reference="Ayc-EK-aVx"/>
                                 <include reference="LXx-bg-opT"/>
@@ -130,10 +126,14 @@
                                 <include reference="YFg-km-hHK"/>
                                 <exclude reference="euA-wT-6R1"/>
                                 <exclude reference="iTc-i3-u8I"/>
-                                <include reference="G0w-mN-w3n"/>
-                                <exclude reference="jmr-XP-lc7"/>
+                                <exclude reference="YL9-xb-Lyw"/>
+                                <include reference="t2Z-Zy-sWs"/>
+                                <exclude reference="tQy-qD-x2L"/>
+                                <include reference="xX0-t9-Bl8"/>
                                 <exclude reference="l2U-9V-8ti"/>
                                 <include reference="qfI-EQ-x4H"/>
+                                <include reference="G0w-mN-w3n"/>
+                                <exclude reference="jmr-XP-lc7"/>
                             </mask>
                         </variation>
                     </view>
@@ -184,7 +184,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kig-NO-xm7">
-                                                    <rect key="frame" x="12" y="4" width="70" height="70"/>
+                                                    <rect key="frame" x="12" y="3" width="70" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="70" id="SrK-aG-ocg"/>
                                                         <constraint firstAttribute="width" constant="70" id="ulm-4Q-wcN"/>
@@ -481,7 +481,7 @@
                                     <constraint firstAttribute="width" constant="49" id="Rwe-Ip-7sA"/>
                                     <constraint firstAttribute="height" constant="31" id="jAc-q2-rkz"/>
                                 </constraints>
-                                <color key="onTintColor" red="0.63451522435897434" green="0.34365335796228819" blue="0.17937994909294641" alpha="0.89000000000000001" colorSpace="calibratedRGB"/>
+                                <color key="onTintColor" red="0.49845753205128207" green="0.2699645305817085" blue="0.14091590444450786" alpha="0.89000000000000001" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="switchSoundChanged:" destination="7un-kc-RhZ" eventType="valueChanged" id="SmW-kr-Hsv"/>
                                 </connections>
@@ -508,7 +508,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="0.56862745100000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="K1e-ge-l2i" firstAttribute="top" secondItem="zoe-jM-MHx" secondAttribute="bottom" constant="31" id="9BD-f9-bns"/>
                             <constraint firstItem="ERI-2F-KgT" firstAttribute="leading" secondItem="Kde-sY-FCl" secondAttribute="leading" constant="16" id="9bc-FV-3U4"/>
@@ -636,7 +636,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="TjD-4d-48J" id="w4l-Ce-Ubx">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="76"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="3gM-Ug-Zel">
