@@ -64,7 +64,7 @@ extension PlayersViewController: UITableViewDataSource {
             playerCell.accessoryType = .none
         }
         PlayersProvider.asynchGetPhotoForPlayer(player.name!) { (image) in
-            DispatchQueue.main.sync {
+            DispatchQueue.main.async {
                 playerCell.playerImageView.image = image
                 playerCell.removeActivityIndicator()
             }
@@ -132,12 +132,12 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
         playersTableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        if type == .update {
-            let cell = playersTableView.cellForRow(at: indexPath!) as! CustomPlayerCell
-            cell.playerImageView.image = UIImage(data: PlayersProvider.fetchedResultController.object(at: indexPath!).photo!)
-        }
-    }
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        if type == .update {
+//            let cell = playersTableView.cellForRow(at: indexPath!) as! CustomPlayerCell
+//            cell.playerImageView.image = UIImage(data: PlayersProvider.fetchedResultController.object(at: indexPath!).photo!)
+//        }
+//    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         playersTableView.endUpdates()
