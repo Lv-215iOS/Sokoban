@@ -24,9 +24,6 @@ class SceneBuilder : UIView, SceneBuilderInterface {
     var sceneWidth = 0
     var sceneHeight = 0
     
-    var rectX = 0
-    var rectY = 0
-    
     var scene: UIView? = nil
     func getSceneCanvas(level: Level) -> UIView {
         
@@ -34,8 +31,6 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         sceneHeight = level.scene?.height as! Int
         var levelStr = level.scene?.matrix
         let levelData = levelStr?.characters.map { String($0) }
-        
-        ///FIX: set background of scene to gray
         
         scene = UIView(frame: CGRect(x: 0, y: 0, width: sceneWidth * dimensionOfCell, height: sceneHeight * dimensionOfCell))
         scene?.backgroundColor = UIColor.gray
@@ -50,22 +45,22 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         for levelItem in levelData! {
             switch levelItem {
             case "#":
-                drawWall(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("#", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+                drawWall(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                coordsOfCell.append(("#", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "-":
-                //drawFloor(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("-", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+                //drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                coordsOfCell.append(("-", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "*":
-                drawDot(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                drawBlockCellIn(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("*", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+                drawDot(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                drawBlockCellIn(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                coordsOfCell.append(("*", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "%":
-                drawBlockCellOut(frame: CGRect(x: rectX + dimensionOfCell * countWidth, y: rectY + dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("%", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+                drawBlockCellOut(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+                coordsOfCell.append(("%", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "&":
-                playerCoordX = rectX + dimensionOfCell * countWidth
-                playerCoordY = rectY + dimensionOfCell * countHeight
-                coordsOfCell.append(("&", rectX + dimensionOfCell * countWidth, rectY + dimensionOfCell * countHeight))
+                playerCoordX = dimensionOfCell * countWidth
+                playerCoordY = dimensionOfCell * countHeight
+                coordsOfCell.append(("&", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             default:
                 break
             }
