@@ -73,6 +73,14 @@ class MenuController: UIViewController {
         menuAboutButton.clipsToBounds = true
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        let image = PlayersProvider.currentPlayer?.photo
+        
+        userListButton.setImage(UIImage(data: (image! )), for: .normal)
+    }
+    
     override func viewDidLayoutSubviews() {
         configureButton()
     }
