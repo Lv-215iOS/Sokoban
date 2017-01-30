@@ -9,11 +9,11 @@
 import Foundation
 import UIKit
 
-enum Moves: String {
-    case Left = "👈"
-    case Right = "👉"
-    case Down = "👇🏿"
-    case Up = "👆"
+enum Moves: Int {
+    case Left = 1
+    case Right = 2
+    case Down = 3
+    case Up = 4
 }
 
 protocol SceneControllerInterface {
