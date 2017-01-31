@@ -284,7 +284,6 @@
                                 <state key="normal" title="⏸"/>
                                 <connections>
                                     <action selector="pauseTapped:" destination="QUR-DB-LXs" eventType="touchUpInside" id="m4V-Qj-pjj"/>
-                                    <action selector="playPauseTapped:" destination="QUR-DB-LXs" eventType="touchUpInside" id="dei-NL-OYM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkT-Xe-KGV">
