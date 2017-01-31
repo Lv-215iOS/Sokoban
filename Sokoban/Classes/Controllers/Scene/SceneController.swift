@@ -9,11 +9,9 @@
 import UIKit
 
 class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface, GameLogic {
-    //TODO: complete ScrollView
-    //    @IBOutlet weak var background: UIScrollView!
-    //    @IBOutlet weak var foreground: UIScrollView!
     
     var currentLevel: Level?
+    var resetMatrix: String!
     var matrix: String!
     var indexBlock: [Int] = []
     var temp = 0
@@ -46,13 +44,17 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     /// take action from PlaygroundController to restart level
     func restartLevel() {
+        matrix = resetMatrix
+        indexBlock = []
+        temp = 0
         self.viewDidAppear(true)
+        self.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        sceneBuilder.player.initPlayer()
+//        sceneBuilder.player.initPlayer()
         
         let gameView = sceneBuilder.getSceneCanvas(level: currentLevel!)
         
@@ -66,6 +68,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     override func viewDidLoad() {
         matrix = currentLevel?.scene?.matrix
+        resetMatrix = matrix
         for i in 0..<matrix.characters.count {
             let index = matrix.index(matrix.startIndex, offsetBy: i)
             print("mrx = \(matrix[index])")
@@ -321,11 +324,4 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         _ = navigationController?.popToRootViewController(animated: true)
         return true
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if segue.identifier == "" {
-//            pla = segue.destination as? LevelsController
-//            levelController = currentLevel
-//        }
-//    }
 }
