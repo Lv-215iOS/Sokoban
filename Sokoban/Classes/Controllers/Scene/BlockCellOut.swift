@@ -2,7 +2,7 @@
 //  BlockCell.swift
 //  Sokoban
 //
-//  Created by adminaccount on 1/20/17.
+//  Created by Dmytro on 1/20/17.
 //
 //
 

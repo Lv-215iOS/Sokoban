@@ -33,7 +33,9 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         let levelData = levelStr?.characters.map { String($0) }
         
         scene = UIView(frame: CGRect(x: 0, y: 0, width: sceneWidth * dimensionOfCell, height: sceneHeight * dimensionOfCell))
-        scene?.backgroundColor = UIColor.gray
+//        scene?.backgroundColor = UIColor.gray
+        
+        
         
         var playerCoordX: Int = 0
         var playerCoordY: Int = 0
@@ -41,14 +43,25 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         
         var countWidth = 0
         var countHeight = 0
+        for levelItem in levelData! {
+            drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
+            countWidth += 1
+            if countWidth == sceneWidth {
+                countWidth = 0
+                countHeight += 1
+            }
+            i += 1
+        }
+         countWidth = 0
+         countHeight = 0
         
         for levelItem in levelData! {
+//            drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
             switch levelItem {
             case "#":
                 drawWall(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 coordsOfCell.append(("#", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "-":
-                //drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 coordsOfCell.append(("-", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "*":
                 drawDot(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
