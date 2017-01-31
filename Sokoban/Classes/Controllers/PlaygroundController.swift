@@ -31,7 +31,7 @@ class PlaygroundController: UIViewController {
     
     
     var sceneController: SceneController? = nil
-        
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SceneControllerEmbed" {
             sceneController = segue.destination as? SceneController
@@ -79,12 +79,13 @@ class PlaygroundController: UIViewController {
             isPlaying = false
         }
         calculateScore()
+        PlayersProvider.setLevelScoreForCurrentPlayer(level: currentLevel!, score: score)
     }
-
+    
     func calculateScore() {
         score = ((minTime/timeInSecs)*(minMoves/Double(movesCount))) * 100
     }
-
+    
     func updateTime() {
         time += 1
         let minutes = Int(time) / 60 % 60

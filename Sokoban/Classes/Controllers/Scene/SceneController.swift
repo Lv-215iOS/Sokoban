@@ -268,7 +268,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                     //                let sender: UIButton
                     //                PlaygroundController.pauseTapped(sender)
                     let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
-                    var number: Int = self.currentLevel!.order!.intValue + 1
+                    let number: Int = self.currentLevel!.order!.intValue + 1
                     let NextLevelAction = UIAlertAction(title: "level \(number)", style: .default) { (_) in
 //                        self.playgroundController.ifTheEndOfLevel()
                         
