@@ -160,52 +160,52 @@ class LevelsProvider: LevelsProviderInterface {
     */
     static func addDefaultLevels() {
         addLevelWith(name: "Level 1",
-                     order: 1,
+                     order: 0,
                      sceneWidth: 10,
                      sceneHeight: 5,
                      sceneMatrix: "###########--#--#--##---&----##-*--%---###########")
         addLevelWith(name: "Level 2",
-                     order: 2,
+                     order: 1,
                      sceneWidth: 7,
                      sceneHeight: 8,
                      sceneMatrix: "###########--##--#--##-*-*-##-&%%-##-#-####---##########")
         addLevelWith(name: "Level 3",
-                     order: 3,
+                     order: 2,
                      sceneWidth: 8,
                      sceneHeight: 8,
                      sceneMatrix: "#########---#--##-#-#%*##----%*##-#-#%*##---#--######&-#########")
         addLevelWith(name: "Level 4",
-                     order: 4,
+                     order: 3,
                      sceneWidth: 8,
                      sceneHeight: 8,
                      sceneMatrix: "#########----####-##-####--%---##%*%-%-##&*##%###**---##########")
         addLevelWith(name: "Level 5",
-                     order: 5,
+                     order: 4,
                      sceneWidth: 9,
                      sceneHeight: 8,
                      sceneMatrix: "###########--######--%%---##&%--*-######*#*####-%-*--###-----###########")
         addLevelWith(name: "Level 6",
-                     order: 6,
+                     order: 5,
                      sceneWidth: 7,
                      sceneHeight: 11,
                      sceneMatrix: "#########--*-##--*#-##&--*-###-##-###-%--###-%--###-#%-###-%-####----########")
         addLevelWith(name: "Level 7",
-                     order: 7,
+                     order: 6,
                      sceneWidth: 6,
                      sceneHeight: 9,
                      sceneMatrix: "########---##--%-##&%--####-###****##-%%-###---#######")
         addLevelWith(name: "Level 8",
-                     order: 8,
+                     order: 7,
                      sceneWidth: 8,
                      sceneHeight: 12,
                      sceneMatrix: "##########----###--%---##-%%%#&##-%--#####-%-#*#####-#*##-----*##-#---*##-##%#*##----**#########")
         addLevelWith(name: "Level 9",
-                     order: 9,
+                     order: 8,
                      sceneWidth: 8,
                      sceneHeight: 10,
                      sceneMatrix: "#########----&-##-%--#-####%##-###-*-%-###-*-#-####**%-#####*%-#######-#########")
         addLevelWith(name: "Level 10",
-                     order: 10,
+                     order: 9,
                      sceneWidth: 12,
                      sceneHeight: 11,
                      sceneMatrix: "#################-----###-**#-###-###-*##------###--#--#---###--&-###%-###--#--#---####-#---%-#####---%-#--####---##################")
