@@ -102,6 +102,7 @@ UINavigationControllerDelegate {
     }
     
     override func viewDidLoad() {
+        
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FirstLaunchViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
         super.viewDidLoad()
