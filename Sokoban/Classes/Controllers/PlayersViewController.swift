@@ -14,8 +14,8 @@ class PlayersViewController: UIViewController {
     fileprivate let playerCellIdentifier = "playerCellReuseIdentifier"
     fileprivate let playersResultsController = PlayersProvider.fetchedResultController
     /// Index for selected player cell
-    var selectedIndex: Int = 1
-
+    fileprivate var selectedIndex: Int = 1
+    
     // MARK: - IBOutlets
     @IBOutlet weak var playersTableView: UITableView!
     
@@ -33,7 +33,7 @@ class PlayersViewController: UIViewController {
     }
     
     // MARK: - IBActions
-    /// adding player alert appears 
+    /// adding player alert appears
     @IBAction func addNewPlayerButtonTapped(_ sender: UIButton) {
     }
     
@@ -70,35 +70,26 @@ extension PlayersViewController: UITableViewDataSource {
             }
         }
         playerCell.playerName.text = player.name
-        if let playerScore = player.score?.stringValue {
-            playerCell.playerScore.text = "score - " + playerScore
+        if let playerScore = player.score {
+            playerCell.playerScore.text = "score - " + playerScore.stringValue
         }
         return playerCell
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        let path = IndexPath(row: 0, section: 0)
-        guard let playerToRemove = PlayersProvider.getPlayers()?[indexPath.row],
-              let firstCell = tableView.cellForRow(at: path) as? CustomPlayerCell,
-              let firstCellText = firstCell.playerName.text,
-              let currentCellText = (tableView.cellForRow(at: indexPath) as? CustomPlayerCell)?.playerName.text,
-              editingStyle == .delete else {
-                return
+        guard editingStyle == .delete else {
+            return
         }
         // If deleting last player in table, present alert
-        if tableView.numberOfRows(inSection: 0) == 1 {
+        if playersTableView.numberOfRows(inSection: 0) == 1 {
             let alert = UIAlertController(title: "Can't delete last user", message: nil, preferredStyle: .alert)
             let ok = UIAlertAction(title: "OK", style: .cancel, handler: { (action) in })
             alert.addAction(ok)
             present(alert, animated: true)
             return
         }
-        if PlayersProvider.currentPlayer?.name == currentCellText {
-            firstCell.accessoryType = .checkmark
-            PlayersProvider.setCurrentPlayerWith(name: firstCellText)
-        }
+        let playerToRemove = PlayersProvider.fetchedResultController.object(at: indexPath)
         PlayersProvider.deletePlayer(playerToRemove)
-        //playersTableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -111,7 +102,7 @@ extension PlayersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let currentSelectedCell = tableView.cellForRow(at: indexPath) as? CustomPlayerCell,
-              let checkedCell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) else {
+            let checkedCell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) else {
                 return
         }
         currentSelectedCell.accessoryType = .checkmark
@@ -132,16 +123,57 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
         playersTableView.beginUpdates()
     }
     
-//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-//        if type == .update {
-//            let cell = playersTableView.cellForRow(at: indexPath!) as! CustomPlayerCell
-//            cell.playerImageView.image = UIImage(data: PlayersProvider.fetchedResultController.object(at: indexPath!).photo!)
-//        }
-//    }
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        switch type {
+        case .insert:
+            CoreDataStack.sharedStack.saveContext()
+            playersTableView.insertRows(at: [newIndexPath!], with: .automatic)
+            let player = PlayersProvider.fetchedResultController.object(at: newIndexPath!)
+            guard let cell = playersTableView.cellForRow(at: newIndexPath!) as? CustomPlayerCell,
+                let playerName = player.name,
+                let playerScore = player.score else {
+                    break
+            }
+            PlayersProvider.asynchGetPhotoForPlayer(playerName) { (image) in
+                DispatchQueue.main.async {
+                    cell.playerImageView.image = image
+                    cell.removeActivityIndicator()
+                }
+            }
+            cell.playerName.text = playerName
+            cell.playerScore.text = "score - " + playerScore.stringValue
+            selectedIndex = newIndexPath!.row
+            
+        case .delete:
+            let path = IndexPath(row: 0, section: 0)
+            guard let firstCell = playersTableView.cellForRow(at: path) as? CustomPlayerCell,
+                let player = PlayersProvider.currentPlayer,
+                let firstCellText = firstCell.playerName.text,
+                let currentCellText = (playersTableView.cellForRow(at: indexPath!) as? CustomPlayerCell)?.playerName.text else {
+                    return
+            }
+            if player.name == currentCellText {
+                if indexPath == IndexPath(row: 0, section: 0) {
+                    if let secondCell = playersTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? CustomPlayerCell,
+                        let secondCellText = secondCell.playerName.text {
+                        secondCell.accessoryType = .checkmark
+                        PlayersProvider.setCurrentPlayerWith(name: secondCellText)
+                    }
+                } else {
+                    firstCell.accessoryType = .checkmark
+                    PlayersProvider.setCurrentPlayerWith(name: firstCellText)
+                }
+                selectedIndex = 0
+            }
+            playersTableView.deleteRows(at: [indexPath!], with: .automatic)
+        default:
+            break
+        }
+    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         playersTableView.endUpdates()
     }
     
 }
-

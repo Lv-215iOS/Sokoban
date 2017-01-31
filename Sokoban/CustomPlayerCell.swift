@@ -31,7 +31,7 @@ class CustomPlayerCell: UITableViewCell {
     }
     
     // MARK: - Internal
-    /// Remaves Activity Indicator from playerImageView
+    /// Remaves activity indicator from playerImageView
     func removeActivityIndicator() {
         activity.removeFromSuperview()
     }
