@@ -48,7 +48,6 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.levelNameLabel.text = level.name
         
-        
         //--------------------------------------------
         //Snapshot:
         
@@ -62,7 +61,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if indexPath.row < levelsScoresArray.count {//level score in levelScoreLabel
             let levelScore = levelsScoresArray[indexPath.row]
-            cell.levelScoreLabel.text = String(describing: String(format: "%.2f",  levelScore))
+            cell.levelScoreLabel.text = String(describing: levelScore)
             
             if levelScore > 0.0 {//sets correct levelStateImage
                 cell.levelStateImage.image = UIImage(named: "levelPassedImage")
@@ -101,7 +100,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
             
         }
     }
-    
+
 }
 
 

@@ -23,19 +23,13 @@ class PlaygroundController: UIViewController {
     var time = 0
     var movesCount = 0
     
-    var minMoves = 1.0
-    var minTime = 1.0
-    var timeInSecs = 0.0
-    var score = 0.0
-    
     
     var sceneController: SceneController? = nil
-    
+        
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SceneControllerEmbed" {
             sceneController = segue.destination as? SceneController
             sceneController?.currentLevel = currentLevel
-            sceneController?.playgroundController = self
         }
     }
     
@@ -89,7 +83,6 @@ class PlaygroundController: UIViewController {
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         timeLabel.text = String(format:"%02i:%02i", minutes, seconds)
-        timeInSecs = Double(minutes * 60 + seconds)
     }
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {

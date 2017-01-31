@@ -71,10 +71,16 @@ UINavigationControllerDelegate {
     }
     
     @IBAction func CameraAction(_ sender: UIButton) {
+         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) {
         let picker = UIImagePickerController()
         picker.delegate = self
         picker.sourceType = .camera
         self.present(picker, animated: true, completion: nil)
+         } else {
+            let ac = UIAlertController(title: "Source Not Available", message: "The camera is not available.", preferredStyle: .alert)
+            ac.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+            present(ac, animated: true, completion: nil)
+        }
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {

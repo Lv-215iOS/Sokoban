@@ -32,6 +32,7 @@ protocol PlayersProviderInterface {
     static func deletePlayer(_ player : Player)
     static func getPlayers() -> [Player]?
     static func saveCurrentPlayer()
+    static func setLevelScoreForCurrentPlayer(level: Level, score: Double)
     static func addPlayerWith(name : String,
                               score : NSNumber,
                               levelsScores: NSArray,
