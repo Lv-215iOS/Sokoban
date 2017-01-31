@@ -62,7 +62,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if indexPath.row < levelsScoresArray.count {//level score in levelScoreLabel
             let levelScore = levelsScoresArray[indexPath.row]
-            cell.levelScoreLabel.text = String(describing: levelScore)
+            cell.levelScoreLabel.text = String(describing: String(format: "%.2f",  levelScore))
             
             if levelScore > 0.0 {//sets correct levelStateImage
                 cell.levelStateImage.image = UIImage(named: "levelPassedImage")
