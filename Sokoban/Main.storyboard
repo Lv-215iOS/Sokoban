@@ -284,7 +284,6 @@
                                 <state key="normal" title="⏸"/>
                                 <connections>
                                     <action selector="pauseTapped:" destination="QUR-DB-LXs" eventType="touchUpInside" id="m4V-Qj-pjj"/>
-                                    <action selector="playPauseTapped:" destination="QUR-DB-LXs" eventType="touchUpInside" id="dei-NL-OYM"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TkT-Xe-KGV">
@@ -897,9 +896,11 @@
                         <outlet property="contentView" destination="36c-sj-dhK" id="0Ha-8A-pzJ"/>
                         <outlet property="contentWidth" destination="3jW-M3-yNE" id="IwT-Ko-hRz"/>
                         <outlet property="scrollView" destination="vEL-cC-p8M" id="5C9-y7-KLj"/>
+                        <segue destination="DAS-in-Kwe" kind="unwind" identifier="unwindToMenu" unwindAction="unwindToMenuWithSegue:" id="A3y-9s-sz8"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="frg-XU-036" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="DAS-in-Kwe" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="3911" y="-146"/>
         </scene>

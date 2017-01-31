@@ -48,6 +48,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         cell.levelNameLabel.text = level.name
         
+        
         //--------------------------------------------
         //Snapshot:
         
@@ -86,8 +87,10 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.deselectRow(at: indexPath, animated: true)//highlights for a second
         
         let chosenLevel = LevelsProvider.getLevels()?[indexPath.row]
+        let levelIndex = indexPath.row
         
-        performSegue(withIdentifier: "segueToPlaygroundVC", sender: chosenLevel)
+        let arrayWithLevelInfo = [chosenLevel!, levelIndex] as [Any]
+        performSegue(withIdentifier: "segueToPlaygroundVC", sender: arrayWithLevelInfo)
         
     }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -95,13 +98,13 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         if segue.identifier == "segueToPlaygroundVC" {
             
             let playgroundController: PlaygroundController = (segue.destination as? PlaygroundController)!
-            let chosenLevel = sender as? Level
-            playgroundController.currentLevel = chosenLevel
-            print(chosenLevel?.name ?? "error")
+            let arrayWithLevelAndIndex = sender as? Array<Any>
+            playgroundController.currentLevel = arrayWithLevelAndIndex?[0] as? Level
+            playgroundController.currentIndex = arrayWithLevelAndIndex?[1] as? Int
             
         }
     }
-
+    
 }
 
 
