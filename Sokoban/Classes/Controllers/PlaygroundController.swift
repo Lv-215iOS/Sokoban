@@ -36,6 +36,7 @@ class PlaygroundController: UIViewController {
         if segue.identifier == "SceneControllerEmbed" {
             sceneController = segue.destination as? SceneController
             sceneController?.currentLevel = currentLevel
+            sceneController?.playgroundController = self
         }
     }
     

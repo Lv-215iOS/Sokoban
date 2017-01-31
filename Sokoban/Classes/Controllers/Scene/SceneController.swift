@@ -17,6 +17,8 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     var matrix: String!
     var indexBlock: [Int] = []
     var temp = 0
+    var levelController: LevelsController? = nil
+    var playgroundController: PlaygroundController? = nil
     
     var sceneBuilder = SceneBuilder()
     @IBOutlet weak var scrollView: UIScrollView!
@@ -259,11 +261,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             print(sceneBuilder.blockCellIn[0].isHidden)
             delay(delay: 1) {
                 if self.isFinish() {
+                    self.playgroundController?.ifTheEndOfLevel()
                     //                let sender: UIButton
                     //                PlaygroundController.pauseTapped(sender)
-                    let alert = UIAlertController(title: "Congratulations", message: "Next level?", preferredStyle: .alert)
+                    let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
                     var number: Int = self.currentLevel!.order!.intValue + 1
                     let NextLevelAction = UIAlertAction(title: "level \(number)", style: .default) { (_) in
+//                        self.playgroundController.ifTheEndOfLevel()
                         
 //
                     }
@@ -317,4 +321,11 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         _ = navigationController?.popToRootViewController(animated: true)
         return true
     }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if segue.identifier == "" {
+//            pla = segue.destination as? LevelsController
+//            levelController = currentLevel
+//        }
+//    }
 }
