@@ -54,7 +54,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        sceneBuilder.player.initPlayer()
+     sceneBuilder.player.initPlayer()
         
         let gameView = sceneBuilder.getSceneCanvas(level: currentLevel!)
         
@@ -191,12 +191,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         }
         return nil
     }
-    
-    
-    
-    
-    
-    
+
     /**
      Moves block with direction
      
@@ -289,9 +284,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         } else {
             return false
         }
-        
-        
-        
         
             }
     
