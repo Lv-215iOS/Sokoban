@@ -2,7 +2,7 @@
 //  FloorCell.swift
 //  Sokoban
 //
-//  Created by adminaccount on 1/23/17.
+//  Created by Dmytro on 1/23/17.
 //
 //
 

@@ -63,10 +63,10 @@ extension PlayersViewController: UITableViewDataSource {
         } else {
             playerCell.accessoryType = .none
         }
-        PlayersProvider.asynchGetPhotoForPlayer(player.name!) { [weak playerCell] (image) in
+        PlayersProvider.asynchGetPhotoForPlayer(player.name!) { (image) in
             DispatchQueue.main.async {
-                playerCell?.removeActivityIndicator()
-                playerCell?.playerImageView.image = image
+                playerCell.playerImageView.image = image
+                playerCell.removeActivityIndicator()
             }
         }
         playerCell.playerName.text = player.name
@@ -132,19 +132,12 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
         playersTableView.beginUpdates()
     }
     
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-        if type == .update {
-            let cell = playersTableView.cellForRow(at: indexPath!) as! CustomPlayerCell
-            cell.playerImageView.image = UIImage(data: PlayersProvider.fetchedResultController.object(at: indexPath!).photo!)
-        }
-        if type == .insert {
-            playersTableView.insertRows(at: [newIndexPath!], with: .automatic)
-        }
-        if type == .delete {
-            playersTableView.deleteRows(at: [indexPath!], with: .automatic)
-        }
-
-    }
+//    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+//        if type == .update {
+//            let cell = playersTableView.cellForRow(at: indexPath!) as! CustomPlayerCell
+//            cell.playerImageView.image = UIImage(data: PlayersProvider.fetchedResultController.object(at: indexPath!).photo!)
+//        }
+//    }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         playersTableView.endUpdates()

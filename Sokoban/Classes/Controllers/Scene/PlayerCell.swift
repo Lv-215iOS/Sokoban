@@ -2,7 +2,7 @@
 //  PlayerCell.swift
 //  Sokoban
 //
-//  Created by pasik_01 on 20.01.17.
+//  Created by Dmytro on 20.01.17.
 //
 //
 

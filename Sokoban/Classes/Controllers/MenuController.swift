@@ -64,6 +64,15 @@ class MenuController: UIViewController {
         menuAboutButton.layer.cornerRadius = 0.5 * menuPlayButton.bounds.size.width
         menuAboutButton.clipsToBounds = true
     }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        userListButton.layer.cornerRadius = 0.5 * userListButton.bounds.size.width
+        userListButton.clipsToBounds = true
+        
+        let image = PlayersProvider.currentPlayer?.photo
+        
+        userListButton.setBackgroundImage(UIImage(data: (image! )), for: .normal)
+    }
     
     override func viewDidLayoutSubviews() {
         configureButton()

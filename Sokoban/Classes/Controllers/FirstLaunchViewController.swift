@@ -36,7 +36,19 @@ UINavigationControllerDelegate {
     
     /// to open MenuViewController and change nickname
     @IBAction func createNewPlayerButtonTapped(_ sender: UIButton) {
-        PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:imageDisplay.image!)
+        if addPlayerTextField.text == "" {
+            let alert = UIAlertController(title: "No player name", message: "Please, enter player name", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            
+        }
+        if imageDisplay.image != nil {
+            PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:imageDisplay.image!)
+            PlayersProvider.setCurrentPlayerWith(name: addPlayerTextField.text!)
+        } else {
+            PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:#imageLiteral(resourceName: "down1.png"))
+            PlayersProvider.setCurrentPlayerWith(name: addPlayerTextField.text!)
+        }
         
         if defaults.string(forKey: "isPlayerAlreadyCreated") != nil{
             _ = navigationController?.popViewController(animated: true)
@@ -48,7 +60,6 @@ UINavigationControllerDelegate {
             self.present(vc, animated: true, completion: nil)
             
         }
-        
     }
     
     @IBAction func PhotoLibraryAction(_ sender: UIButton) {
@@ -85,9 +96,17 @@ UINavigationControllerDelegate {
         return newImage!
     }
     
+    func dismissKeyboard() {
+        
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FirstLaunchViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         super.viewDidLoad()
         self.imageDisplay.layer.cornerRadius = self.imageDisplay.frame.size.width / 2;
         self.imageDisplay.clipsToBounds = true;
     }
+    
 }
