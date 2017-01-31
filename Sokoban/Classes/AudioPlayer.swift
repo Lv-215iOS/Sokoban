@@ -28,6 +28,7 @@ class AudioPlayer {
     
     func playMusic() {
         backgroundMusicAudioPlayer?.play()
+        backgroundMusicAudioPlayer?.numberOfLoops = 1000
         UserDefaults.standard.set(true, forKey: "musicIsPlaying")
     }
     

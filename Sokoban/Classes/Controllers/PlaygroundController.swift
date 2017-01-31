@@ -16,7 +16,6 @@ class PlaygroundController: UIViewController {
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var stepsCountLabel: UILabel!
     
-    var currentIndex: Int?
     var currentLevel: Level?
     
     var isPlaying = false
@@ -68,7 +67,6 @@ class PlaygroundController: UIViewController {
     
     override func viewDidLoad() {
         
-        print(currentIndex ?? "ERROR!!!!!!")
         print(currentLevel?.name ?? "ERROR!!!!!!")
         
     }
