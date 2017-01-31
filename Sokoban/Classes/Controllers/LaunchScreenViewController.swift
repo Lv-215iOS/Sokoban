@@ -15,6 +15,8 @@ class LaunchScreenViewController: UIViewController {
     @IBOutlet weak var groupName: UILabel!
     let defaults = UserDefaults.standard
     
+    
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         appTitle.center.y -= view.bounds.height
@@ -36,13 +38,28 @@ class LaunchScreenViewController: UIViewController {
             self.appTitle.center.y += self.view.bounds.height
             self.appTitle.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
             self.appTitle.transform = CGAffineTransform(rotationAngle: CGFloat.pi * 2)
-
+            
             
         }, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
+            
+            AudioPlayer.sharedInstance.backgroundMusic()
+            
+            let musicIsPlaying = UserDefaults.standard.bool(forKey: "musicIsPlaying")
+            
+            if musicIsPlaying == false {
+                AudioPlayer.sharedInstance.stopMusic()
+            } else {
+                AudioPlayer.sharedInstance.playMusic()
+            }
+        } else {
+            AudioPlayer.sharedInstance.backgroundMusic()
+        }
         
     }
     
@@ -52,8 +69,7 @@ class LaunchScreenViewController: UIViewController {
     }
     
     func whatControllerToOpen()
-    {
-        
+    { 
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "secondViewController") as! UINavigationController
@@ -66,6 +82,4 @@ class LaunchScreenViewController: UIViewController {
             self.present(vc, animated: true, completion: nil)
         }
     }
-    
-    
 }
