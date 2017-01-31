@@ -130,10 +130,11 @@ class PlayersProvider: PlayersProviderInterface {
         guard let player = currentPlayer,
               let levelScores = player.levelsScores,
               let levelScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelScores) as? NSArray,
-              let levelOrder = level.order else {
+              let levelOrder = level.order,
+              let playerScore = player.score else {
             return
         }
-        
+        player.score = NSNumber(value: playerScore.intValue + Int(score))
         let muttableLevelScores = NSMutableArray(array: levelScoresArray)
         muttableLevelScores[levelOrder.intValue] = score
         currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: NSArray(array: muttableLevelScores))

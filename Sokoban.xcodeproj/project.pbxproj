@@ -247,6 +247,7 @@
 			children = (
 				5108B8271E3FC0BB001597AE /* AudioPlayer.swift */,
 				5108B8291E3FC0CA001597AE /* CustomLevelsTableViewCell.swift */,
+				489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */,
 				5108B8231E3FB57E001597AE /* Extentions */,
 				84C1A75A1E2F74D300FCB4C3 /* DataProviders */,
 				84C1A74B1E2F72C900FCB4C3 /* Controller */,
@@ -274,7 +275,6 @@
 		84C1A74B1E2F72C900FCB4C3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */,
 				84C1A7471E2F72C400FCB4C3 /* LevelsController.swift */,
 				84C1A7481E2F72C400FCB4C3 /* MenuController.swift */,
 				84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */,
