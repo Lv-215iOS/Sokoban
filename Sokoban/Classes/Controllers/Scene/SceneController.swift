@@ -107,9 +107,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         let y_pos = getPosition(str: matrix!, findElement: "&")! / sceneWidth!
         let x_pos = getPosition(str: matrix!, findElement: "&")! - sceneWidth! * y_pos
         
-        if isFinish() {
-            
-        }
+        
         
         
         if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
@@ -125,6 +123,9 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 self.swapSymbol(x: x_pos, y: y_pos, x_next: x_pos + x, y_next: y_pos + y)
             }
         }
+        
+        
+        
     }
     
     func isAbleToMove(x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
@@ -191,14 +192,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     
     
-    
-    
-    
-    
-    
-    
-    
-    
     /**
      Moves block with direction
      
@@ -236,8 +229,10 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
             
             sceneBuilder.blockCellOut[block_index].isHidden = false
-            let blockIn = findBlockIn(center: sceneBuilder.blockCellOut[block_index].center)
-            blockIn.isHidden = true
+            let num = findBlockIn(center: sceneBuilder.blockCellOut[block_index].center)
+            if num != -1 {
+                sceneBuilder.blockCellIn[num].isHidden = true
+            }
             
             UIView.animate(withDuration: 0.35) {
                 self.sceneBuilder.blockCellOut[block_index].center.x += CGFloat(x) * self.sceneBuilder.blockCellOut[block_index].bounds.size.width
@@ -247,14 +242,42 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 index = self.matrix?.index((self.matrix?.startIndex)!, offsetBy: self.indexBlock[block_index])
                 
                 if self.isBlockOnDot(block: self.sceneBuilder.blockCellOut[block_index]) {
-                    self.delay(delay: 0.25) {
+//                    UIView.animate(withDuration: 0.25) {
+                                            self.delay(delay: 0.25) {
                         self.sceneBuilder.blockCellOut[block_index].isHidden = true
-                        let blockIn = self.findBlockIn(center: self.sceneBuilder.blockCellOut[block_index].center)
-                        blockIn.isHidden = false
-                    }
+                        let num = self.findBlockIn(center: self.sceneBuilder.blockCellOut[block_index].center)
+                        if num != -1 {
+                            self.sceneBuilder.blockCellIn[num].isHidden = false
+                        }
+                        
+                                            }
+                    
+//                    }
+
                 }
             }
-            
+            print(sceneBuilder.blockCellIn[0].isHidden)
+            delay(delay: 1) {
+                if self.isFinish() {
+                    //                let sender: UIButton
+                    //                PlaygroundController.pauseTapped(sender)
+                    let alert = UIAlertController(title: "Congratulations", message: "Next level?", preferredStyle: .alert)
+                    var number: Int = self.currentLevel!.order!.intValue + 1
+                    let NextLevelAction = UIAlertAction(title: "level \(number)", style: .default) { (_) in
+                        
+//
+                    }
+                    let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
+                        self.performSegue(withIdentifier: "unwindToMenu", sender: self)
+                    }                    
+                    alert.addAction(MenuAction)
+                    alert.addAction(NextLevelAction)
+                    self.present(alert, animated: true, completion: nil)
+                }
+            }
+            if num != -1 {
+                print(sceneBuilder.blockCellIn[num].isHidden)
+            }
             return true
         } else {
             return false
@@ -263,44 +286,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         
         
         
-        
-        //        for block in 0..<sceneBuilder.blockCellOut.count {
-        //            if isWallNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
-        //                return
-        //                //FIX: player go over blocks when block is near block
-        //                //            } else if isBlockNearBlock(sceneBuilder.blockCellOut[block], x: x, y: y) {
-        //                //                return
-        //            } else if (player.center.x + CGFloat(x) * player.bounds.size.width) == sceneBuilder.blockCellOut[block].center.x && (player.center.y + CGFloat(y) * player.bounds.size.height) == sceneBuilder.blockCellOut[block].center.y {
-        //                if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
-        //                    let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
-        //                    newBlock.isHidden = true
-        //                } else {
-        //                    sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-        //                    sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-        //                    if isBlockOnDot(block: sceneBuilder.blockCellOut[block]) {
-        //                        let newBlock = findBlockIn(x: sceneBuilder.blockCellOut[block].center.x, y: sceneBuilder.blockCellOut[block].center.y)
-        //                        sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-        //                        sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
-        //                        UIView.animate(withDuration: 0.35) {
-        //                            self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-        //                            self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-        //                        }
-        //                        delay(delay: 0.25) {
-        //                            newBlock.isHidden = false
-        //                        }
-        //                        return
-        //                    }
-        //                    sceneBuilder.blockCellOut[block].center.x -= CGFloat(x) * player.bounds.size.width
-        //                    sceneBuilder.blockCellOut[block].center.y -= CGFloat(y) * player.bounds.size.height
-        //                }
-        //                UIView.animate(withDuration: 0.35) {
-        //                    self.sceneBuilder.blockCellOut[block].center.x += CGFloat(x) * player.bounds.size.width
-        //                    self.sceneBuilder.blockCellOut[block].center.y += CGFloat(y) * player.bounds.size.height
-        //                }
-        //
-        //            }
-        //        }
-    }
+            }
     
     // check if block is on cell
     func isBlockOnDot(block: BlockCellOut) -> Bool {
@@ -312,19 +298,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         return false
     }
     
-    func findBlockIn(center: CGPoint) -> BlockCellIn {
-        for block in sceneBuilder.blockCellIn {
-            if block.center.x == center.x && block.center.y == center.y {
+    func findBlockIn(center: CGPoint) -> Int {
+        for block in 0..<sceneBuilder.blockCellIn.count {
+            if sceneBuilder.blockCellIn[block].center == center {
                 return block
             }
         }
-        return sceneBuilder.blockCellIn.last!
-//        for block in sceneBuilder.blockCellIn {
-//            if block.center.x == x && block.center.y == y {
-//                return block
-//            }
-//        }
-//        return sceneBuilder.blockCellIn.last!
+        return -1
     }
     
     func isFinish() -> Bool {
