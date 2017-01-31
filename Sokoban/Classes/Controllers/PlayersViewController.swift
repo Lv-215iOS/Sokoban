@@ -164,7 +164,7 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
                     firstCell.accessoryType = .checkmark
                     PlayersProvider.setCurrentPlayerWith(name: firstCellText)
                 }
-                
+                selectedIndex = 0
             }
             playersTableView.deleteRows(at: [indexPath!], with: .automatic)
         default:
