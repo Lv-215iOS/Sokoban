@@ -9,14 +9,14 @@
 import UIKit
 
 class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface, GameLogic {
+    //TODO: complete ScrollView
+    //    @IBOutlet weak var background: UIScrollView!
+    //    @IBOutlet weak var foreground: UIScrollView!
     
     var currentLevel: Level?
-    var resetMatrix: String!
     var matrix: String!
     var indexBlock: [Int] = []
     var temp = 0
-    var levelController: LevelsController? = nil
-    var playgroundController: PlaygroundController? = nil
     
     var sceneBuilder = SceneBuilder()
     @IBOutlet weak var scrollView: UIScrollView!
@@ -44,17 +44,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     /// take action from PlaygroundController to restart level
     func restartLevel() {
-        matrix = resetMatrix
-        indexBlock = []
-        temp = 0
         self.viewDidAppear(true)
-        self.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-     sceneBuilder.player.initPlayer()
+        sceneBuilder.player.initPlayer()
         
         let gameView = sceneBuilder.getSceneCanvas(level: currentLevel!)
         
@@ -68,7 +64,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     override func viewDidLoad() {
         matrix = currentLevel?.scene?.matrix
-        resetMatrix = matrix
         for i in 0..<matrix.characters.count {
             let index = matrix.index(matrix.startIndex, offsetBy: i)
             print("mrx = \(matrix[index])")
@@ -191,7 +186,12 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         }
         return nil
     }
-
+    
+    
+    
+    
+    
+    
     /**
      Moves block with direction
      
@@ -259,13 +259,11 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             print(sceneBuilder.blockCellIn[0].isHidden)
             delay(delay: 1) {
                 if self.isFinish() {
-                    self.playgroundController?.ifTheEndOfLevel()
                     //                let sender: UIButton
                     //                PlaygroundController.pauseTapped(sender)
-                    let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
-                    let number: Int = self.currentLevel!.order!.intValue + 1
+                    let alert = UIAlertController(title: "Congratulations", message: "Next level?", preferredStyle: .alert)
+                    var number: Int = self.currentLevel!.order!.intValue + 1
                     let NextLevelAction = UIAlertAction(title: "level \(number)", style: .default) { (_) in
-//                        self.playgroundController.ifTheEndOfLevel()
                         
 //
                     }
@@ -284,6 +282,9 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         } else {
             return false
         }
+        
+        
+        
         
             }
     
