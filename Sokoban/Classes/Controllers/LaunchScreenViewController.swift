@@ -54,7 +54,7 @@ class LaunchScreenViewController: UIViewController {
     func whatControllerToOpen()
     {
         
-        if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil{
+        if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "secondViewController") as! UINavigationController
             self.present(vc, animated: true, completion: nil)

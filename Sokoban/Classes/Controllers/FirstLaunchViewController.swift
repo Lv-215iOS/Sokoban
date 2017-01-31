@@ -60,7 +60,6 @@ UINavigationControllerDelegate {
             self.present(vc, animated: true, completion: nil)
             
         }
-        
     }
     
     @IBAction func PhotoLibraryAction(_ sender: UIButton) {
@@ -97,6 +96,11 @@ UINavigationControllerDelegate {
         return newImage!
     }
     
+    func dismissKeyboard() {
+        
+        view.endEditing(true)
+    }
+    
     override func viewDidLoad() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(FirstLaunchViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
@@ -104,8 +108,5 @@ UINavigationControllerDelegate {
         self.imageDisplay.layer.cornerRadius = self.imageDisplay.frame.size.width / 2;
         self.imageDisplay.clipsToBounds = true;
     }
-    func dismissKeyboard() {
-        
-        view.endEditing(true)
-    }
+    
 }
