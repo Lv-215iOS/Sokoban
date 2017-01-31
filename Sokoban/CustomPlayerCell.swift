@@ -23,6 +23,7 @@ class CustomPlayerCell: UITableViewCell {
         super.awakeFromNib()
         playerImageView.layer.cornerRadius = 30
         playerImageView.clipsToBounds = true
+        selectionStyle = .gray
         activity.alpha = 1
         activity.center = CGPoint(x: 30, y: 30)
         activity.color = UIColor.black

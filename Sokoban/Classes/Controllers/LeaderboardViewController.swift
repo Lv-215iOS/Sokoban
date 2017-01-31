@@ -9,27 +9,58 @@
 import UIKit
 
 class LeaderboardViewController: UIViewController {
+    
+    // MARK: - Properties
+    fileprivate let leaderBoardCellIdentifier = "leaderBoardCellReuseIdentifier"
+    fileprivate var playersCount = 0
+    
+     // MARK: - IBOutlets
+    @IBOutlet weak var leaderTableView: UITableView!
 
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        if let players = PlayersProvider.getPlayers() {
+            playersCount = players.count
+        }
+        
+        leaderTableView.dataSource = self
+        leaderTableView.tableFooterView = UIView()
+        leaderTableView.alwaysBounceVertical = false
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+// MARK: - UITableViewDataSource
+extension LeaderboardViewController: UITableViewDataSource {
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+       return 5
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: leaderBoardCellIdentifier, for: indexPath)
+        guard let leaderBoardCell = cell as? CustomLeaderBoardCell else {
+            return cell
+        }
+        
+        if playersCount <= indexPath.row {
+            leaderBoardCell.order.text = String(indexPath.row + 1)
+            return leaderBoardCell
+        }
+        
+        let player = PlayersProvider.fetchedResultController.object(at: indexPath)
+        
+        if let playerScore = player.score,
+           let playerPhoto = player.photo {
+            leaderBoardCell.playerScore.text = playerScore.stringValue
+            leaderBoardCell.playerImageView.image = UIImage(data: playerPhoto)
+        }
+        leaderBoardCell.playerName.text = player.name
+        leaderBoardCell.order.text = String(indexPath.row + 1)
+        
+        return leaderBoardCell
     }
-    */
-
 }
+
+

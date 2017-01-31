@@ -32,18 +32,13 @@ class PlayersViewController: UIViewController {
         playersTableView.reloadData()
     }
     
-    // MARK: - IBActions
-    /// adding player alert appears
-    @IBAction func addNewPlayerButtonTapped(_ sender: UIButton) {
-    }
-    
 }
 
 // MARK: - UITableViewDataSource
 extension PlayersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let sectionInfo = PlayersProvider.fetchedResultController.sections?[section] else {
+        guard let sectionInfo = playersResultsController.sections?[section] else {
             return 0
         }
         return sectionInfo.numberOfObjects
@@ -54,7 +49,7 @@ extension PlayersViewController: UITableViewDataSource {
         guard let playerCell = cell as? CustomPlayerCell else {
             return cell
         }
-        let player = PlayersProvider.fetchedResultController.object(at: indexPath)
+        let player = playersResultsController.object(at: indexPath)
         // if player in current cell is currentPlayer, check cell
         if player == PlayersProvider.currentPlayer {
             playerCell.accessoryType = .checkmark
@@ -88,7 +83,7 @@ extension PlayersViewController: UITableViewDataSource {
             present(alert, animated: true)
             return
         }
-        let playerToRemove = PlayersProvider.fetchedResultController.object(at: indexPath)
+        let playerToRemove = playersResultsController.object(at: indexPath)
         PlayersProvider.deletePlayer(playerToRemove)
     }
     
@@ -129,7 +124,7 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
         case .insert:
             CoreDataStack.sharedStack.saveContext()
             playersTableView.insertRows(at: [newIndexPath!], with: .automatic)
-            let player = PlayersProvider.fetchedResultController.object(at: newIndexPath!)
+            let player = playersResultsController.object(at: newIndexPath!)
             guard let cell = playersTableView.cellForRow(at: newIndexPath!) as? CustomPlayerCell,
                 let playerName = player.name,
                 let playerScore = player.score else {

@@ -36,6 +36,7 @@
 		25DF17171E361CBD007A468A /* BlockCellIn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17141E361CBD007A468A /* BlockCellIn.swift */; };
 		25DF17181E361CBD007A468A /* BlockCellOut.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17151E361CBD007A468A /* BlockCellOut.swift */; };
 		25DF17191E361CBD007A468A /* Dot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 25DF17161E361CBD007A468A /* Dot.swift */; };
+		48908C7C1E413E910046BD89 /* CustomLeaderBoardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 48908C7B1E413E910046BD89 /* CustomLeaderBoardCell.swift */; };
 		489755FB1E3D4A5000EAF4C2 /* CustomPlayerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */; };
 		5108B8221E3FB568001597AE /* IUButton+Highlighting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108B8211E3FB568001597AE /* IUButton+Highlighting.swift */; };
 		5108B8261E3FBE9D001597AE /* UIImage+ImageFromView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5108B8251E3FBE9D001597AE /* UIImage+ImageFromView.swift */; };
@@ -117,6 +118,7 @@
 		25DF17141E361CBD007A468A /* BlockCellIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellIn.swift; path = Classes/Controllers/Scene/BlockCellIn.swift; sourceTree = "<group>"; };
 		25DF17151E361CBD007A468A /* BlockCellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellOut.swift; path = Classes/Controllers/Scene/BlockCellOut.swift; sourceTree = "<group>"; };
 		25DF17161E361CBD007A468A /* Dot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dot.swift; path = Classes/Controllers/Scene/Dot.swift; sourceTree = "<group>"; };
+		48908C7B1E413E910046BD89 /* CustomLeaderBoardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomLeaderBoardCell.swift; sourceTree = "<group>"; };
 		489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPlayerCell.swift; sourceTree = "<group>"; };
 		5108B8211E3FB568001597AE /* IUButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "IUButton+Highlighting.swift"; path = "Classes/Extentions/IUButton+Highlighting.swift"; sourceTree = "<group>"; };
 		5108B8251E3FBE9D001597AE /* UIImage+ImageFromView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+ImageFromView.swift"; path = "Classes/Extentions/UIImage+ImageFromView.swift"; sourceTree = "<group>"; };
@@ -245,6 +247,7 @@
 		84C1A7431E2F724300FCB4C3 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				48908C7B1E413E910046BD89 /* CustomLeaderBoardCell.swift */,
 				5108B8271E3FC0BB001597AE /* AudioPlayer.swift */,
 				5108B8291E3FC0CA001597AE /* CustomLevelsTableViewCell.swift */,
 				489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */,
@@ -562,6 +565,7 @@
 				5108B8281E3FC0BB001597AE /* AudioPlayer.swift in Sources */,
 				84C12F991E36035400613C43 /* CoreDataStack.swift in Sources */,
 				5108B8261E3FBE9D001597AE /* UIImage+ImageFromView.swift in Sources */,
+				48908C7C1E413E910046BD89 /* CustomLeaderBoardCell.swift in Sources */,
 				8B359E561E30D662004646EC /* AboutViewController.swift in Sources */,
 				5108B82A1E3FC0CA001597AE /* CustomLevelsTableViewCell.swift in Sources */,
 				8BE462301E32091200F1E8D4 /* Player+CoreDataProperties.m in Sources */,
