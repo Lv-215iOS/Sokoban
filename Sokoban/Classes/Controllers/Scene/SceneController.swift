@@ -10,6 +10,7 @@ import UIKit
 
 class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface, GameLogic {
     
+    //MARK: Declaration of values
     var currentLevel: Level?
     var resetMatrix: String!
     var matrix: String!
@@ -17,14 +18,18 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     var temp = 0
     var levelController: LevelsController? = nil
     var playgroundController: PlaygroundController? = nil
-    
     var sceneBuilder: SceneBuilder! = SceneBuilder()
+    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentWidth: NSLayoutConstraint!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
-    /// take actions from PlaygroundController to start moving
+    /**
+     Take action from PlaygroundController to start moving
+     
+     - Parameter operation: move direction
+     */
     func movePlayerButtons(operation: Moves) {
         switch operation {
         case .Right:
@@ -44,12 +49,11 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     /// take action from PlaygroundController to restart level
     func restartLevel() {
-//        playground
         sceneBuilder = nil
         sceneBuilder = SceneBuilder()
         matrix = resetMatrix
         indexBlock = []
-        temp = 0        
+        temp = 0
         self.viewDidAppear(true)
         self.viewDidLoad()
     }
@@ -97,7 +101,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     }
     
     func getBlockToMove(_ player: UIImageView, x: Int, y: Int) -> Int {
-//        let matrix = currentLevel?.scene?.matrix
+        //        let matrix = currentLevel?.scene?.matrix
         let sceneWidth = currentLevel?.scene?.width?.intValue
         let pos = getPosition(str: matrix!, findElement: "&")
         return pos! + y * sceneWidth! + x
@@ -106,14 +110,11 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     /// check if player is able to move
     func movePlayer(_ player: UIImageView, x: Int, y: Int) {
         //FIX: player go over block, when block is near wall
-//        let matrix = currentLevel?.scene?.matrix
+        //        let matrix = currentLevel?.scene?.matrix
         let sceneWidth = currentLevel?.scene?.width?.intValue
         
         let y_pos = getPosition(str: matrix!, findElement: "&")! / sceneWidth!
         let x_pos = getPosition(str: matrix!, findElement: "&")! - sceneWidth! * y_pos
-        
-        
-        
         
         if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
             if getSymbol(x: x_pos + x, y: y_pos + y) == "%" {
@@ -171,15 +172,8 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     }
     
     func getPosition(str :String, findElement: Character, block_value: Int = 0) -> Int? {
-//        var str = str
         for (index, value) in Array(str.characters).enumerated() {
             if value == findElement {
-//                if block_index > 0 {
-//                    for i in 0...index {
-//                        str.remove(at: str.startIndex)
-//                    }
-//                    return index + 1 + getPosition(str: str, findElement: findElement, block_index: block_index - 1)!
-//                }
                 if block_value == 0 {
                     return index
                 } else if index == block_value {
@@ -189,10 +183,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         }
         return nil
     }
-    
-    
-    
-    
     
     
     /**
@@ -242,18 +232,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 index = self.matrix?.index((self.matrix?.startIndex)!, offsetBy: self.indexBlock[block_index])
                 
                 if self.isBlockOnDot(block: self.sceneBuilder.blockCellOut[block_index]) {
-//                    UIView.animate(withDuration: 0.25) {
-                                            self.delay(delay: 0.25) {
+                    self.delay(delay: 0.25) {
                         self.sceneBuilder.blockCellOut[block_index].isHidden = true
                         let num = self.findBlockIn(center: self.sceneBuilder.blockCellOut[block_index].center)
                         if num != -1 {
                             self.sceneBuilder.blockCellIn[num].isHidden = false
                         }
-                        
-                                            }
-                    
-//                    }
-
+                    }
                 }
             }
             
@@ -268,13 +253,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                         number -= 1
                     }
                     let NextLevelAction = UIAlertAction(title: "Next level", style: .default) { (_) in
-//                        self.playgroundController.ifTheEndOfLevel()
+                        //                        self.playgroundController.ifTheEndOfLevel()
                         
-//
+                        //
                     }
                     let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
                         self.performSegue(withIdentifier: "unwindToMenu", sender: self)
-                    }                    
+                    }
                     alert.addAction(MenuAction)
                     alert.addAction(NextLevelAction)
                     self.present(alert, animated: true, completion: nil)
@@ -284,11 +269,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         } else {
             return false
         }
-        
-        
-        
-        
-            }
+    }
     
     // check if block is on cell
     func isBlockOnDot(block: BlockCellOut) -> Bool {
@@ -315,7 +296,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 return false
             }
         }
-        //save result
         _ = navigationController?.popToRootViewController(animated: true)
         return true
     }
