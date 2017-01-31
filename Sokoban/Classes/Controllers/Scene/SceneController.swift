@@ -41,7 +41,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     /// take action from PlaygroundController to restart level
     func restartLevel() {
-        
+        self.viewDidAppear(true)
     }
     
     override func viewDidAppear(_ animated: Bool) {
