@@ -121,6 +121,26 @@ class PlayersProvider: PlayersProviderInterface {
     }
     
     /**
+     Sets level score for current player
+     
+     - Parameter level: level that score needs to be set
+     - Parameter score: score for senders level
+     */
+    static func setLevelScoreForCurrentPlayer(level: Level, score: Double) {
+        guard let player = currentPlayer,
+              let levelScores = player.levelsScores,
+              let levelScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelScores) as? NSArray,
+              let levelOrder = level.order else {
+            return
+        }
+        
+        let muttableLevelScores = NSMutableArray(array: levelScoresArray)
+        muttableLevelScores[levelOrder.intValue] = score
+        currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: NSArray(array: muttableLevelScores))
+        CoreDataStack.sharedStack.saveContext()
+    }
+    
+    /**
      Saves changes, that was made to currentPlayer
     */
     static func saveCurrentPlayer() {
