@@ -116,7 +116,7 @@
 		25DF17141E361CBD007A468A /* BlockCellIn.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellIn.swift; path = Classes/Controllers/Scene/BlockCellIn.swift; sourceTree = "<group>"; };
 		25DF17151E361CBD007A468A /* BlockCellOut.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = BlockCellOut.swift; path = Classes/Controllers/Scene/BlockCellOut.swift; sourceTree = "<group>"; };
 		25DF17161E361CBD007A468A /* Dot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Dot.swift; path = Classes/Controllers/Scene/Dot.swift; sourceTree = "<group>"; };
-		489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomPlayerCell.swift; path = ../../CustomPlayerCell.swift; sourceTree = "<group>"; };
+		489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPlayerCell.swift; sourceTree = "<group>"; };
 		5108B8211E3FB568001597AE /* IUButton+Highlighting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "IUButton+Highlighting.swift"; path = "Classes/Extentions/IUButton+Highlighting.swift"; sourceTree = "<group>"; };
 		5108B8251E3FBE9D001597AE /* UIImage+ImageFromView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "UIImage+ImageFromView.swift"; path = "Classes/Extentions/UIImage+ImageFromView.swift"; sourceTree = "<group>"; };
 		5108B8271E3FC0BB001597AE /* AudioPlayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AudioPlayer.swift; path = Classes/AudioPlayer.swift; sourceTree = "<group>"; };
@@ -247,6 +247,7 @@
 			children = (
 				5108B8271E3FC0BB001597AE /* AudioPlayer.swift */,
 				5108B8291E3FC0CA001597AE /* CustomLevelsTableViewCell.swift */,
+				489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */,
 				5108B8231E3FB57E001597AE /* Extentions */,
 				84C1A75A1E2F74D300FCB4C3 /* DataProviders */,
 				84C1A74B1E2F72C900FCB4C3 /* Controller */,
@@ -314,7 +315,6 @@
 			children = (
 				84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */,
 				25DF17121E361B20007A468A /* PlayersProvider.swift */,
-				489755FA1E3D4A5000EAF4C2 /* CustomPlayerCell.swift */,
 			);
 			name = DataProviders;
 			path = Classes/DataProviders;
