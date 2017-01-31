@@ -18,7 +18,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     var levelController: LevelsController? = nil
     var playgroundController: PlaygroundController? = nil
     
-    var sceneBuilder = SceneBuilder()
+    var sceneBuilder: SceneBuilder! = SceneBuilder()
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentWidth: NSLayoutConstraint!
@@ -44,9 +44,12 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     /// take action from PlaygroundController to restart level
     func restartLevel() {
+//        playground
+        sceneBuilder = nil
+        sceneBuilder = SceneBuilder()
         matrix = resetMatrix
         indexBlock = []
-        temp = 0
+        temp = 0        
         self.viewDidAppear(true)
         self.viewDidLoad()
     }
@@ -54,7 +57,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-//        sceneBuilder.player.initPlayer()
+        sceneBuilder.player.initPlayer()
         
         let gameView = sceneBuilder.getSceneCanvas(level: currentLevel!)
         
@@ -71,7 +74,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         resetMatrix = matrix
         for i in 0..<matrix.characters.count {
             let index = matrix.index(matrix.startIndex, offsetBy: i)
-            print("mrx = \(matrix[index])")
             if matrix[index] == "%" {
                 indexBlock.append(i)
             }
@@ -98,7 +100,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
 //        let matrix = currentLevel?.scene?.matrix
         let sceneWidth = currentLevel?.scene?.width?.intValue
         let pos = getPosition(str: matrix!, findElement: "&")
-//        print(pos)
         return pos! + y * sceneWidth! + x
     }
     
@@ -108,7 +109,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
 //        let matrix = currentLevel?.scene?.matrix
         let sceneWidth = currentLevel?.scene?.width?.intValue
         
-//        print(getPosition(str: matrix!, findElement: "&"))
         let y_pos = getPosition(str: matrix!, findElement: "&")! / sceneWidth!
         let x_pos = getPosition(str: matrix!, findElement: "&")! - sceneWidth! * y_pos
         
@@ -116,7 +116,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         
         
         if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
-//            print(getSymbol(x: x_pos + x, y: y_pos + y))
             if getSymbol(x: x_pos + x, y: y_pos + y) == "%" {
                 if !moveBlock(block: getBlockToMove(player, x: x, y: y), x: x, y: y) {
                     return
@@ -162,7 +161,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             let temp = matrix[index]
             matrix.remove(at: index)
             matrix.insert("0", at: index)
-//            print(getSymbol(x: x_next, y: y_next).characters.last!)
             matrix.insert(getSymbol(x: x_next, y: y_next).characters.last!, at: index)
             index = matrix.index(matrix.startIndex, offsetBy: width * y + x + 1)
             matrix.remove(at: index)
@@ -212,7 +210,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         
         for i in 0...block {
             index = matrix?.index((matrix?.startIndex)!, offsetBy: i)
-            print(String(describing: matrix?[index]))
             if String(describing: matrix![index]) == "%" {
                 block_index = indexBlock.index(of: i)!
             }
@@ -226,8 +223,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             }
         }
         
-        
-        print(getPosition(str: matrix!, findElement: "%", block_value: temp))
         let y_pos = getPosition(str: matrix!, findElement: "%", block_value: temp)! / sceneWidth!
         let x_pos = (getPosition(str: matrix!, findElement: "%", block_value: temp)! - sceneWidth! * y_pos)
         
@@ -261,7 +256,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
 
                 }
             }
-            print(sceneBuilder.blockCellIn[0].isHidden)
+            
             delay(delay: 1) {
                 if self.isFinish() {
                     self.playgroundController?.ifTheEndOfLevel()
@@ -269,7 +264,10 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                     //                PlaygroundController.pauseTapped(sender)
                     let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
                     var number: Int = self.currentLevel!.order!.intValue + 1
-                    let NextLevelAction = UIAlertAction(title: "level \(number)", style: .default) { (_) in
+                    if number > 10 {
+                        number -= 1
+                    }
+                    let NextLevelAction = UIAlertAction(title: "Next level", style: .default) { (_) in
 //                        self.playgroundController.ifTheEndOfLevel()
                         
 //
@@ -281,9 +279,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                     alert.addAction(NextLevelAction)
                     self.present(alert, animated: true, completion: nil)
                 }
-            }
-            if num != -1 {
-                print(sceneBuilder.blockCellIn[num].isHidden)
             }
             return true
         } else {

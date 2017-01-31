@@ -29,9 +29,8 @@ class PlaygroundController: UIViewController {
     var timeInSecs = 0.0
     var score = 0.0
     
-    
     var sceneController: SceneController? = nil
-        
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SceneControllerEmbed" {
             sceneController = segue.destination as? SceneController
@@ -64,13 +63,6 @@ class PlaygroundController: UIViewController {
             isPlaying = false
         }
         ///TODO:joystick becomes unable
-    }
-    
-    override func viewDidLoad() {
-        
-        print(currentIndex ?? "ERROR!!!!!!")
-        print(currentLevel?.name ?? "ERROR!!!!!!")
-        
     }
     
     func ifTheEndOfLevel() {
@@ -115,6 +107,4 @@ class PlaygroundController: UIViewController {
             isPlaying = true
         }
     }
-    
-    
 }
