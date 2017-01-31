@@ -16,6 +16,7 @@ class PlaygroundController: UIViewController {
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var stepsCountLabel: UILabel!
     
+    var currentIndex: Int?
     var currentLevel: Level?
     
     var isPlaying = false
@@ -57,6 +58,13 @@ class PlaygroundController: UIViewController {
             isPlaying = false
         }
         ///TODO:joystick becomes unable
+    }
+    
+    override func viewDidLoad() {
+        
+        print(currentIndex ?? "ERROR!!!!!!")
+        print(currentLevel?.name ?? "ERROR!!!!!!")
+        
     }
     
     func updateTime() {
