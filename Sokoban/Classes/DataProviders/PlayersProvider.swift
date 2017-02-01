@@ -134,13 +134,14 @@ class PlayersProvider: PlayersProviderInterface {
               let playerScore = player.score else {
             return
         }
-        player.score = NSNumber(value: playerScore.intValue + Int(score))
         let muttableLevelScores = NSMutableArray(array: levelScoresArray)
-        muttableLevelScores[levelOrder.intValue] = score
-        currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: NSArray(array: muttableLevelScores))
-        CoreDataStack.sharedStack.saveContext()
+        if (muttableLevelScores[levelOrder.intValue] as? Double) ?? 0 < score {
+            player.score = NSNumber(value: playerScore.intValue + Int(score))
+            muttableLevelScores[levelOrder.intValue] = score
+            currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: NSArray(array: muttableLevelScores))
+            CoreDataStack.sharedStack.saveContext()
+        }
     }
-    
     /**
      Saves changes, that was made to currentPlayer
     */

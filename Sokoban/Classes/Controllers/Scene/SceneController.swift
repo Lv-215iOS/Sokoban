@@ -325,20 +325,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 if self.isFinish() {
                     self.playgroundController?.ifTheEndOfLevel()
                     let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
-                    var number: Int = self.currentLevel!.order!.intValue + 1
-                    if number > 10 {
-                        number -= 1
-                    }
-                    let NextLevelAction = UIAlertAction(title: "Next level", style: .default) { (_) in
-                        let level = self.currentLevel?.order?.intValue
-//                        currentLevel?.order
-                        self.restartLevel()
+                    let CancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
                     }
                     let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
-                        self.performSegue(withIdentifier: "unwindToMenu", sender: self)
+                        _ = self.navigationController?.popToRootViewController(animated: true)
                     }
                     alert.addAction(MenuAction)
-                    alert.addAction(NextLevelAction)
+                    alert.addAction(CancelAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
@@ -391,7 +384,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 return false
             }
         }
-        _ = navigationController?.popToRootViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
         return true
     }
 }
