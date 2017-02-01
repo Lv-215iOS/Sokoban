@@ -9,42 +9,55 @@
 import UIKit
 
 class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface, GameLogic {
-    //TODO: complete ScrollView
-    //    @IBOutlet weak var background: UIScrollView!
-    //    @IBOutlet weak var foreground: UIScrollView!
     
+    //MARK: Declaration of values
     var currentLevel: Level?
+    var resetMatrix: String!
     var matrix: String!
     var indexBlock: [Int] = []
     var temp = 0
+    var levelController: LevelsController? = nil
+    var playgroundController: PlaygroundController? = nil
+    var sceneBuilder: SceneBuilder! = SceneBuilder()
     
-    var sceneBuilder = SceneBuilder()
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentWidth: NSLayoutConstraint!
     @IBOutlet weak var contentHeight: NSLayoutConstraint!
     
-    /// take actions from PlaygroundController to start moving
+    /**
+     Take action from PlaygroundController to start moving
+     
+     - Parameter operation: move direction
+     */
     func movePlayerButtons(operation: Moves) {
         switch operation {
         case .Right:
-            animateImage(type: sceneBuilder.player.imageListRight)
+            animateImage(images: sceneBuilder.player.imageListRight)
             movePlayer(sceneBuilder.playerView!, x: 1, y: 0)
         case .Up:
-            animateImage(type: sceneBuilder.player.imageListUp)
+            animateImage(images: sceneBuilder.player.imageListUp)
             movePlayer(sceneBuilder.playerView!, x: 0, y: -1)
         case .Left:
-            animateImage(type: sceneBuilder.player.imageListLeft)
+            animateImage(images: sceneBuilder.player.imageListLeft)
             movePlayer(sceneBuilder.playerView!, x: -1, y: 0)
         case .Down:
-            animateImage(type: sceneBuilder.player.imageListDown)
+            animateImage(images: sceneBuilder.player.imageListDown)
             movePlayer(sceneBuilder.playerView!, x: 0, y: 1)
         }
     }
     
-    /// take action from PlaygroundController to restart level
+    /**
+     Take action from PlaygroundController to restart level
+     */
     func restartLevel() {
+        sceneBuilder = nil
+        sceneBuilder = SceneBuilder()
+        matrix = resetMatrix
+        indexBlock = []
+        temp = 0
         self.viewDidAppear(true)
+        self.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -57,25 +70,32 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
         contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
         scrollView.layoutIfNeeded()
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
         
-        gameView.center = CGPoint(x: contentWidth.constant / 2, y: contentHeight.constant / 2)
+        //gameView.center = CGPoint(x: contentWidth.constant / 2, y: contentHeight.constant / 2)
         contentView.addSubview(gameView)
     }
     
     override func viewDidLoad() {
         matrix = currentLevel?.scene?.matrix
+        resetMatrix = matrix
         for i in 0..<matrix.characters.count {
             let index = matrix.index(matrix.startIndex, offsetBy: i)
-            print("mrx = \(matrix[index])")
             if matrix[index] == "%" {
                 indexBlock.append(i)
             }
         }
     }
     
-    /// animate players moves
-    func animateImage(type: [UIImage]) {
-        sceneBuilder.playerView?.animationImages = type
+    
+    /**
+     Animate player moves
+     
+     - Parameter images: array of UIImage
+     */
+    func animateImage(images: [UIImage]) {
+        sceneBuilder.playerView?.animationImages = images
         sceneBuilder.playerView?.animationDuration = 0.35
         sceneBuilder.playerView?.startAnimating()
         delay(delay: 0.35) {
@@ -83,35 +103,48 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         }
     }
     
+    /**
+     Delay
+     
+     - Parameter delay: time in ms
+     - Parameter closure: empty closure
+     */
     func delay(delay:Double, closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
             closure()
         }
     }
     
+    /**
+     Move block
+     
+     - Parameter player: UIImageView
+     - Parameter x: player coordinate
+     - Parameter y: player coordinate
+     
+     - Return: player position
+     */
     func getBlockToMove(_ player: UIImageView, x: Int, y: Int) -> Int {
-//        let matrix = currentLevel?.scene?.matrix
         let sceneWidth = currentLevel?.scene?.width?.intValue
         let pos = getPosition(str: matrix!, findElement: "&")
-//        print(pos)
         return pos! + y * sceneWidth! + x
     }
     
-    /// check if player is able to move
+    /**
+     Check if player is able to move
+     
+     - Parameter player: UIImageView
+     - Parameter x: player coordinate on x axes
+     - Parameter y: player coordinate on y axes
+     
+     - Return: player position
+     */
     func movePlayer(_ player: UIImageView, x: Int, y: Int) {
-        //FIX: player go over block, when block is near wall
-//        let matrix = currentLevel?.scene?.matrix
         let sceneWidth = currentLevel?.scene?.width?.intValue
-        
-//        print(getPosition(str: matrix!, findElement: "&"))
         let y_pos = getPosition(str: matrix!, findElement: "&")! / sceneWidth!
         let x_pos = getPosition(str: matrix!, findElement: "&")! - sceneWidth! * y_pos
         
-        
-        
-        
         if isAbleToMove(x: x_pos, y: y_pos, move_x: x, move_y: y) {
-//            print(getSymbol(x: x_pos + x, y: y_pos + y))
             if getSymbol(x: x_pos + x, y: y_pos + y) == "%" {
                 if !moveBlock(block: getBlockToMove(player, x: x, y: y), x: x, y: y) {
                     return
@@ -123,26 +156,58 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 self.swapSymbol(x: x_pos, y: y_pos, x_next: x_pos + x, y_next: y_pos + y)
             }
         }
-        
-        
-        
     }
     
+    /**
+     Check if view is able to move
+     
+     - Parameter x: view coordinate on x axes
+     - Parameter y: view coordinate on y axes
+     - Parameter move_x: view shift on x axes
+     - Parameter move_y: view shift on y axes
+     
+     - Return: true or false
+     */
     func isAbleToMove(x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
         return !(isWall(near: x, y: y, move_x: move_x, move_y: move_y))
     }
     
-    /// check if next step is wall (wall near player, wall near block)
+    /**
+     Check if next step is wall
+     
+     - Parameter x: view coordinate on x axes
+     - Parameter y: view coordinate on y axes
+     - Parameter move_x: view shift on x axes
+     - Parameter move_y: view shift on y axes
+     
+     - Return: true or false
+     */
     func isWall(near x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
         return getSymbol(x: x + move_x, y: y + move_y) == "#"
     }
     
-    //TODO:
-    /// check if next step is block (block near block)
+    /**
+     Check if next step is block
+     
+     - Parameter x: view coordinate on x axes
+     - Parameter y: view coordinate on y axes
+     - Parameter move_x: view shift on x axes
+     - Parameter move_y: view shift on y axes
+     
+     - Return: true or false
+     */
     func isBlock(near x: Int, y: Int, move_x: Int, move_y: Int) -> Bool {
         return getSymbol(x: x + move_x, y: y + move_y) == "%"
     }
     
+    /**
+     Gets symbol from matrix
+     
+     - Parameter x: symbol coordinate on x axes
+     - Parameter y: symbol coordinate on y axes
+     
+     - Return: symbol
+     */
     func getSymbol(x: Int, y: Int) -> String {
         if let width = currentLevel?.scene?.width?.intValue {
             let index = matrix.index(matrix.startIndex, offsetBy: width * y + x)
@@ -151,13 +216,20 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         return ""
     }
     
+    /**
+     Swap symbols in matrix
+     
+     - Parameter x: view coordinate on x axes
+     - Parameter y: view coordinate on y axes
+     - Parameter move_x: view shift on x axes
+     - Parameter move_y: view shift on y axes
+     */
     func swapSymbol(x: Int, y: Int, x_next: Int, y_next: Int) {
         if let width = currentLevel?.scene?.width?.intValue {
             var index = matrix.index(matrix.startIndex, offsetBy: width * y + x)
             let temp = matrix[index]
             matrix.remove(at: index)
             matrix.insert("0", at: index)
-//            print(getSymbol(x: x_next, y: y_next).characters.last!)
             matrix.insert(getSymbol(x: x_next, y: y_next).characters.last!, at: index)
             index = matrix.index(matrix.startIndex, offsetBy: width * y + x + 1)
             matrix.remove(at: index)
@@ -167,16 +239,18 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         }
     }
     
+    /**
+     Gets symbol position from matrix
+     
+     - Parameter str: matrix
+     - Parameter findElement: symbol
+     - Parameter block value: block_out order
+     
+     - Return: index position
+     */
     func getPosition(str :String, findElement: Character, block_value: Int = 0) -> Int? {
-//        var str = str
         for (index, value) in Array(str.characters).enumerated() {
             if value == findElement {
-//                if block_index > 0 {
-//                    for i in 0...index {
-//                        str.remove(at: str.startIndex)
-//                    }
-//                    return index + 1 + getPosition(str: str, findElement: findElement, block_index: block_index - 1)!
-//                }
                 if block_value == 0 {
                     return index
                 } else if index == block_value {
@@ -188,16 +262,14 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     }
     
     
-    
-    
-    
-    
     /**
      Moves block with direction
      
-     - Parameter player: players subview
+     - Parameter block: block index
      - Parameter x: x coordinate
      - Parameter y: y coordinate
+     
+     - Return: true or false
      */
     func moveBlock(block: Int, x: Int, y: Int) -> Bool {
         
@@ -207,7 +279,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         
         for i in 0...block {
             index = matrix?.index((matrix?.startIndex)!, offsetBy: i)
-            print(String(describing: matrix?[index]))
             if String(describing: matrix![index]) == "%" {
                 block_index = indexBlock.index(of: i)!
             }
@@ -221,8 +292,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             }
         }
         
-        
-        print(getPosition(str: matrix!, findElement: "%", block_value: temp))
         let y_pos = getPosition(str: matrix!, findElement: "%", block_value: temp)! / sceneWidth!
         let x_pos = (getPosition(str: matrix!, findElement: "%", block_value: temp)! - sceneWidth! * y_pos)
         
@@ -242,53 +311,50 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
                 index = self.matrix?.index((self.matrix?.startIndex)!, offsetBy: self.indexBlock[block_index])
                 
                 if self.isBlockOnDot(block: self.sceneBuilder.blockCellOut[block_index]) {
-//                    UIView.animate(withDuration: 0.25) {
-                                            self.delay(delay: 0.25) {
+                    self.delay(delay: 0.25) {
                         self.sceneBuilder.blockCellOut[block_index].isHidden = true
                         let num = self.findBlockIn(center: self.sceneBuilder.blockCellOut[block_index].center)
                         if num != -1 {
                             self.sceneBuilder.blockCellIn[num].isHidden = false
                         }
-                        
-                                            }
-                    
-//                    }
-
+                    }
                 }
             }
-            print(sceneBuilder.blockCellIn[0].isHidden)
+            
             delay(delay: 1) {
                 if self.isFinish() {
-                    //                let sender: UIButton
-                    //                PlaygroundController.pauseTapped(sender)
-                    let alert = UIAlertController(title: "Congratulations", message: "Next level?", preferredStyle: .alert)
+                    self.playgroundController?.ifTheEndOfLevel()
+                    let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
                     var number: Int = self.currentLevel!.order!.intValue + 1
-                    let NextLevelAction = UIAlertAction(title: "level \(number)", style: .default) { (_) in
-                        
-//
+                    if number > 10 {
+                        number -= 1
+                    }
+                    let NextLevelAction = UIAlertAction(title: "Next level", style: .default) { (_) in
+                        let level = self.currentLevel?.order?.intValue
+//                        currentLevel?.order
+                        self.restartLevel()
                     }
                     let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
                         self.performSegue(withIdentifier: "unwindToMenu", sender: self)
-                    }                    
+                    }
                     alert.addAction(MenuAction)
                     alert.addAction(NextLevelAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
-            if num != -1 {
-                print(sceneBuilder.blockCellIn[num].isHidden)
-            }
             return true
         } else {
             return false
         }
-        
-        
-        
-        
-            }
+    }
     
-    // check if block is on cell
+    /**
+     Check if block is on cell
+     
+     - Parameter block: temporary block_out
+     
+     - Return: true or false
+     */
     func isBlockOnDot(block: BlockCellOut) -> Bool {
         for dot in sceneBuilder.dotCell {
             if block.center.x == dot.center.x && block.center.y == dot.center.y {
@@ -298,6 +364,13 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         return false
     }
     
+    /**
+     Search block_in
+     
+     - Parameter center: center of serching clock_in
+     
+     - Return: index of block_in
+     */
     func findBlockIn(center: CGPoint) -> Int {
         for block in 0..<sceneBuilder.blockCellIn.count {
             if sceneBuilder.blockCellIn[block].center == center {
@@ -307,13 +380,17 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         return -1
     }
     
+    /**
+     Check if game is finished
+     
+     - Return: true or false
+     */
     func isFinish() -> Bool {
         for block in sceneBuilder.blockCellIn {
             if block.isHidden {
                 return false
             }
         }
-        //save result
         _ = navigationController?.popToRootViewController(animated: true)
         return true
     }
