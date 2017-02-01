@@ -324,14 +324,11 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
             delay(delay: 1) {
                 if self.isFinish() {
                     self.playgroundController?.ifTheEndOfLevel()
-                    let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f",  self.playgroundController!.score), preferredStyle: .alert)
-                    let CancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
-                    }
-                    let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
-                        _ = self.navigationController?.popToRootViewController(animated: true)
+                    let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
+                    let MenuAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+                        self.performSegue(withIdentifier: "unwindToMenu", sender: self)
                     }
                     alert.addAction(MenuAction)
-                    alert.addAction(CancelAction)
                     self.present(alert, animated: true, completion: nil)
                 }
             }
