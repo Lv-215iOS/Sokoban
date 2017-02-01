@@ -1,14 +1,12 @@
-//
-//  PlaygroundController.swift
-//  Sokoban
-//
-//  Created by admin on 1/18/17.
-//
-//
 
-import UIKit
-
-class PlaygroundController: UIViewController {
+ //  Sokoban
+ //
+ //  Created by admin on 1/18/17.
+ //
+ //
+ import UIKit
+ 
+ class PlaygroundController: UIViewController {
     
     @IBOutlet weak var movesCountLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -16,6 +14,7 @@ class PlaygroundController: UIViewController {
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var stepsCountLabel: UILabel!
     
+    var currentIndex: Int?
     var currentLevel: Level?
     
     var isPlaying = false
@@ -23,13 +22,19 @@ class PlaygroundController: UIViewController {
     var time = 0
     var movesCount = 0
     
+    var minMoves = 1.0
+    var minTime = 1.0
+    var timeInSecs = 0.0
+    var score = 0.0
+    
     
     var sceneController: SceneController? = nil
-        
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "SceneControllerEmbed" {
             sceneController = segue.destination as? SceneController
             sceneController?.currentLevel = currentLevel
+            sceneController?.playgroundController = self
         }
     }
     
@@ -59,11 +64,32 @@ class PlaygroundController: UIViewController {
         ///TODO:joystick becomes unable
     }
     
+    override func viewDidLoad() {
+        
+        print(currentIndex ?? "ERROR!!!!!!")
+        print(currentLevel?.name ?? "ERROR!!!!!!")
+        
+    }
+    
+    func ifTheEndOfLevel() {
+        if isPlaying {
+            timer.invalidate()
+            isPlaying = false
+        }
+        calculateScore()
+        PlayersProvider.setLevelScoreForCurrentPlayer(level: currentLevel!, score: score)
+    }
+    
+    func calculateScore() {
+        score = ((minTime/timeInSecs)*(minMoves/Double(movesCount))) * 100
+    }
+    
     func updateTime() {
         time += 1
         let minutes = Int(time) / 60 % 60
         let seconds = Int(time) % 60
         timeLabel.text = String(format:"%02i:%02i", minutes, seconds)
+        timeInSecs = Double(minutes * 60 + seconds)
     }
     
     @IBAction func restartButtonTapped(_ sender: UIButton) {
@@ -90,4 +116,4 @@ class PlaygroundController: UIViewController {
     }
     
     
-}
+ }
