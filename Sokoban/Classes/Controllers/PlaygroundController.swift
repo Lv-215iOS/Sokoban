@@ -66,7 +66,6 @@
     
     override func viewDidLoad() {
         
-        print(currentIndex ?? "ERROR!!!!!!")
         print(currentLevel?.name ?? "ERROR!!!!!!")
         
     }

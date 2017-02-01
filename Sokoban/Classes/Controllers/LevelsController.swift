@@ -86,7 +86,6 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         tableView.deselectRow(at: indexPath, animated: true)//highlights for a second
         
         let chosenLevel = LevelsProvider.getLevels()?[indexPath.row]
-        
         performSegue(withIdentifier: "segueToPlaygroundVC", sender: chosenLevel)
         
     }
