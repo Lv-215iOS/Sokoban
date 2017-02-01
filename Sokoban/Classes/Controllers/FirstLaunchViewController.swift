@@ -40,7 +40,7 @@ UINavigationControllerDelegate {
             let alert = UIAlertController(title: "No player name", message: "Please, enter player name", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.cancel, handler: nil))
             self.present(alert, animated: true, completion: nil)
-            
+            return
         }
         if imageDisplay.image != nil {
             PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:imageDisplay.image!)
