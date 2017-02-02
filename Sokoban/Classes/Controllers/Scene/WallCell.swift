@@ -24,6 +24,7 @@ class WallCell: UIView {
         context?.setFillColor(UIColor(red: 0.4392, green: 0.4118, blue: 0.4118, alpha: 1.0).cgColor)
         context?.fill(rect)
         
+        
         context?.setLineWidth((rect.width + rect.height)/100)
         context?.setStrokeColor(UIColor(red: 0.2863, green: 0.0431, blue: 0, alpha: 1.0).cgColor)
         context?.move(to: CGPoint(x: 0, y: 0.04 * rect.height/4))

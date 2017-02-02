@@ -9,7 +9,7 @@ import Foundation
 var coordsOfCell = Array<(cellDetail: String, x: Int, y: Int)>()
 var sceneController = SceneController()
 
-class SceneBuilder : UIView, SceneBuilderInterface {
+class SceneBuilder : SceneBuilderInterface {
     
     var wallViewArray: [WallCell] = []
     var floorViewArray: [FloorCell] = []
@@ -43,7 +43,7 @@ class SceneBuilder : UIView, SceneBuilderInterface {
         
         var countWidth = 0
         var countHeight = 0
-        for levelItem in levelData! {
+        for _ in levelData! {
             drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
             countWidth += 1
             if countWidth == sceneWidth {

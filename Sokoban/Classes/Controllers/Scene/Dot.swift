@@ -19,12 +19,6 @@ class Dot: UIView {
     }
 
     override func draw(_ rect: CGRect) {
-//        let context = UIGraphicsGetCurrentContext()
-//        context?.setFillColor(UIColor.clear.cgColor)
-//        context!.setFillColor(UIColor(red:0.50, green:0.49, blue:0.49, alpha:1.0).cgColor)
-//        context?.fill(rect)
-        
-//        let floor = FloorCell(frame: rect)
         let context = UIGraphicsGetCurrentContext()
         context!.setFillColor(UIColor(red:0.00, green:0.50, blue:0.00, alpha:1.0).cgColor)
         context?.fill(rect)

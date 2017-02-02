@@ -20,11 +20,11 @@ class LaunchScreenViewController: UIViewController {
     @IBOutlet weak var groupNameBottom: NSLayoutConstraint!
     
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        //appTitle.center.y -= view.bounds.height
-        //groupName.center.y += view.bounds.height
-    }
+//    override func viewWillAppear(_ animated: Bool) {
+//        super.viewWillAppear(animated)
+//        //appTitle.center.y -= view.bounds.height
+//        //groupName.center.y += view.bounds.height
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         UIView.animate(withDuration: 2.0, delay: 1.5, usingSpringWithDamping: 5.0, initialSpringVelocity: 8.0, options: [], animations: {

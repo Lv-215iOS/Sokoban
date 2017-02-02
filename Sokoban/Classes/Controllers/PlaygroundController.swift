@@ -14,7 +14,7 @@
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var stepsCountLabel: UILabel!
     
-    var currentIndex: Int?
+    
     var currentLevel: Level?
     
     var isPlaying = false
