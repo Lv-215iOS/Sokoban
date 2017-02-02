@@ -49,6 +49,3 @@ protocol LevelsProviderInterface {
                               sceneMatrix: String)
 }
 
-protocol GameLogic {
-    func isWall(near x: Int, y: Int, move_x: Int, move_y: Int) -> Bool
-}
