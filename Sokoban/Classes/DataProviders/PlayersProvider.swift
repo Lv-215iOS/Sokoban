@@ -53,6 +53,20 @@ class PlayersProvider: PlayersProviderInterface {
     }
     
     /**
+     Resets achivements of player with senders name
+     
+     - Parameter player: player that achivements need to be reset
+     */
+    static func resetScoreFor(player : Player) {
+        player.score = 0
+        if let levels = LevelsProvider.getLevels() {
+            let levelsScores = Array(repeating: 0.0, count: levels.count)
+            player.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
+        }
+        CoreDataStack.sharedStack.saveContext()
+    }
+    
+    /**
      Loads the photo for player with senders name asynchronously
      
      - Parameter name: name of the player that photo needs to get
@@ -108,7 +122,7 @@ class PlayersProvider: PlayersProviderInterface {
      - Parameter levelsScores: Array of level scores for passed levels of player
      - Parameter photo: photo of player
      */
-    static func addPlayerWith(name : String, score : NSNumber, levelsScores: NSArray, photo: UIImage) {
+    static func addPlayerWith(name : String, score : NSNumber, photo: UIImage) {
         let dataStack = CoreDataStack.sharedStack
         let player = Player(context:dataStack.managedContext)
         player.name = name
@@ -116,7 +130,10 @@ class PlayersProvider: PlayersProviderInterface {
         if let photoData = UIImagePNGRepresentation(photo) {
             player.photo = Data(photoData)
         }
-        player.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
+        if let levels = LevelsProvider.getLevels() {
+            let levelsScores = Array(repeating: 0.0, count: levels.count)
+            player.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
+        }
         dataStack.saveContext()
     }
     

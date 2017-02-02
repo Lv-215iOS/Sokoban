@@ -43,10 +43,10 @@ UINavigationControllerDelegate {
             return
         }
         if imageDisplay.image != nil {
-            PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:imageDisplay.image!)
+            PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0,  photo:imageDisplay.image!)
             PlayersProvider.setCurrentPlayerWith(name: addPlayerTextField.text!)
         } else {
-            PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0, levelsScores: [0.0], photo:#imageLiteral(resourceName: "down1.png"))
+            PlayersProvider.addPlayerWith(name: addPlayerTextField.text!, score: 0.0,  photo:#imageLiteral(resourceName: "down1.png"))
             PlayersProvider.setCurrentPlayerWith(name: addPlayerTextField.text!)
         }
         

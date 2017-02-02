@@ -35,7 +35,6 @@ protocol PlayersProviderInterface {
     static func setLevelScoreForCurrentPlayer(level: Level, score: Double)
     static func addPlayerWith(name : String,
                               score : NSNumber,
-                              levelsScores: NSArray,
                               photo: UIImage)
 }
 
