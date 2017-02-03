@@ -146,16 +146,15 @@ class PlayersProvider: PlayersProviderInterface {
     static func setLevelScoreForCurrentPlayer(level: Level, score: Double) {
         guard let player = currentPlayer,
               let levelScores = player.levelsScores,
-              let levelScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelScores) as? NSArray,
+              var levelScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelScores) as? Array<Double>,
               let levelOrder = level.order,
               let playerScore = player.score else {
             return
         }
-        let muttableLevelScores = NSMutableArray(array: levelScoresArray)
-        if (muttableLevelScores[levelOrder.intValue] as? Double) ?? 0 < score {
+        if levelScoresArray[levelOrder.intValue] < score {
             player.score = NSNumber(value: playerScore.intValue + Int(score))
-            muttableLevelScores[levelOrder.intValue] = score
-            currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: NSArray(array: muttableLevelScores))
+            levelScoresArray[levelOrder.intValue] = score
+            currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelScoresArray)
             CoreDataStack.sharedStack.saveContext()
         }
     }
