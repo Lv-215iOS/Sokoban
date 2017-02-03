@@ -318,8 +318,7 @@ class GameLogic: SceneController {
             if block.isHidden {
                 return false
             }
-        }
-        _ = navigationController?.popViewController(animated: true)
+        }        
         return true
     }
 }
