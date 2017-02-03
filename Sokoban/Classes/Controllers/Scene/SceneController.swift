@@ -90,6 +90,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     func unwindToMenu() {
         let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
         let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
+            
             self.performSegue(withIdentifier: "unwindToLevel", sender: self)
         }
         let NextLevel = UIAlertAction(title: "Next Level", style: .default) { (_) in
