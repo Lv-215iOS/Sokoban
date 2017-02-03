@@ -10,14 +10,6 @@ import UIKit
 
 class Dot: UIView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-    }
-
     override func draw(_ rect: CGRect) {
         let context = UIGraphicsGetCurrentContext()
         context!.setFillColor(UIColor(red:0.00, green:0.50, blue:0.00, alpha:1.0).cgColor)
