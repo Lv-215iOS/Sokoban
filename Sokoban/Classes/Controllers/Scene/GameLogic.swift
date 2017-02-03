@@ -320,6 +320,7 @@ class GameLogic: SceneController {
      */
     func isFinish() -> Bool {
         for block in sceneBuilder.blockCellIn {
+
             if block.isHidden {
                 return false
             }

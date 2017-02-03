@@ -18,15 +18,14 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
-        levelsScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelsScoresData!) as! Array
+        getScoresFromDataBase()
     }
-//    override func viewDidAppear(_ animated: Bool) {
-//        
-//        super.viewDidAppear(false)
-//        levelsTableView.reloadData()
-//        
-//    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        super.viewWillAppear(true)
+        getScoresFromDataBase()
+        levelsTableView.reloadData()
+    }
     
     // MARK: - Table view data source
     
@@ -106,6 +105,11 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     }
     @IBAction func unwindToLevel(segue: UIStoryboardSegue) {
         
+    }
+   //Additional funcs
+    func getScoresFromDataBase(){
+        let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
+        levelsScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelsScoresData!) as! Array
     }
     
 }
