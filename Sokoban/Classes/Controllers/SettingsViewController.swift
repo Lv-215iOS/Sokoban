@@ -36,8 +36,15 @@ class SettingsViewController: UIViewController {
         
         sender.highlight()
         
-        let currentPlayer = PlayersProvider.currentPlayer
-
-        PlayersProvider.resetScoreFor(player: currentPlayer!)
+        let alert = UIAlertController(title: "Score", message: "Are you sure you want to reset all scores?", preferredStyle: .alert)
+        let OKAction = UIAlertAction(title: "OK", style: .default) { (_) in
+            let currentPlayer = PlayersProvider.currentPlayer
+            PlayersProvider.resetScoreFor(player: currentPlayer!)        }
+        let CancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+        }
+        alert.addAction(OKAction)
+        alert.addAction(CancelAction)
+        self.present(alert, animated: true, completion: nil)
+        
     }    
 }

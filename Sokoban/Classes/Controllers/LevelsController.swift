@@ -21,7 +21,12 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
         levelsScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelsScoresData!) as! Array
     }
-
+//    override func viewDidAppear(_ animated: Bool) {
+//        
+//        super.viewDidAppear(false)
+//        levelsTableView.reloadData()
+//        
+//    }
     
     // MARK: - Table view data source
     
