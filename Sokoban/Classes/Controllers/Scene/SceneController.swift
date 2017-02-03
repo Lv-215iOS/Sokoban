@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SceneController: GameLogic, UIScrollViewDelegate, SceneControllerInterface {
+class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerInterface {
     
     //MARK: Declaration of values
     var currentLevel: Level!
@@ -80,5 +80,14 @@ class SceneController: GameLogic, UIScrollViewDelegate, SceneControllerInterface
         gameLogic.currentLevel = currentLevel
         gameLogic.playgroundController = playgroundController
         initGame()
+    }
+    
+    func unwindToMenu() {
+        let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
+        let MenuAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+            self.performSegue(withIdentifier: "unwindToLevel", sender: self)
+        }
+        alert.addAction(MenuAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }

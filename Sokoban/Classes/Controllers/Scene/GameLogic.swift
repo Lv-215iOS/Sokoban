@@ -2,13 +2,13 @@
 //  GameLogic.swift
 //  Sokoban
 //
-//  Created by adminaccount on 2/2/17.
+//  Created by Dmytro on 2/2/17.
 //
 //
 
 import UIKit
 
-class GameLogic: UIViewController {
+class GameLogic: SceneController {
     
     //MARK: Declaration of values
     var resetMatrix: String!
@@ -16,8 +16,6 @@ class GameLogic: UIViewController {
     var indexBlock: [Int] = []
     var temp = 0
     var sceneBuilder: SceneBuilder! = SceneBuilder()
-    var currentLevel: Level? = nil
-    var playgroundController: PlaygroundController? = nil
     
     /**
      Initialize blocks
@@ -269,12 +267,7 @@ class GameLogic: UIViewController {
             delay(delay: 1) {
                 if self.isFinish() {
                     self.playgroundController?.ifTheEndOfLevel()
-                    let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
-                    let MenuAction = UIAlertAction(title: "Ok", style: .default) { (_) in
-                        self.performSegue(withIdentifier: "unwindToMenu", sender: self)
-                    }
-                    alert.addAction(MenuAction)
-                    self.present(alert, animated: true, completion: nil)
+                    self.playgroundController.sceneController?.unwindToMenu()
                 }
             }
             return true
