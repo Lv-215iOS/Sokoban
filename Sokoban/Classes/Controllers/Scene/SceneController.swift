@@ -15,6 +15,8 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     var levelController: LevelsController!
     var playgroundController: PlaygroundController!
     var gameLogic: GameLogic!
+    var finishToken = false
+    
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
@@ -27,6 +29,9 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
      - Parameter operation: move direction
      */
     func movePlayerButtons(operation: Moves) {
+        guard !finishToken else {
+            return
+        }
         switch operation {
         case .Right:
             gameLogic.animateImage(images: gameLogic.sceneBuilder.player.imageListRight)
@@ -68,21 +73,14 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         scrollView.layoutIfNeeded()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.backgroundColor = UIColor.gray
-        contentView.backgroundColor = UIColor.gray
- 
-        if UIDevice.current.orientation.isLandscape {
-            scrollView.scrollsToTop = true
-        } else if UIDevice.current.orientation.isPortrait {
-            scrollView.scrollsToTop = true
-        }
         
         contentView.addSubview(gameView)
+        
         gameLogic.initBlocks()
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
         gameLogic = GameLogic()
         gameLogic.currentLevel = currentLevel
         gameLogic.playgroundController = playgroundController
@@ -91,10 +89,18 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     func unwindToMenu() {
         let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
-        let MenuAction = UIAlertAction(title: "Ok", style: .default) { (_) in
+        let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
             self.performSegue(withIdentifier: "unwindToLevel", sender: self)
         }
+        let NextLevel = UIAlertAction(title: "Next Level", style: .default) { (_) in
+            //            let nextLevel = (self.currentLevel.order?.intValue)! + 1 as NSNumber
+            //            self.playgroundController.levelController?.setLevel(num: (self.currentLevel.order?.intValue)!)
+            //            self.restartLevel()
+            //            self.viewDidAppear(true)
+            //            self.playgroundController.levelController?.performSegue(withIdentifier: "segueToPlaygroundVC", sender: nextLevel)
+        }
         alert.addAction(MenuAction)
+        alert.addAction(NextLevel)
         self.present(alert, animated: true, completion: nil)
     }
 }
