@@ -21,6 +21,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         let levelsScoresData = PlayersProvider.currentPlayer?.levelsScores
         levelsScoresArray = NSKeyedUnarchiver.unarchiveObject(with: levelsScoresData!) as! Array
     }
+
     
     // MARK: - Table view data source
     
@@ -61,8 +62,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
         
         if indexPath.row < levelsScoresArray.count {//level score in levelScoreLabel
             let levelScore = levelsScoresArray[indexPath.row]
-            cell.levelScoreLabel.text = String(describing: levelScore)
-            
+            cell.levelScoreLabel.text = String(describing: String(format: "%.2f",  levelScore))
             if levelScore > 0.0 {//sets correct levelStateImage
                 cell.levelStateImage.image = UIImage(named: "levelPassedImage")
                 cell.levelScoreLabel.textColor = UIColor.yellow
@@ -70,7 +70,6 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
                 cell.levelScoreLabel.text = "Untried"
                 cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
             }
-            
         } else {
             cell.levelScoreLabel.text = "Untried"
             cell.levelStateImage.image = UIImage(named: "levelNotPassedImage")
@@ -103,7 +102,7 @@ class LevelsController: UIViewController, UITableViewDelegate, UITableViewDataSo
     @IBAction func unwindToLevel(segue: UIStoryboardSegue) {
         
     }
-
+    
 }
 
 

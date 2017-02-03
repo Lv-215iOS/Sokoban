@@ -37,12 +37,7 @@ class SettingsViewController: UIViewController {
         sender.highlight()
         
         let currentPlayer = PlayersProvider.currentPlayer
-        var levelsScores = Array<Any>()
-        
-        currentPlayer?.score = 0.0
-        levelsScores = [0.0]
-        currentPlayer?.levelsScores = NSKeyedArchiver.archivedData(withRootObject: levelsScores)
-        
-        PlayersProvider.saveCurrentPlayer()
+
+        PlayersProvider.resetScoreFor(player: currentPlayer!)
     }    
 }
