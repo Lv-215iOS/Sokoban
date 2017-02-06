@@ -12,10 +12,10 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     //MARK: Declaration of values
     var currentLevel: Level!
-    var levelController: LevelsController!
     var playgroundController: PlaygroundController!
     var gameLogic: GameLogic!
     var finishToken = false
+    var playView: UIView!
     
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -67,6 +67,7 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         gameLogic.sceneBuilder.player.initPlayer()
         
         let gameView = gameLogic.sceneBuilder.getSceneCanvas(level: currentLevel!)
+        playView = gameView
         
         contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
         contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
@@ -89,16 +90,20 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     func unwindToMenu() {
         let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
-        let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in
-            
+        let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in            
             self.performSegue(withIdentifier: "unwindToLevel", sender: self)
         }
         let NextLevel = UIAlertAction(title: "Next Level", style: .default) { (_) in
-            //            let nextLevel = (self.currentLevel.order?.intValue)! + 1 as NSNumber
-            //            self.playgroundController.levelController?.setLevel(num: (self.currentLevel.order?.intValue)!)
-            //            self.restartLevel()
-            //            self.viewDidAppear(true)
-            //            self.playgroundController.levelController?.performSegue(withIdentifier: "segueToPlaygroundVC", sender: nextLevel)
+            self.playView.removeFromSuperview()
+            
+            let nextLevel = (self.currentLevel.order?.intValue)! + 1
+            self.currentLevel = LevelsProvider.getLevels()?[nextLevel]
+            
+            self.gameLogic = GameLogic()
+            self.gameLogic.currentLevel = self.currentLevel
+            self.gameLogic.playgroundController = self.playgroundController
+            
+            self.restartLevel()
         }
         alert.addAction(MenuAction)
         alert.addAction(NextLevel)
