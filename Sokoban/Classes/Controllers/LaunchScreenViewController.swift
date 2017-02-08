@@ -66,7 +66,7 @@ class LaunchScreenViewController: UIViewController {
         } else {
             defaults.set(true, forKey: "isAppAlreadyLaunchedOnce")
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            let vc: FirstLaunchViewController = storyboard.instantiateViewController(withIdentifier: "firstViewController") as! FirstLaunchViewController
+            let vc: CreateNewPlayerViewController = storyboard.instantiateViewController(withIdentifier: "firstViewController") as! CreateNewPlayerViewController
             self.present(vc, animated: true, completion: nil)
         }
     }

@@ -19,7 +19,7 @@ extension CGSize{
 
 import UIKit
 
-class FirstLaunchViewController: UIViewController,
+class CreateNewPlayerViewController: UIViewController,
     UIImagePickerControllerDelegate,
 UINavigationControllerDelegate {
     
