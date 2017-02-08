@@ -22,12 +22,10 @@ class LaunchScreenViewController: UIViewController {
             self.view.layoutIfNeeded()
             
         }, completion: {(finished:Bool) in
-            
             self.whatControllerToOpen()
         })
         
         UIView.animate(withDuration: 1.5, animations: {
-            
             self.appTitleCenter.constant = 0
             self.view.layoutIfNeeded()
             self.appTitle.transform = CGAffineTransform(rotationAngle: CGFloat.pi)
@@ -53,11 +51,9 @@ class LaunchScreenViewController: UIViewController {
         } else {
             AudioPlayer.sharedInstance.backgroundMusic()
         }
-        
     }
     
-    func whatControllerToOpen()
-    {
+    func whatControllerToOpen() {
         if defaults.string(forKey: "isAppAlreadyLaunchedOnce") != nil && PlayersProvider.getPlayers()!.count != 0 {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             let vc: UINavigationController = storyboard.instantiateViewController(withIdentifier: "secondViewController") as! UINavigationController
