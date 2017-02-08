@@ -99,6 +99,15 @@ class GameLogic: SceneController {
                 self.swapSymbol(x: x_pos, y: y_pos, x_next: x_pos + x, y_next: y_pos + y)
             }
         }
+        delay(delay: 0.25) {
+            if self.isFinish() {
+                self.delay(delay: 0.75) {
+                    self.playgroundController?.ifTheEndOfLevel()
+                    self.playgroundController.sceneController?.unwindToMenu()
+                }
+            }
+        }
+        
     }
     
     /**
@@ -254,20 +263,16 @@ class GameLogic: SceneController {
                 index = self.matrix?.index((self.matrix?.startIndex)!, offsetBy: self.indexBlock[block_index])
                 
                 if self.isBlockOnDot(block: self.sceneBuilder.blockCellOut[block_index]) {
-                    self.delay(delay: 0.25) {
-                        self.sceneBuilder.blockCellOut[block_index].isHidden = true
-                        let num = self.findBlockIn(center: self.sceneBuilder.blockCellOut[block_index].center)
-                        if num != -1 {
+                    let num = self.findBlockIn(center: self.sceneBuilder.blockCellOut[block_index].center)
+                    if num != -1 {
+                        self.delay(delay: 0.25) {
                             self.sceneBuilder.blockCellIn[num].isHidden = false
                         }
                     }
-                }
-            }
-            
-            delay(delay: 1) {
-                if self.isFinish() {
-                    self.playgroundController?.ifTheEndOfLevel()
-                    self.playgroundController.sceneController?.unwindToMenu()
+                    self.delay(delay: 0.25) {
+                        self.sceneBuilder.blockCellOut[block_index].isHidden = true
+                        
+                    }
                 }
             }
             return true
@@ -315,10 +320,11 @@ class GameLogic: SceneController {
      */
     func isFinish() -> Bool {
         for block in sceneBuilder.blockCellIn {
+
             if block.isHidden {
                 return false
             }
-        }        
+        }
         return true
     }
 }

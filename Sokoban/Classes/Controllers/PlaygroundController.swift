@@ -27,7 +27,6 @@
     var timeInSecs = 0.0
     var score = 0.0
     
-    
     var sceneController: SceneController? = nil
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

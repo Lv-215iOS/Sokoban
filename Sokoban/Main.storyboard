@@ -157,7 +157,7 @@
             </objects>
             <point key="canvasLocation" x="1024.8" y="-145.27736131934034"/>
         </scene>
-        <!--Levels-->
+        <!--Levels Controller-->
         <scene sceneID="qP0-PY-fmb">
             <objects>
                 <viewController id="6zC-wU-xla" customClass="LevelsController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -248,7 +248,30 @@
                             <constraint firstAttribute="trailing" secondItem="l47-tY-5Pj" secondAttribute="trailing" id="fub-hY-qGS"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Levels" id="Vox-uc-b8q"/>
+                    <navigationItem key="navigationItem" id="Vox-uc-b8q">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="vJu-z4-ZnK">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Levels" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yYP-5f-0oH">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="iA2-d3-XqU"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="yYP-5f-0oH" secondAttribute="trailing" id="CeR-4M-v9b"/>
+                                <constraint firstItem="yYP-5f-0oH" firstAttribute="centerY" secondItem="vJu-z4-ZnK" secondAttribute="centerY" id="UUt-cB-mCn"/>
+                                <constraint firstItem="yYP-5f-0oH" firstAttribute="leading" secondItem="vJu-z4-ZnK" secondAttribute="leading" id="baT-9t-iz3"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="levelsTableView" destination="l47-tY-5Pj" id="aQ4-d0-Cu2"/>
                         <segue destination="QUR-DB-LXs" kind="show" identifier="segueToPlaygroundVC" id="PkV-WL-o5F"/>
@@ -258,7 +281,7 @@
             </objects>
             <point key="canvasLocation" x="1936.8" y="-145.27736131934034"/>
         </scene>
-        <!--Playground-->
+        <!--Playground Controller-->
         <scene sceneID="Q9n-MC-Tpb">
             <objects>
                 <viewController id="QUR-DB-LXs" customClass="PlaygroundController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -436,7 +459,30 @@
                             <constraint firstItem="653-2J-eeT" firstAttribute="trailing" secondItem="p12-8A-mal" secondAttribute="trailing" id="zmy-Rc-a8X"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Playground" id="MKp-NB-VYs"/>
+                    <navigationItem key="navigationItem" id="MKp-NB-VYs">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="y2E-eu-BUQ">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Playground" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ig0-ta-Lqf">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="xbO-bn-3YU"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="trailing" secondItem="ig0-ta-Lqf" secondAttribute="trailing" id="FfS-WK-zpc"/>
+                                <constraint firstItem="ig0-ta-Lqf" firstAttribute="leading" secondItem="y2E-eu-BUQ" secondAttribute="leading" id="YgK-RK-3Af"/>
+                                <constraint firstItem="ig0-ta-Lqf" firstAttribute="centerY" secondItem="y2E-eu-BUQ" secondAttribute="centerY" id="wAG-65-sOQ"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="movesCountLabel" destination="p9W-Iv-2lI" id="BHB-nN-dFu"/>
                         <outlet property="playPauseButton" destination="fg8-Fk-HAL" id="STp-oo-Egh"/>
@@ -451,7 +497,7 @@
             </objects>
             <point key="canvasLocation" x="2941.5999999999999" y="-145.27736131934034"/>
         </scene>
-        <!--Leaderboard-->
+        <!--Leaderboard View Controller-->
         <scene sceneID="YJp-ys-4Tn">
             <objects>
                 <viewController id="afe-sH-Awm" customClass="LeaderboardViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -531,7 +577,30 @@
                             <constraint firstItem="Bvs-SK-rD1" firstAttribute="leading" secondItem="xfP-zm-yfW" secondAttribute="leading" id="cwC-0E-0ir"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Leaderboard" id="iyD-ux-7Lc"/>
+                    <navigationItem key="navigationItem" id="iyD-ux-7Lc">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="4Sy-CE-YBT">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VEy-SC-FX5">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="UmD-vt-rlT"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="VEy-SC-FX5" firstAttribute="centerY" secondItem="4Sy-CE-YBT" secondAttribute="centerY" id="8Iw-uc-gie"/>
+                                <constraint firstAttribute="trailing" secondItem="VEy-SC-FX5" secondAttribute="trailing" id="oI3-q2-P0B"/>
+                                <constraint firstItem="VEy-SC-FX5" firstAttribute="leading" secondItem="4Sy-CE-YBT" secondAttribute="leading" id="qOS-ZB-Eae"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="leaderTableView" destination="Bvs-SK-rD1" id="veh-mR-LQl"/>
                     </connections>
@@ -540,7 +609,7 @@
             </objects>
             <point key="canvasLocation" x="1880.8" y="755.17241379310349"/>
         </scene>
-        <!--Settings-->
+        <!--Settings View Controller-->
         <scene sceneID="5Pd-U4-582">
             <objects>
                 <viewController id="7un-kc-RhZ" customClass="SettingsViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -559,9 +628,8 @@
                                     <constraint firstAttribute="width" constant="116" id="icS-Ac-5Cn"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" red="0.98431372549019602" green="0.5725490196078431" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zoe-jM-MHx">
                                 <rect key="frame" x="297" y="99" width="51" height="31"/>
@@ -581,9 +649,8 @@
                                     <constraint firstAttribute="width" constant="172" id="bD8-Vi-apQ"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                <color key="textColor" red="0.98431372549019602" green="0.5725490196078431" blue="0.21568627450980393" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
-                                <color key="shadowColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K1e-ge-l2i">
                                 <rect key="frame" x="302" y="161" width="40" height="40"/>
@@ -609,7 +676,30 @@
                             <constraint firstItem="ERI-2F-KgT" firstAttribute="top" secondItem="N48-Pi-RgA" secondAttribute="bottom" constant="18" id="q9U-vp-0gA"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Settings" id="59e-Iu-c6A"/>
+                    <navigationItem key="navigationItem" id="59e-Iu-c6A">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="TEu-g6-GHX">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Settings" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Sgy-HL-Pxt">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="Kcp-xb-33s"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Sgy-HL-Pxt" firstAttribute="leading" secondItem="TEu-g6-GHX" secondAttribute="leading" id="ChP-Cg-jAp"/>
+                                <constraint firstAttribute="trailing" secondItem="Sgy-HL-Pxt" secondAttribute="trailing" id="NAO-as-oHq"/>
+                                <constraint firstItem="Sgy-HL-Pxt" firstAttribute="centerY" secondItem="TEu-g6-GHX" secondAttribute="centerY" id="RW3-tW-dGx"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="soundSwitch" destination="zoe-jM-MHx" id="8qB-8D-frY"/>
                     </connections>
@@ -618,7 +708,7 @@
             </objects>
             <point key="canvasLocation" x="2661.5999999999999" y="635.53223388305855"/>
         </scene>
-        <!--About-->
+        <!--About View Controller-->
         <scene sceneID="8A0-AL-wLE">
             <objects>
                 <viewController id="C6h-Db-VEZ" customClass="AboutViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -637,13 +727,36 @@
                         </subviews>
                         <color key="backgroundColor" red="0.41176470590000003" green="0.52549019610000003" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
-                    <navigationItem key="navigationItem" title="About" id="1YI-Ld-aIr"/>
+                    <navigationItem key="navigationItem" id="1YI-Ld-aIr">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="rFR-AI-qF1">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6F7-SI-iyp">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="JdE-ar-9Kp"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="6F7-SI-iyp" firstAttribute="leading" secondItem="rFR-AI-qF1" secondAttribute="leading" id="8IQ-yd-Ss7"/>
+                                <constraint firstAttribute="trailing" secondItem="6F7-SI-iyp" secondAttribute="trailing" id="DkP-1c-jDM"/>
+                                <constraint firstItem="6F7-SI-iyp" firstAttribute="centerY" secondItem="rFR-AI-qF1" secondAttribute="centerY" id="jlf-HA-1ND"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ANK-N3-7dB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1024.8" y="635.53223388305855"/>
         </scene>
-        <!--Players-->
+        <!--Players View Controller-->
         <scene sceneID="LQd-Il-9it">
             <objects>
                 <viewController storyboardIdentifier="ThirdViewController" id="0S6-c6-Kyf" customClass="PlayersViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -722,7 +835,29 @@
                             <constraint firstAttribute="trailing" secondItem="uES-2a-Sgr" secondAttribute="trailing" id="m7T-xQ-pNe"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Players" id="iZT-7R-e16">
+                    <navigationItem key="navigationItem" id="iZT-7R-e16">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="FqT-hw-r8R">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Players" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="94B-hs-G5l">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="GwT-mT-fTC"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="94B-hs-G5l" firstAttribute="centerY" secondItem="FqT-hw-r8R" secondAttribute="centerY" id="awE-Wl-fsp"/>
+                                <constraint firstItem="94B-hs-G5l" firstAttribute="leading" secondItem="FqT-hw-r8R" secondAttribute="leading" id="q7U-B8-GFb"/>
+                                <constraint firstAttribute="trailing" secondItem="94B-hs-G5l" secondAttribute="trailing" id="rcn-LG-SzW"/>
+                            </constraints>
+                        </view>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="4Rh-Gt-qze">
                             <connections>
                                 <segue destination="LcD-bc-KWO" kind="show" id="xCp-in-vCa"/>
@@ -750,12 +885,12 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="menuBackground" translatesAutoresizingMaskIntoConstraints="NO" id="fHY-sV-eX6">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <visualEffectView opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b5T-oj-ih9">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="2tg-Fp-zLh">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
                                 <blurEffect style="light"/>
@@ -808,9 +943,10 @@
             <objects>
                 <navigationController storyboardIdentifier="secondViewController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1wN-0q-fst" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="xQA-8J-8OI">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="xQA-8J-8OI">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         <color key="barTintColor" red="0.14901960784313725" green="0.22352941176470589" blue="0.29411764705882354" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -878,7 +1014,7 @@
             </objects>
             <point key="canvasLocation" x="3911" y="-146"/>
         </scene>
-        <!--Add player-->
+        <!--First Launch View Controller-->
         <scene sceneID="FdN-xz-HJx">
             <objects>
                 <viewController storyboardIdentifier="firstViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="LcD-bc-KWO" customClass="FirstLaunchViewController" customModule="Sokoban" customModuleProvider="target" sceneMemberID="viewController">
@@ -1014,7 +1150,30 @@
                             <constraint firstItem="sT2-wR-8VM" firstAttribute="top" secondItem="4df-9I-XGy" secondAttribute="bottom" constant="8" id="wd8-HL-bI3"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add player" id="jo1-1v-cpo"/>
+                    <navigationItem key="navigationItem" id="jo1-1v-cpo">
+                        <nil key="title"/>
+                        <view key="titleView" contentMode="scaleToFill" id="0pZ-lb-6He">
+                            <rect key="frame" x="113" y="6" width="150" height="33"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add player" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PEc-Nc-5fe">
+                                    <rect key="frame" x="0.0" y="4" width="150" height="25"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="25" id="QDr-mK-Rcn"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="22"/>
+                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="PEc-Nc-5fe" firstAttribute="centerY" secondItem="0pZ-lb-6He" secondAttribute="centerY" id="LdF-3G-Bga"/>
+                                <constraint firstAttribute="trailing" secondItem="PEc-Nc-5fe" secondAttribute="trailing" id="lY7-hf-9Ir"/>
+                                <constraint firstItem="PEc-Nc-5fe" firstAttribute="leading" secondItem="0pZ-lb-6He" secondAttribute="leading" id="xmT-E8-Oxb"/>
+                            </constraints>
+                        </view>
+                    </navigationItem>
                     <connections>
                         <outlet property="addPlayerTextField" destination="NAM-hn-pZL" id="IWQ-nm-Wkh"/>
                         <outlet property="createNewPlayerButton" destination="F1a-qH-1Qi" id="j33-yo-ogL"/>
