@@ -51,6 +51,7 @@
 		84C1A7551E2F739600FCB4C3 /* Sokoban.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A7531E2F739600FCB4C3 /* Sokoban.xcdatamodeld */; };
 		84C1A75C1E2F74D300FCB4C3 /* LevelsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */; };
 		84C1A75E1E2F74F800FCB4C3 /* PlaygroundController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */; };
+		8B21EDF21E486D49002D5AAE /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8B21EDF11E486D49002D5AAE /* MapKit.framework */; };
 		8B2794B51E2E5F8600A93642 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2794B41E2E5F8600A93642 /* AppDelegate.swift */; };
 		8B2794BF1E2E5F8600A93642 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2794BE1E2E5F8600A93642 /* Assets.xcassets */; };
 		8B2794C21E2E5F8600A93642 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2794C01E2E5F8600A93642 /* LaunchScreen.storyboard */; };
@@ -133,6 +134,7 @@
 		84C1A7541E2F739600FCB4C3 /* Sokoban.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Sokoban.xcdatamodel; sourceTree = "<group>"; };
 		84C1A75B1E2F74D300FCB4C3 /* LevelsProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LevelsProvider.swift; sourceTree = "<group>"; };
 		84C1A75D1E2F74F800FCB4C3 /* PlaygroundController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PlaygroundController.swift; path = Classes/Controllers/PlaygroundController.swift; sourceTree = "<group>"; };
+		8B21EDF11E486D49002D5AAE /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		8B2794B11E2E5F8600A93642 /* Sokoban.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sokoban.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8B2794B41E2E5F8600A93642 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8B2794BE1E2E5F8600A93642 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8B21EDF21E486D49002D5AAE /* MapKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +326,14 @@
 			path = Classes/DataProviders;
 			sourceTree = "<group>";
 		};
+		8B21EDF01E486D49002D5AAE /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8B21EDF11E486D49002D5AAE /* MapKit.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8B2794A81E2E5F8600A93642 = {
 			isa = PBXGroup;
 			children = (
@@ -331,6 +342,7 @@
 				8B2794CB1E2E5F8600A93642 /* SokobanTests */,
 				8B2794D61E2E5F8600A93642 /* SokobanUITests */,
 				8B2794B21E2E5F8600A93642 /* Products */,
+				8B21EDF01E486D49002D5AAE /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -448,6 +460,14 @@
 						DevelopmentTeam = M3UST45RNV;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Maps.iOS = {
+								enabled = 0;
+							};
+						};
 					};
 					8B2794C71E2E5F8600A93642 = {
 						CreatedOnToolsVersion = 8.2;

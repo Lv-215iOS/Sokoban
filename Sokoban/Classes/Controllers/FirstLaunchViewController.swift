@@ -16,11 +16,7 @@ extension CGSize{
         self.init(width:width,height:height)
     }
 }
-extension CGPoint{
-    init(_ x:CGFloat,_ y:CGFloat) {
-        self.init(x:x,y:y)
-    }
-}
+
 import UIKit
 
 class FirstLaunchViewController: UIViewController,
