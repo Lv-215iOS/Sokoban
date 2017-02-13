@@ -67,21 +67,27 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
         gameLogic.sceneBuilder.player.initPlayer()
         
         let gameView = gameLogic.sceneBuilder.getSceneCanvas(level: currentLevel!)
-        playView = gameView
         
         contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
         contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
         scrollView.layoutIfNeeded()
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
+        scrollView.backgroundColor = UIColor.gray
+        contentView.backgroundColor = UIColor.gray
+        
+        if UIDevice.current.orientation.isLandscape {
+            scrollView.scrollsToTop = true
+        } else if UIDevice.current.orientation.isPortrait {
+            scrollView.scrollsToTop = true
+        }
         
         contentView.addSubview(gameView)
-        
         gameLogic.initBlocks()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    override func viewDidLoad() {
+        super.viewDidLoad()
         gameLogic = GameLogic()
         gameLogic.currentLevel = currentLevel
         gameLogic.playgroundController = playgroundController
