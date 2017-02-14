@@ -26,6 +26,7 @@ class PlayersProvider: PlayersProviderInterface {
         return fetchController
     }()
     
+    /// Player which is playing for now
     static private(set) var currentPlayer : Player? = {
         let request = Player.fetchRequest()
         let players = getPlayers()
@@ -76,12 +77,14 @@ class PlayersProvider: PlayersProviderInterface {
         let request = Player.fetchRequest()
         request.predicate = NSPredicate(format: "%K == %@", #keyPath(Player.name), name)
         let asynchRequst = NSAsynchronousFetchRequest<Player>(fetchRequest: request) { result in
-            if result.finalResult?.count ?? 0 > 0, let data = result.finalResult?[0].photo {
-                completionHandler(UIImage(data: data))
+            if let fetchedResult = result.finalResult {
+                if fetchedResult.count > 0, let data = fetchedResult[0].photo {
+                    completionHandler(UIImage(data: data))
+                }
             }
         }
         do {
-            try CoreDataStack.sharedStack.managedContext.execute(asynchRequst)
+            try CoreDataStack.sharedStack.privateManagedContext.execute(asynchRequst)
         } catch let error as NSError {
             print("Could not fetch \(error), \(error.userInfo)")
         }
@@ -158,6 +161,7 @@ class PlayersProvider: PlayersProviderInterface {
             CoreDataStack.sharedStack.saveContext()
         }
     }
+    
     /**
      Saves changes, that was made to currentPlayer
     */

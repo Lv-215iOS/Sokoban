@@ -30,6 +30,13 @@ class CoreDataStack {
         return mangedContext
     }()
     
+    /// Context for background fetches
+    lazy var privateManagedContext : NSManagedObjectContext = {
+        let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+        privateContext.parent = self.managedContext
+        return privateContext
+    }()
+    
     func saveContext() {
         guard managedContext.hasChanges else { return }
         do  {

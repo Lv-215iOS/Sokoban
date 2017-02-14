@@ -48,7 +48,6 @@ extension LeaderboardViewController: UITableViewDataSource {
             leaderBoardCell.order.text = String(indexPath.row + 1)
             return leaderBoardCell
         }
-        
         let player = PlayersProvider.fetchedResultController.object(at: indexPath)
         
         if let playerScore = player.score,
@@ -58,7 +57,6 @@ extension LeaderboardViewController: UITableViewDataSource {
         }
         leaderBoardCell.playerName.text = player.name
         leaderBoardCell.order.text = String(indexPath.row + 1)
-        
         return leaderBoardCell
     }
 }

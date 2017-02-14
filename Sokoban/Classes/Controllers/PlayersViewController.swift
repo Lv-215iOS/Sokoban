@@ -28,10 +28,6 @@ class PlayersViewController: UIViewController {
         playersTableView.delegate = self
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        playersTableView.reloadData()
-    }
-    
 }
 
 // MARK: - UITableViewDataSource
@@ -45,28 +41,37 @@ extension PlayersViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: playerCellIdentifier, for: indexPath)
-        guard let playerCell = cell as? CustomPlayerCell else {
-            return cell
+        let tableViewCell = tableView.dequeueReusableCell(withIdentifier: playerCellIdentifier, for: indexPath)
+        guard let playerCell = tableViewCell as? CustomPlayerCell else {
+            return tableViewCell
         }
         let player = playersResultsController.object(at: indexPath)
-        // if player in current cell is currentPlayer, check cell
+        
+        // If player in current cell is currentPlayer, check cell
         if player == PlayersProvider.currentPlayer {
+            if let checkedCell = tableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) {
+                checkedCell.accessoryType = .none
+            }
             playerCell.accessoryType = .checkmark
             selectedIndex = indexPath.row
             tableView.selectRow(at: indexPath, animated: false, scrollPosition: .bottom)
         } else {
             playerCell.accessoryType = .none
         }
-        PlayersProvider.asynchGetPhotoForPlayer(player.name!) { (image) in
-            DispatchQueue.main.async {
-                playerCell.playerImageView.image = image
-                playerCell.removeActivityIndicator()
-            }
+        guard let playerScore = player.score,
+            let playerName = player.name  else {
+            return playerCell
         }
         playerCell.playerName.text = player.name
-        if let playerScore = player.score {
-            playerCell.playerScore.text = "score - " + playerScore.stringValue
+        playerCell.playerScore.text = "score - " + playerScore.stringValue
+        PlayersProvider.asynchGetPhotoForPlayer(playerName) { (image) in
+            DispatchQueue.main.async {
+                if let cell = tableView.cellForRow(at: indexPath) ,
+                    let gamerCell = cell as? CustomPlayerCell {
+                    gamerCell.playerImageView.image = image
+                    gamerCell.removeActivityIndicator()
+                }
+            }
         }
         return playerCell
     }
@@ -75,6 +80,7 @@ extension PlayersViewController: UITableViewDataSource {
         guard editingStyle == .delete else {
             return
         }
+        
         // If deleting last player in table, present alert
         if playersTableView.numberOfRows(inSection: 0) == 1 {
             let alert = UIAlertController(title: "Can't delete last user", message: nil, preferredStyle: .alert)
@@ -122,34 +128,22 @@ extension PlayersViewController: NSFetchedResultsControllerDelegate {
         
         switch type {
         case .insert:
-            CoreDataStack.sharedStack.saveContext()
             playersTableView.insertRows(at: [newIndexPath!], with: .automatic)
             let player = playersResultsController.object(at: newIndexPath!)
-            guard let cell = playersTableView.cellForRow(at: newIndexPath!) as? CustomPlayerCell,
-                let playerName = player.name,
-                let playerScore = player.score else {
-                    break
+            if let playerName = player.name {
+                PlayersProvider.setCurrentPlayerWith(name: playerName)
             }
-            PlayersProvider.asynchGetPhotoForPlayer(playerName) { (image) in
-                DispatchQueue.main.async {
-                    cell.playerImageView.image = image
-                    cell.removeActivityIndicator()
-                }
-            }
-            cell.playerName.text = playerName
-            cell.playerScore.text = "score - " + playerScore.stringValue
-            selectedIndex = newIndexPath!.row
-            
         case .delete:
-            let path = IndexPath(row: 0, section: 0)
-            guard let firstCell = playersTableView.cellForRow(at: path) as? CustomPlayerCell,
+            let zeroPath = IndexPath(row: 0, section: 0)
+            guard let firstCell = playersTableView.cellForRow(at: zeroPath) as? CustomPlayerCell,
                 let player = PlayersProvider.currentPlayer,
                 let firstCellText = firstCell.playerName.text,
-                let currentCellText = (playersTableView.cellForRow(at: indexPath!) as? CustomPlayerCell)?.playerName.text else {
+                let currentCell = playersTableView.cellForRow(at: indexPath!) as? CustomPlayerCell,
+                let currentCellText = currentCell.playerName.text else {
                     return
             }
             if player.name == currentCellText {
-                if indexPath == IndexPath(row: 0, section: 0) {
+                if indexPath == zeroPath {
                     if let secondCell = playersTableView.cellForRow(at: IndexPath(row: 1, section: 0)) as? CustomPlayerCell,
                         let secondCellText = secondCell.playerName.text {
                         secondCell.accessoryType = .checkmark
