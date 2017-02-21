@@ -17,7 +17,6 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     var finishToken = false
     var playView: UIView!
     
-    
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var contentWidth: NSLayoutConstraint!
@@ -64,10 +63,9 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
      Initialize the game
      */
     func initGame() {
-        gameLogic.sceneBuilder.player.initPlayer()
-        
         let gameView = gameLogic.sceneBuilder.getSceneCanvas(level: currentLevel!)
         
+        gameLogic.sceneBuilder.player.initPlayer()
         contentWidth.constant = max(gameView.frame.size.width, scrollView.frame.size.width)
         contentHeight.constant = max(gameView.frame.size.height, scrollView.frame.size.height)
         scrollView.layoutIfNeeded()
@@ -96,23 +94,10 @@ class SceneController: UIViewController, UIScrollViewDelegate, SceneControllerIn
     
     func unwindToMenu() {
         let alert = UIAlertController(title: "Congratulations", message: String(format: "Score: %.2f", self.playgroundController!.score), preferredStyle: .alert)
-        let MenuAction = UIAlertAction(title: "Menu", style: .default) { (_) in            
+        let MenuAction = UIAlertAction(title: "Levels", style: .default) { (_) in
             self.performSegue(withIdentifier: "unwindToLevel", sender: self)
         }
-        let NextLevel = UIAlertAction(title: "Next Level", style: .default) { (_) in
-            self.playView.removeFromSuperview()
-            
-            let nextLevel = (self.currentLevel.order?.intValue)! + 1
-            self.currentLevel = LevelsProvider.getLevels()?[nextLevel]
-            
-            self.gameLogic = GameLogic()
-            self.gameLogic.currentLevel = self.currentLevel
-            self.gameLogic.playgroundController = self.playgroundController
-            
-            self.restartLevel()
-        }
         alert.addAction(MenuAction)
-        alert.addAction(NextLevel)
         self.present(alert, animated: true, completion: nil)
     }
 }

@@ -92,7 +92,6 @@ class GameLogic: SceneController {
                     return
                 }
             }
-            
             UIView.animate(withDuration: 0.35) {
                 player.center.x += CGFloat(x) * player.bounds.size.width
                 player.center.y += CGFloat(y) * player.bounds.size.height
@@ -213,7 +212,6 @@ class GameLogic: SceneController {
         return nil
     }
     
-    
     /**
      Moves block with direction
      
@@ -271,7 +269,6 @@ class GameLogic: SceneController {
                     }
                     self.delay(delay: 0.25) {
                         self.sceneBuilder.blockCellOut[block_index].isHidden = true
-                        
                     }
                 }
             }
@@ -320,7 +317,7 @@ class GameLogic: SceneController {
      */
     func isFinish() -> Bool {
         for block in sceneBuilder.blockCellIn {
-
+            
             if block.isHidden {
                 return false
             }

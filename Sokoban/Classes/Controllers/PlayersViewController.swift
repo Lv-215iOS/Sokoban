@@ -27,7 +27,6 @@ class PlayersViewController: UIViewController {
         playersTableView.dataSource = self
         playersTableView.delegate = self
     }
-    
 }
 
 // MARK: - UITableViewDataSource

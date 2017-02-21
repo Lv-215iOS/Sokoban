@@ -1,12 +1,12 @@
 
- //  Sokoban
- //
- //  Created by admin on 1/18/17.
- //
- //
- import UIKit
- 
- class PlaygroundController: UIViewController {
+//  Sokoban
+//
+//  Created by admin on 1/18/17.
+//
+//
+import UIKit
+
+class PlaygroundController: UIViewController {
     
     @IBOutlet weak var movesCountLabel: UILabel!
     @IBOutlet weak var playPauseButton: UIButton!
@@ -14,19 +14,15 @@
     @IBOutlet weak var restartButton: UIButton!
     @IBOutlet weak var stepsCountLabel: UILabel!
     
-    
     var currentLevel: Level?
-    
     var isPlaying = false
     var timer = Timer()
     var time = 0
     var movesCount = 0
-    
     var minMoves = 1.0
     var minTime = 1.0
     var timeInSecs = 0.0
     var score = 0.0
-    
     var sceneController: SceneController? = nil
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -40,7 +36,6 @@
     @IBAction func MoveAction(_ sender: UIButton) {
         sceneController?.movePlayerButtons(operation: Moves(rawValue: sender.tag)!)
     }
-    
     
     @IBAction func backToMenu(_ sender: UIButton) {
         let alert = UIAlertController(title: "Back to menu", message: "Are you sure you want to quit the game?", preferredStyle: .alert)
@@ -65,8 +60,7 @@
     
     override func viewDidLoad() {
         
-        print(currentLevel?.name ?? "ERROR!!!!!!")
-        
+        print(currentLevel?.name ?? "ERROR!!!")
     }
     
     func ifTheEndOfLevel() {
@@ -112,6 +106,4 @@
             isPlaying = true
         }
     }
-    
-    
- }
+}

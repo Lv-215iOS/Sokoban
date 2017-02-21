@@ -17,13 +17,10 @@ class SceneBuilder : SceneBuilderInterface {
     var blockCellOut: [BlockCellOut] = []
     var dotCell: [Dot] = []
     var playerView: UIImageView!
-    
     var player = PlayerCell()
-    
     var dimensionOfCell = 40
     var sceneWidth = 0
     var sceneHeight = 0
-    
     var scene: UIView? = nil
     func getSceneCanvas(level: Level) -> UIView {
         
@@ -33,10 +30,7 @@ class SceneBuilder : SceneBuilderInterface {
         let levelData = levelStr?.characters.map { String($0) }
         
         scene = UIView(frame: CGRect(x: 0, y: 0, width: sceneWidth * dimensionOfCell, height: sceneHeight * dimensionOfCell))
-//        scene?.backgroundColor = UIColor.gray
-        
-        
-        
+
         var playerCoordX: Int = 0
         var playerCoordY: Int = 0
         var i = 0
@@ -56,7 +50,6 @@ class SceneBuilder : SceneBuilderInterface {
          countHeight = 0
         
         for levelItem in levelData! {
-//            drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
             switch levelItem {
             case "#":
                 drawWall(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
@@ -120,5 +113,4 @@ class SceneBuilder : SceneBuilderInterface {
         dotCell.append(Dot(frame: frame))
         scene?.addSubview(dotCell.last!)
     }
-    
 }

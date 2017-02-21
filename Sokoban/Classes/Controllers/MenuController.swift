@@ -11,30 +11,19 @@ import UIKit
 class MenuController: UIViewController {
     
     @IBOutlet weak var userListButton: UIButton!
-    
-
     @IBOutlet weak var menuPlayButton: UIButton!
-    
-
     @IBOutlet weak var menuLeaderboardButton: UIButton!
-    
-
     @IBOutlet weak var menuSettingsButton: UIButton!
-
     @IBOutlet weak var menuAboutButton: UIButton!
-    
-
-    
     @IBAction func unwindToMenu(segue: UIStoryboardSegue) {
         
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-           AudioPlayer.sharedInstance.backgroundMusic()
-    
+        AudioPlayer.sharedInstance.backgroundMusic()
+        
         let musicIsPlaying = UserDefaults.standard.bool(forKey: "musicIsPlaying")
         if musicIsPlaying == false {
             AudioPlayer.sharedInstance.stopMusic()
@@ -69,5 +58,4 @@ class MenuController: UIViewController {
     override func viewDidLayoutSubviews() {
         configureButton()
     }
-    
 }
