@@ -6,7 +6,6 @@
 import UIKit
 import Foundation
 
-var coordsOfCell = Array<(cellDetail: String, x: Int, y: Int)>()
 var sceneController = SceneController()
 
 class SceneBuilder : SceneBuilderInterface {
@@ -30,13 +29,11 @@ class SceneBuilder : SceneBuilderInterface {
         let levelData = levelStr?.characters.map { String($0) }
         
         scene = UIView(frame: CGRect(x: 0, y: 0, width: sceneWidth * dimensionOfCell, height: sceneHeight * dimensionOfCell))
-
         var playerCoordX: Int = 0
         var playerCoordY: Int = 0
-        var i = 0
-        
         var countWidth = 0
         var countHeight = 0
+        var i = 0
         for _ in levelData! {
             drawFloor(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
             countWidth += 1
@@ -46,27 +43,20 @@ class SceneBuilder : SceneBuilderInterface {
             }
             i += 1
         }
-         countWidth = 0
-         countHeight = 0
-        
+        countWidth = 0
+        countHeight = 0
         for levelItem in levelData! {
             switch levelItem {
             case "#":
                 drawWall(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("#", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
-            case "-":
-                coordsOfCell.append(("-", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "*":
                 drawDot(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
                 drawBlockCellIn(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("*", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "%":
                 drawBlockCellOut(frame: CGRect(x: dimensionOfCell * countWidth, y: dimensionOfCell * countHeight, width: dimensionOfCell, height: dimensionOfCell))
-                coordsOfCell.append(("%", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             case "&":
                 playerCoordX = dimensionOfCell * countWidth
                 playerCoordY = dimensionOfCell * countHeight
-                coordsOfCell.append(("&", dimensionOfCell * countWidth, dimensionOfCell * countHeight))
             default:
                 break
             }
