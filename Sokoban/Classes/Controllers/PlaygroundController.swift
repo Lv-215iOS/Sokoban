@@ -55,7 +55,7 @@ class PlaygroundController: UIViewController {
             timer.invalidate()
             isPlaying = false
         }
-        ///TODO:joystick becomes unable
+        
     }
     
     override func viewDidLoad() {
@@ -95,7 +95,7 @@ class PlaygroundController: UIViewController {
         timeLabel.text = String("00:00")
         stepsCountLabel.text = String(0)
         sceneController?.restartLevel()
-        ///TODO:player respawns,view redraws
+        
     }
     
     @IBAction func moveActionTapped(_ sender: UIButton) {
